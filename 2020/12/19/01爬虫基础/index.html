@@ -11,25 +11,26 @@
     
     
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Monster","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"articleBody":"1. Python爬虫1.1 爬虫用途\n网络爬虫：按照一定的规则，自动地爬取互联网信息的程序。\n1.2 应用方向\n1.2.1 定制搜索引擎学习爬虫，可以私人定制一个搜索引擎，并且可以对搜索引擎的数据工作原理进行更深层次的理解\n\n\n1.2.2 seo优化学习爬虫，可以更深层次理解搜索引擎爬虫工作原理，从而可以更好地进行搜索引擎优化\n1.2.3 数据分析\n大数据时代，要进行数据分析，首先要有数据源，而学习爬虫，可以让我们获取更多的数据，并且这些数据源可以按我们的目的进行采集，去掉很多无关数据。        \n1.2.4 找工作还是要恰饭的嘛。\n1.3 为什么要用Python爬虫\n\nPHP：天生不适合\nJava：生态圈完善，但语言本身较笨重，毕竟人生苦短……\nC/C++：运行效率没得说，大拇指，但学起来也太难了叭。\nPython：代码简洁优美，开发效率高。谁叫我这么菜，只想学简单的。\n\n1.3.1 一个python爬虫使用python爬取百度网址\n123456import requests  # 导入爬虫requests库url = &#x27;http://www.baidu.com&#x27;response = requests.get(url=url)  # 向指定url地址发送请求print(response)  # 返回状态码，200表示请求成功print(response.text)  # 返回百度页面的html\n\n2. 爬虫2.1 爬虫分类\n2.1.1 通用爬虫通用爬虫是搜索引擎抓取系统（百度、Google、Sogou等）一个重要组成部分。主要是将互联网上的网页下载到本地，形成一个互联网内容的镜像备份，为搜索引擎提供搜索支撑。\n搜索引擎工作原理：\n\n\n第一步： 抓取网页\n搜索引擎去网站上抓取数据\n\n第二步：数据存储\n搜索引擎通过爬虫得到的网页，将数据存入原始页面数据库（文档库）。其中的页面数据与用户浏览器得到的HTML是完全一样的。\n\n第三步：提供检索服务，网站排名\n搜索引擎将爬虫抓取回来的页面，进行各种步骤的预处理：中文分词，消除噪音，索引处理等\n\n\n搜索引擎局限性：\n\n搜索引擎抓取的是整个网页，不是具体详细的信息；\n搜索引擎无法提供针对具体某个客户需求的搜索结果。\n\n2.1.2 聚焦爬虫聚焦爬虫，是“面向特定主题需求”的一种网络爬虫程序，它与通用搜索引擎爬虫的区别在于：聚焦爬虫在实施网页抓取时会对内容进行处理筛选，尽量保证只抓取与需求相关的网页数据。\n我们学当然要学聚焦爬虫 =v= 。\n2.1.3 Robots协议Robots协议也称爬虫协议、机器人协议等，全称呢个“网络爬虫排除标准”（Robots Exclusion Protocol）,网站通过Robot协议告诉搜索引擎哪些页面可以抓取，哪些页面不能抓取，如：\n淘宝：https://www.taobao.com/robots.txt\n百度：https://www.baidu.com/robots.txt\n3. 请求与相应\n当我们在浏览器输入https://www.baidu.com时，浏览器会发送一个Request请求去获取https://baidu.com的html文件，服务器返回Response对象给浏览器。\n浏览器分析Response中的HTML，发现其中引用了很多文件，如Images文件、CSS文件。浏览器会自动再次发送请求去获取图片等。\n当所有文件都下载成功后，网页会根据HTML语法结构，完整显示出来。\n\n4. Chrome 开发者工具一般爬虫用的最多的是Chrome开发者工具，在谷歌浏览器中右击，左击“检查”，或者按快捷键F12即可打开开发者工具。\n4.1 元素面板（Elements）\n\n\n打开谷歌开发者工具，点击elements，在这里可以看到网页的html，同时后续css/xpath/re都是从这里获取资源定位。\n选页面某一节点右击也可复制xpath路径、css路径等。\n4.2 控制台面板（Console）\n\n控制台面板是用于显示JS和DOM对象信息的单独窗口。js解密会用console调试运行js代码。\n4.3 资源面板（Source）\n\n左侧可以看到源文件以树结构进行展示。\n中间可以用来调试js代码。\n右侧是断点调试功能区。\n4.4 网络面板（Network）\n\n网络（Network）面板记录页面上每个网络操作的相关信息，包括详细的耗时数据、HTTP标头和Cookie等。\n4.4.1 工具栏\n从左到右：\nStop recording network log\n默认情况下，只要开发者工具在开启状态，就会记录所有网络请求。红色表示开始，灰色表示关闭。\nClear\n清空所有数据\nFilter\n数据包过滤，红色打开，蓝色关闭。经常使用它来过滤一些HTTP请求，如Ajax异步请求、图片、视频等。\nSearch\n搜索框，只要在ALL里出现过的内容，就可以被直接搜索到。常用于数据检索与JS解密。\nPreserve log\n保留日志。当分析多个页面跳转的内容时，一定要勾上，不然页面跳转会把历史清空。\nDisable cache\n清空Javascript、css文件缓存，获取最新的。\nHide data URLs\n用于是否隐藏dataurl。什么是dataurl？传统的通常img标记的src属性指定了一个远程服务器的资源，浏览器针对每个外部资源需要向服务器发送一次拉去资源请求。而Data URL技术是图片数据以base64字符串格式嵌入到了页面中，和HTML融为一体。\n4.4.2 Requests详情请求头\nHeaders是显示HTTP请求的Headers，我们通过这个能看到请求的方式，以及携带的请求参数等。\n\nGeneral\nResponse Headers\nRequest Headers\n\n\n预览\nPreview是请求结果的预览。\n响应体\nResponse是请求返回的结果，一般是整个网站的源代码。如果该请求是异步请求，返回的结果一般是json文本数据。\n此数据与浏览器展示的网页可能不一致，因为浏览器是动态加载的。\n","dateCreated":"2020-12-19T10:05:26+08:00","dateModified":"2020-12-02T10:06:35+08:00","datePublished":"2020-12-19T10:05:26+08:00","description":"1. Python爬虫1.1 爬虫用途\n网络爬虫：按照一定的规则，自动地爬取互联网信息的程序。\n1.2 应用方向\n1.2.1 定制搜索引擎学习爬虫，可以私人定制一个搜索引擎，并且可以对搜索引擎的数据工作原理进行更深层次的理解","headline":"01 爬虫基础","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://github.com/Monster1314/blog/2020/12/19/01%20%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/"},"publisher":{"@type":"Organization","name":"Monster","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"url":"https://github.com/Monster1314/blog/2020/12/19/01%20%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Monster","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"articleBody":"1. Python爬虫1.1 爬虫用途\n网络爬虫：按照一定的规则，自动地爬取互联网信息的程序。\n1.2 应用方向\n1.2.1 定制搜索引擎学习爬虫，可以私人定制一个搜索引擎，并且可以对搜索引擎的数据工作原理进行更深层次的理解\n\n\n1.2.2 seo优化学习爬虫，可以更深层次理解搜索引擎爬虫工作原理，从而可以更好地进行搜索引擎优化\n1.2.3 数据分析\n大数据时代，要进行数据分析，首先要有数据源，而学习爬虫，可以让我们获取更多的数据，并且这些数据源可以按我们的目的进行采集，去掉很多无关数据。        \n1.2.4 找工作还是要恰饭的嘛。\n1.3 为什么要用Python爬虫\n\nPHP：天生不适合\nJava：生态圈完善，但语言本身较笨重，毕竟人生苦短……\nC/C++：运行效率没得说，大拇指，但学起来也太难了叭。\nPython：代码简洁优美，开发效率高。谁叫我这么菜，只想学简单的。\n\n1.3.1 一个python爬虫使用python爬取百度网址\n123456import requests  # 导入爬虫requests库url = &#x27;http://www.baidu.com&#x27;response = requests.get(url=url)  # 向指定url地址发送请求print(response)  # 返回状态码，200表示请求成功print(response.text)  # 返回百度页面的html\n\n2. 爬虫2.1 爬虫分类\n2.1.1 通用爬虫通用爬虫是搜索引擎抓取系统（百度、Google、Sogou等）一个重要组成部分。主要是将互联网上的网页下载到本地，形成一个互联网内容的镜像备份，为搜索引擎提供搜索支撑。\n搜索引擎工作原理：\n\n\n第一步： 抓取网页\n搜索引擎去网站上抓取数据\n\n第二步：数据存储\n搜索引擎通过爬虫得到的网页，将数据存入原始页面数据库（文档库）。其中的页面数据与用户浏览器得到的HTML是完全一样的。\n\n第三步：提供检索服务，网站排名\n搜索引擎将爬虫抓取回来的页面，进行各种步骤的预处理：中文分词，消除噪音，索引处理等\n\n\n搜索引擎局限性：\n\n搜索引擎抓取的是整个网页，不是具体详细的信息；\n搜索引擎无法提供针对具体某个客户需求的搜索结果。\n\n2.1.2 聚焦爬虫聚焦爬虫，是“面向特定主题需求”的一种网络爬虫程序，它与通用搜索引擎爬虫的区别在于：聚焦爬虫在实施网页抓取时会对内容进行处理筛选，尽量保证只抓取与需求相关的网页数据。\n我们学当然要学聚焦爬虫 =v= 。\n2.1.3 Robots协议Robots协议也称爬虫协议、机器人协议等，全称呢个“网络爬虫排除标准”（Robots Exclusion Protocol）,网站通过Robot协议告诉搜索引擎哪些页面可以抓取，哪些页面不能抓取，如：\n淘宝：https://www.taobao.com/robots.txt\n百度：https://www.baidu.com/robots.txt\n3. 请求与相应\n当我们在浏览器输入https://www.baidu.com时，浏览器会发送一个Request请求去获取https://baidu.com的html文件，服务器返回Response对象给浏览器。\n浏览器分析Response中的HTML，发现其中引用了很多文件，如Images文件、CSS文件。浏览器会自动再次发送请求去获取图片等。\n当所有文件都下载成功后，网页会根据HTML语法结构，完整显示出来。\n\n4. Chrome 开发者工具一般爬虫用的最多的是Chrome开发者工具，在谷歌浏览器中右击，左击“检查”，或者按快捷键F12即可打开开发者工具。\n4.1 元素面板（Elements）\n\n打开谷歌开发者工具，点击elements，在这里可以看到网页的html，同时后续css/xpath/re都是从这里获取资源定位。\n选页面某一节点右击也可复制xpath路径、css路径等。\n4.2 控制台面板（Console）\n\n控制台面板是用于显示JS和DOM对象信息的单独窗口。js解密会用console调试运行js代码。\n4.3 资源面板（Source）\n\n左侧可以看到源文件以树结构进行展示。\n中间可以用来调试js代码。\n右侧是断点调试功能区。\n4.4 网络面板（Network）\n\n网络（Network）面板记录页面上每个网络操作的相关信息，包括详细的耗时数据、HTTP标头和Cookie等。\n4.4.1 工具栏\n从左到右：\nStop recording network log\n默认情况下，只要开发者工具在开启状态，就会记录所有网络请求。红色表示开始，灰色表示关闭。\nClear\n清空所有数据\nFilter\n数据包过滤，红色打开，蓝色关闭。经常使用它来过滤一些HTTP请求，如Ajax异步请求、图片、视频等。\nSearch\n搜索框，只要在ALL里出现过的内容，就可以被直接搜索到。常用于数据检索与JS解密。\nPreserve log\n保留日志。当分析多个页面跳转的内容时，一定要勾上，不然页面跳转会把历史清空。\nDisable cache\n清空Javascript、css文件缓存，获取最新的。\nHide data URLs\n用于是否隐藏dataurl。什么是dataurl？传统的通常img标记的src属性指定了一个远程服务器的资源，浏览器针对每个外部资源需要向服务器发送一次拉去资源请求。而Data URL技术是图片数据以base64字符串格式嵌入到了页面中，和HTML融为一体。\n4.4.2 Requests详情请求头\nHeaders是显示HTTP请求的Headers，我们通过这个能看到请求的方式，以及携带的请求参数等。\n\nGeneral\n\nResponse Headers\n\nRequest Headers\n\n\n预览\nPreview是请求结果的预览。\n响应体\nResponse是请求返回的结果，一般是整个网站的源代码。如果该请求是异步请求，返回的结果一般是json文本数据。\n此数据与浏览器展示的网页可能不一致，因为浏览器是动态加载的。\n","dateCreated":"2020-12-19T10:05:26+08:00","dateModified":"2020-12-07T23:31:16+08:00","datePublished":"2020-12-19T10:05:26+08:00","description":"1. Python爬虫1.1 爬虫用途\n网络爬虫：按照一定的规则，自动地爬取互联网信息的程序。\n1.2 应用方向\n1.2.1 定制搜索引擎学习爬虫，可以私人定制一个搜索引擎，并且可以对搜索引擎的数据工作原理进行更深层次的理解","headline":"01 爬虫基础","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://github.com/Monster1314/blog/2020/12/19/01%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/"},"publisher":{"@type":"Organization","name":"Monster","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"url":"https://github.com/Monster1314/blog/2020/12/19/01%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/","keywords":"python, spider"}</script>
     <meta name="description" content="1. Python爬虫1.1 爬虫用途 网络爬虫：按照一定的规则，自动地爬取互联网信息的程序。 1.2 应用方向 1.2.1 定制搜索引擎学习爬虫，可以私人定制一个搜索引擎，并且可以对搜索引擎的数据工作原理进行更深层次的理解">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="01 爬虫基础">
-<meta property="og:url" content="https://github.com/Monster1314/blog/2020/12/19/01%20%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:url" content="https://github.com/Monster1314/blog/2020/12/19/01%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="Monster">
 <meta property="og:description" content="1. Python爬虫1.1 爬虫用途 网络爬虫：按照一定的规则，自动地爬取互联网信息的程序。 1.2 应用方向 1.2.1 定制搜索引擎学习爬虫，可以私人定制一个搜索引擎，并且可以对搜索引擎的数据工作原理进行更深层次的理解">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="c:/Users/muzha/AppData/Roaming/Typora/typora-user-images/image-20201125120028022.png">
-<meta property="og:image" content="c:/Users/muzha/AppData/Roaming/Typora/typora-user-images/image-20201125122700892.png">
-<meta property="og:image" content="c:/Users/muzha/AppData/Roaming/Typora/typora-user-images/image-20201125122822609.png">
-<meta property="og:image" content="c:/Users/muzha/AppData/Roaming/Typora/typora-user-images/image-20201125123234182.png">
-<meta property="og:image" content="c:/Users/muzha/AppData/Roaming/Typora/typora-user-images/image-20201125123410215.png">
-<meta property="og:image" content="c:/Users/muzha/AppData/Roaming/Typora/typora-user-images/image-20201125123818751.png">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/07/DzYZNj.png">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/07/DzYe4s.png">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/07/DzYAHg.png">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/07/DzYnCn.png">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/07/DzYVEQ.png">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/07/DzYkDS.png">
 <meta property="article:published_time" content="2020-12-19T02:05:26.000Z">
-<meta property="article:modified_time" content="2020-12-02T02:06:35.355Z">
+<meta property="article:modified_time" content="2020-12-07T15:31:16.359Z">
 <meta property="article:author" content="Monster">
+<meta property="article:tag" content="python, spider">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="c:/Users/muzha/AppData/Roaming/Typora/typora-user-images/image-20201125120028022.png">
+<meta name="twitter:image" content="https://s3.ax1x.com/2020/12/07/DzYZNj.png">
     
     
         
@@ -367,7 +368,7 @@
 <h1 id="2-爬虫"><a href="#2-爬虫" class="headerlink" title="2. 爬虫"></a>2. 爬虫</h1><h2 id="2-1-爬虫分类"><a href="#2-1-爬虫分类" class="headerlink" title="2.1 爬虫分类"></a>2.1 爬虫分类</h2><hr>
 <h3 id="2-1-1-通用爬虫"><a href="#2-1-1-通用爬虫" class="headerlink" title="2.1.1 通用爬虫"></a>2.1.1 通用爬虫</h3><p>通用爬虫是搜索引擎抓取系统（百度、Google、Sogou等）一个重要组成部分。主要是将互联网上的网页下载到本地，形成一个互联网内容的镜像备份，为搜索引擎提供搜索支撑。</p>
 <p><strong>搜索引擎工作原理：</strong></p>
-<p><img src="C:\Users\muzha\AppData\Roaming\Typora\typora-user-images\image-20201125120028022.png" alt="搜索引擎工作原理"></p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/DzYZNj"><img src="https://s3.ax1x.com/2020/12/07/DzYZNj.png" alt="DzYZNj.png"></a></p>
 <ul>
 <li><p><strong>第一步： 抓取网页</strong></p>
 <p>搜索引擎去网站上抓取数据</p>
@@ -396,22 +397,21 @@
 </ol>
 <h1 id="4-Chrome-开发者工具"><a href="#4-Chrome-开发者工具" class="headerlink" title="4. Chrome 开发者工具"></a>4. Chrome 开发者工具</h1><p>一般爬虫用的最多的是<strong>Chrome开发者工具</strong>，在谷歌浏览器中右击，左击“检查”，或者按快捷键F12即可打开开发者工具。</p>
 <h2 id="4-1-元素面板（Elements）"><a href="#4-1-元素面板（Elements）" class="headerlink" title="4.1 元素面板（Elements）"></a>4.1 元素面板（Elements）</h2><hr>
-<img src="C:\Users\muzha\AppData\Roaming\Typora\typora-user-images\image-20201125122700892.png" alt="elements"  />
-
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/DzYe4s"><img src="https://s3.ax1x.com/2020/12/07/DzYe4s.png" alt="DzYe4s.png"></a></p>
 <p>打开谷歌开发者工具，点击elements，在这里可以看到网页的html，同时后续css/xpath/re都是从这里获取资源定位。</p>
 <p>选页面某一节点右击也可复制xpath路径、css路径等。</p>
 <h2 id="4-2-控制台面板（Console）"><a href="#4-2-控制台面板（Console）" class="headerlink" title="4.2 控制台面板（Console）"></a>4.2 控制台面板（Console）</h2><hr>
-<p><img src="C:\Users\muzha\AppData\Roaming\Typora\typora-user-images\image-20201125122822609.png" alt="console"></p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/DzYAHg"><img src="https://s3.ax1x.com/2020/12/07/DzYAHg.png" alt="DzYAHg.png"></a></p>
 <p>控制台面板是用于显示JS和DOM对象信息的单独窗口。js解密会用console调试运行js代码。</p>
 <h2 id="4-3-资源面板（Source）"><a href="#4-3-资源面板（Source）" class="headerlink" title="4.3 资源面板（Source）"></a>4.3 资源面板（Source）</h2><hr>
-<p><img src="C:\Users\muzha\AppData\Roaming\Typora\typora-user-images\image-20201125123234182.png" alt="source"></p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/DzYnCn"><img src="https://s3.ax1x.com/2020/12/07/DzYnCn.png" alt="DzYnCn.png"></a></p>
 <p>左侧可以看到源文件以树结构进行展示。</p>
 <p>中间可以用来调试js代码。</p>
 <p>右侧是断点调试功能区。</p>
 <h2 id="4-4-网络面板（Network）"><a href="#4-4-网络面板（Network）" class="headerlink" title="4.4 网络面板（Network）"></a>4.4 网络面板（Network）</h2><hr>
-<p><img src="C:\Users\muzha\AppData\Roaming\Typora\typora-user-images\image-20201125123410215.png" alt="network"></p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/DzYVEQ"><img src="https://s3.ax1x.com/2020/12/07/DzYVEQ.png" alt="DzYVEQ.png"></a></p>
 <p>网络（Network）面板记录页面上每个网络操作的相关信息，包括详细的耗时数据、HTTP标头和Cookie等。</p>
-<h3 id="4-4-1-工具栏"><a href="#4-4-1-工具栏" class="headerlink" title="4.4.1 工具栏"></a>4.4.1 工具栏</h3><p><img src="C:\Users\muzha\AppData\Roaming\Typora\typora-user-images\image-20201125123818751.png" alt="工具栏"></p>
+<h3 id="4-4-1-工具栏"><a href="#4-4-1-工具栏" class="headerlink" title="4.4.1 工具栏"></a>4.4.1 工具栏</h3><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/DzYkDS"><img src="https://s3.ax1x.com/2020/12/07/DzYkDS.png" alt="DzYkDS.png"></a></p>
 <p>从左到右：</p>
 <p><strong>Stop recording network log</strong></p>
 <p>默认情况下，只要开发者工具在开启状态，就会记录所有网络请求。红色表示开始，灰色表示关闭。</p>
@@ -430,10 +430,12 @@
 <h3 id="4-4-2-Requests详情"><a href="#4-4-2-Requests详情" class="headerlink" title="4.4.2 Requests详情"></a>4.4.2 Requests详情</h3><p><strong>请求头</strong></p>
 <p><strong>Headers</strong>是显示HTTP请求的Headers，我们通过这个能看到请求的方式，以及携带的请求参数等。</p>
 <ul>
-<li>General</li>
-<li>Response Headers</li>
-<li>Request Headers</li>
-<li></li>
+<li><p>General</p>
+</li>
+<li><p>Response Headers</p>
+</li>
+<li><p>Request Headers</p>
+</li>
 </ul>
 <p><strong>预览</strong></p>
 <p>Preview是请求结果的预览。</p>
@@ -447,6 +449,13 @@
         </div>
     </div>
     <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-none-link" href="/blog/tags/python-spider/" rel="tag">python, spider</a>
+
+            </div>
         
         
             <div class="post-actions-wrap">
@@ -495,7 +504,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/Monster1314/blog/2020/12/19/01%20%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/Monster1314/blog/2020/12/19/01%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -508,7 +517,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://github.com/Monster1314/blog/2020/12/19/01%20%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://github.com/Monster1314/blog/2020/12/19/01%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -521,7 +530,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://github.com/Monster1314/blog/2020/12/19/01%20%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/"
+                    target="new" href="https://plus.google.com/share?url=https://github.com/Monster1314/blog/2020/12/19/01%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -607,7 +616,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/Monster1314/blog/2020/12/19/01%20%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/"
+                    target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/Monster1314/blog/2020/12/19/01%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/"
                     title="Share on Facebook"
                     aria-label="Share on Facebook"
                 >
@@ -620,7 +629,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://twitter.com/intent/tweet?text=https://github.com/Monster1314/blog/2020/12/19/01%20%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/"
+                    target="new" href="https://twitter.com/intent/tweet?text=https://github.com/Monster1314/blog/2020/12/19/01%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/"
                     title="Share on Twitter"
                     aria-label="Share on Twitter"
                 >
@@ -633,7 +642,7 @@
             <li class="post-action hide-xs">
                 <a
                     class="post-action-btn btn btn--default"
-                    target="new" href="https://plus.google.com/share?url=https://github.com/Monster1314/blog/2020/12/19/01%20%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/"
+                    target="new" href="https://plus.google.com/share?url=https://github.com/Monster1314/blog/2020/12/19/01%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/"
                     title="Share on Google+"
                     aria-label="Share on Google+"
                 >
@@ -667,7 +676,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/Monster1314/blog/2020/12/19/01%20%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/"
+                        href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/Monster1314/blog/2020/12/19/01%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/"
                         aria-label="Share on Facebook"
                     >
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
@@ -680,7 +689,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://twitter.com/intent/tweet?text=https://github.com/Monster1314/blog/2020/12/19/01%20%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/"
+                        href="https://twitter.com/intent/tweet?text=https://github.com/Monster1314/blog/2020/12/19/01%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/"
                         aria-label="Share on Twitter"
                     >
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
@@ -693,7 +702,7 @@
                     <a
                         class="share-option-btn"
                         target="new"
-                        href="https://plus.google.com/share?url=https://github.com/Monster1314/blog/2020/12/19/01%20%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/"
+                        href="https://plus.google.com/share?url=https://github.com/Monster1314/blog/2020/12/19/01%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/"
                         aria-label="Share on Google+"
                     >
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
