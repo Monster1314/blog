@@ -464,7 +464,7 @@
       </categories>
   </entry>
   <entry>
-    <title>git</title>
+    <title>git方法</title>
     <url>/blog/2020/12/09/git/</url>
     <content><![CDATA[<h1 id="Git-与-GitHub"><a href="#Git-与-GitHub" class="headerlink" title="Git 与 GitHub"></a>Git 与 GitHub</h1><h2 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h2><ol>
 <li>git branch “name”   创建名为name的新分支</li>
