@@ -1,57 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>hexo+github搭建教程</title>
-    <url>/blog/2020/12/08/hexo-github%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Github Pages 是GitHub提供的免费静态网页托管服务，可以用来托管博客、项目网站等静态网页。支持Jekyll、Hugo、Hexo编译静态资源，本文的主题是GitHub+Hexo。</p>
-<a id="more"></a>
-
-<h1 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h1><ol>
-<li>NodeJs，Hexo是基于NodeJs驱动的一款博客框架</li>
-<li>Git，</li>
-<li>npm<h1 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h1>在某个文件夹下，右键打开git bash执行以下命令：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-<p>之后执行下列命令：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo init filename</span><br><span class="line">cd filename</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-
-<p>新建完成后，运行hexo s，其中s是sever的缩写。之后访问 <a href="http://localhost:4000/">http://localhost:4000</a> 就可以预览效果了。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-<h1 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h1><ol>
-<li>账号注册</li>
-<li>创建一个仓库<h1 id="配置SSH"><a href="#配置SSH" class="headerlink" title="配置SSH"></a>配置SSH</h1>有ssh则使用下列命令查看：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cat ~&#x2F;.ssh&#x2F;id_rsa.pub</span><br></pre></td></tr></table></figure>
-没有ssh则执行以下命令生成：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;用户名&quot;</span><br><span class="line">git config --global user.email &quot;邮箱地址&quot;</span><br><span class="line">ssh-keygen -t rsa -C &quot;上面的邮箱&quot;</span><br></pre></td></tr></table></figure>
-
-<p>之后将id_rsa.pub（公钥）添加到GitHub ssh key上。</p>
-<h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>修改 _ config.yml文件，在文件最后：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: 仓库git地址，不用http</span><br><span class="line">  branch: 分支名称</span><br></pre></td></tr></table></figure>
-
-<p>安装部署插件hexo-deployer-git</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<p>本地推送：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo s</span><br></pre></td></tr></table></figure>
-
-<p>远程推送：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
-
-<h1 id="写作"><a href="#写作" class="headerlink" title="写作"></a>写作</h1><p>在文件根目录下打开git bash，执行命令，创建新md文件，在./source/_posts下编辑即可：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new 文章标题</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>hexo博客</category>
-      </categories>
-      <tags>
-        <tag>教程</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>01 爬虫基础</title>
-    <url>/blog/2020/12/19/01%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/</url>
+    <url>/blog/2019/12/19/01%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h1 id="1-Python爬虫"><a href="#1-Python爬虫" class="headerlink" title="1. Python爬虫"></a>1. Python爬虫</h1><h2 id="1-1-爬虫用途"><a href="#1-1-爬虫用途" class="headerlink" title="1.1 爬虫用途"></a>1.1 爬虫用途</h2><hr>
 <p><strong>网络爬虫</strong>：按照一定的规则，自动地爬取互联网信息的程序。</p>
 <a id="more"></a>
@@ -158,8 +109,8 @@
       </tags>
   </entry>
   <entry>
-    <title>hexo博客 图片CDN加速</title>
-    <url>/blog/2020/12/08/hexo%E5%8D%9A%E5%AE%A2CDN%E5%8A%A0%E9%80%9F/</url>
+    <title>图片CDN加速</title>
+    <url>/blog/2020/12/08/CDN%E5%8A%A0%E9%80%9F/</url>
     <content><![CDATA[<p>一个免费的CDN加速，<a href="https://www.jsdelivr.com/?docs=gh" >JSDELIVR</a> </p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;user&#x2F;repo@version&#x2F;file</span><br><span class="line">user--GitHub用户名</span><br><span class="line">repo--分支名称</span><br><span class="line">version--版本号，可以不填</span><br><span class="line">file--图片路径，比如存储在GitHub仓库images文件夹下的1.jpg，可以写&#x2F;images&#x2F;1.jpg</span><br></pre></td></tr></table></figure>
 
@@ -171,6 +122,160 @@
       <tags>
         <tag>-教程</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>hexo+github搭建教程</title>
+    <url>/blog/2020/12/08/hexo-github%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Github Pages 是GitHub提供的免费静态网页托管服务，可以用来托管博客、项目网站等静态网页。支持Jekyll、Hugo、Hexo编译静态资源，本文的主题是GitHub+Hexo。</p>
+<a id="more"></a>
+
+<h1 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h1><ol>
+<li>NodeJs，Hexo是基于NodeJs驱动的一款博客框架</li>
+<li>Git，</li>
+<li>npm<h1 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h1>在某个文件夹下，右键打开git bash执行以下命令：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<p>之后执行下列命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo init filename</span><br><span class="line">cd filename</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<p>新建完成后，运行hexo s，其中s是sever的缩写。之后访问 <a href="http://localhost:4000/">http://localhost:4000</a> 就可以预览效果了。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<h1 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h1><ol>
+<li>账号注册</li>
+<li>创建一个仓库<h1 id="配置SSH"><a href="#配置SSH" class="headerlink" title="配置SSH"></a>配置SSH</h1>有ssh则使用下列命令查看：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cat ~&#x2F;.ssh&#x2F;id_rsa.pub</span><br></pre></td></tr></table></figure>
+没有ssh则执行以下命令生成：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;用户名&quot;</span><br><span class="line">git config --global user.email &quot;邮箱地址&quot;</span><br><span class="line">ssh-keygen -t rsa -C &quot;上面的邮箱&quot;</span><br></pre></td></tr></table></figure>
+
+<p>之后将id_rsa.pub（公钥）添加到GitHub ssh key上。</p>
+<h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>修改 _ config.yml文件，在文件最后：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: 仓库git地址，不用http</span><br><span class="line">  branch: 分支名称</span><br></pre></td></tr></table></figure>
+
+<p>安装部署插件hexo-deployer-git</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<p>本地推送：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo s</span><br></pre></td></tr></table></figure>
+
+<p>远程推送：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
+
+<h1 id="写作"><a href="#写作" class="headerlink" title="写作"></a>写作</h1><p>在文件根目录下打开git bash，执行命令，创建新md文件，在./source/_posts下编辑即可：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new 文章标题</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>hexo博客</category>
+      </categories>
+      <tags>
+        <tag>教程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>markdown</title>
+    <url>/blog/2020/09/25/markdown/</url>
+    <content><![CDATA[<h2 id="Markdown入门"><a href="#Markdown入门" class="headerlink" title="Markdown入门"></a>Markdown入门</h2><p><strong>概要</strong></p>
+<p>Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有HTML的格式。</p>
+<a id="more"></a>
+
+<h3 id="官方网站"><a href="#官方网站" class="headerlink" title="官方网站"></a>官方网站</h3><p><a href="https://daringfireball.net/projects/markdown/">https://daringfireball.net/projects/markdown/</a></p>
+<h3 id="GitHub-Markdown-Cheatsheet"><a href="#GitHub-Markdown-Cheatsheet" class="headerlink" title="GitHub Markdown Cheatsheet"></a>GitHub Markdown Cheatsheet</h3><p><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet</a></p>
+<h3 id="课程详细"><a href="#课程详细" class="headerlink" title="课程详细"></a>课程详细</h3><ol>
+<li>课程介绍</li>
+<li>预览插件</li>
+<li>设置标题</li>
+<li>自然段改行</li>
+<li>引用表现</li>
+<li>增加分割线</li>
+<li>强调表现</li>
+<li>列表表示</li>
+<li>超文本链接</li>
+<li>代码高亮显示</li>
+<li>图片显示</li>
+<li>表格显示</li>
+</ol>
+<h3 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h3><ul>
+<li>记事本等文本编辑器</li>
+</ul>
+<ol>
+<li>Visual Studio Code</li>
+<li>Pycharm</li>
+<li>ATOM</li>
+</ol>
+<h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><ul>
+<li>html标题标记的生成(h1～h6)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># h1标题</span><br><span class="line">## h2标题</span><br><span class="line">### h3标题</span><br><span class="line">#### h4标题</span><br><span class="line">##### h5标题</span><br><span class="line">###### h6标题</span><br><span class="line"></span><br><span class="line">h1标题</span><br><span class="line">&#x3D;&#x3D;&#x3D;</span><br><span class="line"></span><br><span class="line">h2标题</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><ul>
+<li>引用文的表现方法：&gt;</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">我是引用</span><br><span class="line"></span><br><span class="line">&gt; 我是引用</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h3><ul>
+<li>为文章分割线：<code>---</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- ------</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h3><ul>
+<li>斜体：<code>*XXX*</code>, <code>_XXX_</code></li>
+<li>粗体：<code>**XXX**</code>,<code> __XXX__</code></li>
+</ul>
+<p>案例：<em>XXX</em>, <em>XXX</em></p>
+<p>案例：<strong>XXX</strong> , <strong>XXX</strong></p>
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><ul>
+<li>列表符号：-</li>
+<li>列表符号：*</li>
+<li>列表符号：+</li>
+<li>列表符号：数字</li>
+</ul>
+<p>练习：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- 项目</span><br><span class="line">  - 项目</span><br><span class="line">    - 项目</span><br><span class="line"></span><br><span class="line">1. 项目1</span><br><span class="line">2. 项目2</span><br><span class="line">3. 项目3</span><br><span class="line"></span><br><span class="line">- [ ] 计划任务</span><br><span class="line">- [x] 完成任务</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="超文本链接"><a href="#超文本链接" class="headerlink" title="超文本链接"></a>超文本链接</h3><ul>
+<li>超文本链接的书写</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;www.python.org&#x2F;</span><br><span class="line"></span><br><span class="line">[Python.org](https:&#x2F;&#x2F;www.python.org&#x2F;)</span><br><span class="line"></span><br><span class="line">[Python.org](https:&#x2F;&#x2F;www.python.org&#x2F; &quot;python官方文档&quot;)</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.python.org/">https://www.python.org/</a></p>
+<h3 id="代码高亮显示"><a href="#代码高亮显示" class="headerlink" title="代码高亮显示"></a>代码高亮显示</h3><ul>
+<li>代码高亮显示符号：`</li>
+<li>代码高亮显示符号：~</li>
+</ul>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">​&#96;&#96;&#96;python</span><br><span class="line">def add(x, y) </span><br><span class="line">    return x+y</span><br><span class="line">​&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line">说明：您可以使用 &#96;add(x,y)&#96; 函数计算两个数的和。</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="图片显示"><a href="#图片显示" class="headerlink" title="图片显示"></a>图片显示</h3><ul>
+<li>图片的引用与显示：<img src=""></li>
+</ul>
+<p>![alt文字](C:/Users/muzha/Documents/WeChat Files/wxid_jqw01i0de0iv22/FileStorage/File/2020-09/markdown/图片url 图片title)</p>
+<h3 id="制作图片链接"><a href="#制作图片链接" class="headerlink" title="制作图片链接"></a>制作图片链接</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">![img](https:&#x2F;&#x2F;gss0.bdstatic.com&#x2F;94o3dSag_xI4khGkpoWK1HF6hhy&#x2F;baike&#x2F;c0%3Dbaike150%2C5%2C5%2C150%2C50&#x2F;sign&#x3D;db37d3b8454a20a425133495f13bf347&#x2F;3b87e950352ac65c8819edd9f1f2b21193138a78.jpg)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="表格显示"><a href="#表格显示" class="headerlink" title="表格显示"></a>表格显示</h3><ul>
+<li>表格制作与显示</li>
+</ul>
+<p>使用 <code>-</code> 和 <code>|</code> 来制作表格。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">| TH1 | TH2 | TH3 |</span><br><span class="line">----|----|----</span><br><span class="line">| TD1 | TD3 | TD5 |</span><br><span class="line">| TD2 | TD4 | TD6 |</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用表格对齐"><a href="#使用表格对齐" class="headerlink" title="使用表格对齐"></a>使用表格对齐</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">| 居左 | 居中 | 居右 |</span><br><span class="line">|:---|:---:|---:|</span><br><span class="line">|1 |2 |3 |</span><br><span class="line">|4 |5 |6 | </span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>markdown</category>
+      </categories>
   </entry>
   <entry>
     <title>python技巧</title>
@@ -306,111 +411,6 @@
 ]]></content>
       <categories>
         <category>python</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>markdown</title>
-    <url>/blog/2020/09/25/markdown/</url>
-    <content><![CDATA[<h2 id="Markdown入门"><a href="#Markdown入门" class="headerlink" title="Markdown入门"></a>Markdown入门</h2><p><strong>概要</strong></p>
-<p>Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有HTML的格式。</p>
-<a id="more"></a>
-
-<h3 id="官方网站"><a href="#官方网站" class="headerlink" title="官方网站"></a>官方网站</h3><p><a href="https://daringfireball.net/projects/markdown/">https://daringfireball.net/projects/markdown/</a></p>
-<h3 id="GitHub-Markdown-Cheatsheet"><a href="#GitHub-Markdown-Cheatsheet" class="headerlink" title="GitHub Markdown Cheatsheet"></a>GitHub Markdown Cheatsheet</h3><p><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet</a></p>
-<h3 id="课程详细"><a href="#课程详细" class="headerlink" title="课程详细"></a>课程详细</h3><ol>
-<li>课程介绍</li>
-<li>预览插件</li>
-<li>设置标题</li>
-<li>自然段改行</li>
-<li>引用表现</li>
-<li>增加分割线</li>
-<li>强调表现</li>
-<li>列表表示</li>
-<li>超文本链接</li>
-<li>代码高亮显示</li>
-<li>图片显示</li>
-<li>表格显示</li>
-</ol>
-<h3 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h3><ul>
-<li>记事本等文本编辑器</li>
-</ul>
-<ol>
-<li>Visual Studio Code</li>
-<li>Pycharm</li>
-<li>ATOM</li>
-</ol>
-<h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><ul>
-<li>html标题标记的生成(h1～h6)</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># h1标题</span><br><span class="line">## h2标题</span><br><span class="line">### h3标题</span><br><span class="line">#### h4标题</span><br><span class="line">##### h5标题</span><br><span class="line">###### h6标题</span><br><span class="line"></span><br><span class="line">h1标题</span><br><span class="line">&#x3D;&#x3D;&#x3D;</span><br><span class="line"></span><br><span class="line">h2标题</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><ul>
-<li>引用文的表现方法：&gt;</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">我是引用</span><br><span class="line"></span><br><span class="line">&gt; 我是引用</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h3><ul>
-<li>为文章分割线：<code>---</code></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- ------</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h3><ul>
-<li>斜体：<code>*XXX*</code>, <code>_XXX_</code></li>
-<li>粗体：<code>**XXX**</code>,<code> __XXX__</code></li>
-</ul>
-<p>案例：<em>XXX</em>, <em>XXX</em></p>
-<p>案例：<strong>XXX</strong> , <strong>XXX</strong></p>
-<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><ul>
-<li>列表符号：-</li>
-<li>列表符号：*</li>
-<li>列表符号：+</li>
-<li>列表符号：数字</li>
-</ul>
-<p>练习：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- 项目</span><br><span class="line">  - 项目</span><br><span class="line">    - 项目</span><br><span class="line"></span><br><span class="line">1. 项目1</span><br><span class="line">2. 项目2</span><br><span class="line">3. 项目3</span><br><span class="line"></span><br><span class="line">- [ ] 计划任务</span><br><span class="line">- [x] 完成任务</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="超文本链接"><a href="#超文本链接" class="headerlink" title="超文本链接"></a>超文本链接</h3><ul>
-<li>超文本链接的书写</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;www.python.org&#x2F;</span><br><span class="line"></span><br><span class="line">[Python.org](https:&#x2F;&#x2F;www.python.org&#x2F;)</span><br><span class="line"></span><br><span class="line">[Python.org](https:&#x2F;&#x2F;www.python.org&#x2F; &quot;python官方文档&quot;)</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://www.python.org/">https://www.python.org/</a></p>
-<h3 id="代码高亮显示"><a href="#代码高亮显示" class="headerlink" title="代码高亮显示"></a>代码高亮显示</h3><ul>
-<li>代码高亮显示符号：`</li>
-<li>代码高亮显示符号：~</li>
-</ul>
-<p>例子：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">​&#96;&#96;&#96;python</span><br><span class="line">def add(x, y) </span><br><span class="line">    return x+y</span><br><span class="line">​&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line">说明：您可以使用 &#96;add(x,y)&#96; 函数计算两个数的和。</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="图片显示"><a href="#图片显示" class="headerlink" title="图片显示"></a>图片显示</h3><ul>
-<li>图片的引用与显示：<img src=""></li>
-</ul>
-<p>![alt文字](C:/Users/muzha/Documents/WeChat Files/wxid_jqw01i0de0iv22/FileStorage/File/2020-09/markdown/图片url 图片title)</p>
-<h3 id="制作图片链接"><a href="#制作图片链接" class="headerlink" title="制作图片链接"></a>制作图片链接</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">![img](https:&#x2F;&#x2F;gss0.bdstatic.com&#x2F;94o3dSag_xI4khGkpoWK1HF6hhy&#x2F;baike&#x2F;c0%3Dbaike150%2C5%2C5%2C150%2C50&#x2F;sign&#x3D;db37d3b8454a20a425133495f13bf347&#x2F;3b87e950352ac65c8819edd9f1f2b21193138a78.jpg)</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="表格显示"><a href="#表格显示" class="headerlink" title="表格显示"></a>表格显示</h3><ul>
-<li>表格制作与显示</li>
-</ul>
-<p>使用 <code>-</code> 和 <code>|</code> 来制作表格。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">| TH1 | TH2 | TH3 |</span><br><span class="line">----|----|----</span><br><span class="line">| TD1 | TD3 | TD5 |</span><br><span class="line">| TD2 | TD4 | TD6 |</span><br></pre></td></tr></table></figure>
-
-<h3 id="使用表格对齐"><a href="#使用表格对齐" class="headerlink" title="使用表格对齐"></a>使用表格对齐</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">| 居左 | 居中 | 居右 |</span><br><span class="line">|:---|:---:|---:|</span><br><span class="line">|1 |2 |3 |</span><br><span class="line">|4 |5 |6 | </span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>markdown</category>
       </categories>
   </entry>
 </search>
