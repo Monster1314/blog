@@ -1,19 +1,14 @@
-
 <!DOCTYPE html>
-<html lang="en">
-    
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Monster">
-    <title>python技巧 - Monster</title>
-    <meta name="author" content="Monster">
-    
-    
-    
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Monster","sameAs":["https://github.com/","mailto:muzhaoyang66@163.com"]},"articleBody":"\n正确使用True和False的判断\n正确返回None值\n…\n\n\n\n1. 正确使用True和False的判断123456789101112131415false_value = [    `[],`    `&#123;&#125;,`    `False,`    `&#x27;&#x27;,`    `0,`    `0.0,`    `None,`]\n\n\n12for x in false_value:    print(True if value else False)\n\n2. 正确返回None值一个函数里面可能多个返回值都为True或False，这时候就要用is明确指定返回值，如None\n3. if条件优化\n直接判断——效率最低\nin list 列表判断——效率最高,推荐 \nin set 集合——效率居中\n\n4. 字符串格式化技巧\n直接拼接\n“{}”.format \n&#39;%s&#39;%()\npython3.6+，f&#39;my age is &#123;age&#125;&#39; 推荐\n\n5. Flat is better than nested\nimport this 可以打印python之禅\nnested 指的是if 嵌套、一层层包裹，不推荐\nflat要代码扁平化，用if、 elif，避免多个if，不满足条件直接返回，推荐\n\n6. 列表解析，也就是列表推导式除了减少代码量之外，还能提高运行效率，时间接近原来的一半\n示例：[item for item in items if item%2 == 0]\n7. 字典解析示例：a = [1, 2, 3, 4, 5, 6]\n&#123;item:str(item) for item in a&#125;\n8. 字典合并\n循环添加，也可以字典解析，但并不推荐\nupdate更新，`d1.update(d2)`\npython3.5+， &#123;**d1, **d2, **d3&#125;推荐\n\n9. 字典安全访问\n用try-except抛出异常\nd.get(‘’)# 默认空返回None，也可以设置\n\n`    d.get(‘name’,’unkown’)\n设置空返回unknown`\npython内置defaultdict\n\n1234from collection import defaultdictd_new = defaultdict(lamda:&#x27;missing&#x27;, d)d_new[&#x27;name&#x27;] # 返回name对应的d_new[&#x27;asdf&#x27;] # 不存在则返回missing\n\n10. 关于for循环，类中实现for循环示例：12345678910111213141516171819202122232425262728293031class A:    def __init__(self):        self.data = []    def add(self, x):        self.data.append(x)    def __iter__(self):        # return self.data.__iter__()        # 这里也可以加一个for循环        for item in self.data:            yield itemclass B():    def __init__(self, x, y):        self.x = x        self.y = yb1 = B(x=1, y=2)b2 = B(x=3, y=4)a = A()a.add(b1)a.add(b2)for item in a:    print(item.x, item.y)\n\n11. 为什么要使用yield一次性读取可能会占用太多内存，yield可以提高效率\n12. 如何在递归调用中使用yield示例：123456789101112131415import ospath = &#x27;&#x27;def get_file(folder_name):    for item in os.listdir(folder_name):    full_path = os.path.join(folder_name, item)    if os.path.isfile(full_path):        yield full_path    elif os.path.isdir(full_path):        # 方法一        for item in get_file(full_path):        yield item        # 方法二,python3        yield from get_file(full_path)for file_name in get_file(path):    print(file_name)\n\n13. 巧用lambda函数参数为函数时，可以考虑能否用lambda实现\nJupyter shift+tab可以查看信息，比如sort排序传入key\n14. 处理程序中的异常try-except，可以具体抛出某些异常。\n总的如except Exception as e：\n具体的如except DNSError:\n15. 函数默认参数为函数参数设置默认值\n16. 可变数量参数1234567891011121314151617def function(x, *args):    print(args)function(1,2,3,4)# 结果[2, 3, 4]# 注意： 使用```*args```之后，x就不能赋值了，否则会报错SyntaxError# 当如下形式时，x必须赋值,否则会报错TypeError：def function(*args, x):    print(args, x)function(1,2,x=3)\n\n17. 字典和```**kwargs```的关系实现可变数量位置参数\n1234567891011121314151617181920def function(x, **kwargs):    print(x, kwargs)function(x=1, a=2, b=3, c=4)# 运行结果1 &#123;&#x27;a&#x27;:2, &#x27;b&#x27;:3, &#x27;c&#x27;:4&#125;def sum1(x, y):    print(x+y)sum(x=1, y=2)sum(**&#123;&#x27;x&#x27;:1, &#x27;y&#x27;:&#x27;2&#x27;&#125;)# 传入参数\\`\\`\\`\\_\\_&#123;&#x27;x&#x27;:1, &#x27;y&#x27;:2&#125;\\`\\`\\`与传入参数\\`\\`\\`x=1, y=2\\`\\`\\\\`返回结果一样\n\n\n\n18. 默认参数陷阱不建议用列表作为参数\n123456789101112131415161718def bad_default_arg(s, time, target=[]):    for _ in range(time):        target.append(a)        return targetbad_default_arg(s=&#x27;a&#x27;, time=3) # 返回 [&#x27;a&#x27;, &#x27;a&#x27;, &#x27;a&#x27;]bad_default_arg(s=&#x27;b&#x27;, time=3, target=&#x27;a&#x27;) # 返回 [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;b&#x27;, &#x27;b&#x27;]bad_default_arg(s=&#x27;AB&#x27;, time=2) # 返回 [&#x27;a&#x27;, &#x27;a&#x27;, &#x27;a&#x27;, &#x27;AB&#x27;, &#x27;AB&#x27;]# 使用列表作为参数时，假如不指定，则会使用上一次的默认值bad_default_arg(s=&#x27;F&#x27;, time=2) # 返回 [&#x27;a&#x27;, &#x27;a&#x27;, &#x27;a&#x27;, &#x27;AB&#x27;, &#x27;AB&#x27;, &#x27;F&#x27;, &#x27;F&#x27;]解决方法：def good_default_arg(s, time, target=None):    if target is None:        target = []    for _ in range(time):        target.append(a)        return target\n\n19. 尽量避免使用```from xxx import *```库中方法可能与已命名方法重名，建议用什么引入什么\n20. 合理使用virtualenv与pip\n进入文件，virtualenv –python3.6 env 创建虚拟环境\n激活环境， source env/bin/activate\n安装使用的库\npip freeze，把已安装的库写入txt文件里\n退出环境， deactivate\npip install -r xxx.txt 安装所有的依赖\n\n21. 类的属性和实例属性\nclass类中定义属性，尽量在__init__下定义\n或者在class下定义\n\n22. 类实例的受保护属性和私有属性\n加一个下划线_，仍然可以被访问，即受保护\n加两个下划线__，无法被访问，即私有，但是实际上还是可以访问的，只不过名字编程了_类名__属性名\n\n123456789101112class A(object):    &quot;&quot;&quot;docstring for A&quot;&quot;&quot;    def __init__(self, name, age):        super(A, self).__init__()        self.__name = name        self.__age = agea = A(name=&#x27;python&#x27;, age=27)a.__age  # 无法被访问\n\n23. 使用类的property访问类的属性，需要property，但是是只读的\n要修改的话，可以定义setter\n123456789101112131415161718192021222324252627282930class B:    def __init__(self, name, age):        self.__name = name        self.__age = age@propertydef name(self):    return self._name@propertydef age(self):    return self._age@age.setterdef age(self, value):    self.__age = valuedef __str__(self):    print(&#x27;My name is &#123;&#125; and my age is &#123;&#125;&#x27;.format(self.__name, self.__age))b = B(&#x27;Demo&#x27;, 30)print(b)b.age = 40 # 可以修改\n\n24. tuple元组技巧\n同时赋值，保证个数一致\nenumerate(),将列表变为元组\n\n12345678910a &#x3D; [1, 2, 3, 4]for item in enumerate(a):    print(item)# 返回（0，1）（1，2）（2，3）（3，4）\n\n25. 特殊元组namedtuple123456789101112import collectionsStudent = collections.namedtuple(&#x27;Student&#x27;, &#x27;id, name, score&#x27;)students = [    Student(1, &#x27;ABC&#x27;, 90),    Student(2, &#x27;XYZ&#x27;, 85),    Student(3, &#x27;asdf&#x27;, 80)]# 调用for s in students:    print(&#x27;name=&#123;&#125;, id=&#123;&#125;, score=&#123;&#125;&#x27;.format(s.name, s.id, s.score))\n\n提高可读性及可维护性，效率并无太大区别\n26. dict和zip创建字典\n123456789101112# 1dict(a=1,b=2)# 2data = ((&#x27;a&#x27;:1), (&#x27;b&#x27;:2)) # 只要是可迭代对象都行dict(data)# 3# 两个元素数量相同的列表dict(zip(x,y))  # 生成对应字典\n\n27. 字典按照key/value大小排序dict(sorted(d.items(), key=lambda x:x[1], reverse=True))\n28. 通过debug学习Python生成器yield生成器\n29. string操作技巧s = &#39; Last Checkpoint: a few seconds ago (unsaved changes) &#39;\n最好是链条式做完，而不是一个一个做\n30. 列表解析取代map和filter31. 上下文管理with open\n32. 一个单独的下划线可以怎么用\nfor循环中，不使用i，可用_代替\n输入1+2返回3，实际上3就赋值给了_\n取用列表或元组的元素时，无关紧要的可用_代替\n\n33. ```__str__和__repr__```区别123456789101112131415class Person:    def __init__(self, name, age):        self.name = name        self.age = age    def __str__(self):        return f&#x27;name=&#123;self.name&#125;, age=&#123;self.age&#125;&#x27;    def __repr__(self):    return f&#x27;name:&#123;self.name&#125;, age:&#123;self.age&#125;&#x27;p = Person(&#x27;Python&#x27;, 27)print(p)  # 先找__str__没有再找__repr__,都没有打印地址p # 命令行中输入p，有__repr__才能返回值，否则返回地址\n\n34. 定义自己的exception123456789101112131415161718from exception import NameTooShortdef validate(name):    if len(name) &lt; 10:        raise NameTooShort(&#x27;Name is too short.&#x27;)try:    validate(&#x27;test&#x27;)except NameTooShort as e:    print(e)# exceprion.py 文件下class NameTooShort(ValueError):    pass# 多个错误可以定义一个基类继承自Exception，其他错误都继承这个基类\n\n35. mypy做静态类型检查123456def sum(x: int, y: int) -&gt; int: # x、y都是int对象，函数返回int对象    return x + yif __name__ == &#x27;__main__&#x27;:    print(sum(&#x27;1&#x27;, &#x27;2&#x27;)) # 并不会报错，用mypy会提示希望是int，但却是str类型\n\n36. 改进的namedtuple12345678910111213# python3.6+from typing import NamedTupleclass Car(NmaedTuple):    color: str    mileage: float    automatic: bool    # 以上类型只是建议，不用对应的类型也不会报错，mypy会报错car = Car(&#x27;red&#x27;, &#x27;100.01&#x27;, False)car.mileage = 100 # 会报错，因为不支持修改数据\n\n37. 用哪种数据结构存储数据\n为了简单用dict或tuple，字典数据得不到保护，元组数据顺序不能乱\nclass，灵活，但是普通class属性还是可以改变的，也可以添加属性\nNamedTuple，定义子类，得到有效保护\n\n38. Python3.7+ Data Class12345678910111213141516from dataclasses import dataclass@dataclassclass NewPeple:    name: str    age: int    # 仅仅是提示p1 = NewPeple(&#x27;A&#x27;, 20)p2 = NewPeple(&#x27;A&#x27;, 20)print(p1, p2) # 普通类还要重写__str__ ,__repr__print(&#x27;p1=p2?&#x27;, p1==p2) # 普通类需要重写__eq__\n","dateCreated":"2020-09-19T10:23:37+08:00","dateModified":"2020-12-08T09:33:49+08:00","datePublished":"2020-09-19T10:23:37+08:00","description":"\n正确使用True和False的判断\n正确返回None值\n…\n","headline":"python技巧","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://github.com/Monster1314/blog/2020/09/19/python%E6%8A%80%E5%B7%A7/"},"publisher":{"@type":"Organization","name":"Monster","sameAs":["https://github.com/","mailto:muzhaoyang66@163.com"]},"url":"https://github.com/Monster1314/blog/2020/09/19/python%E6%8A%80%E5%B7%A7/"}</script>
-    <meta name="description" content="正确使用True和False的判断 正确返回None值 …">
-<meta property="og:type" content="blog">
+  <meta charset="utf-8">
+  
+
+  
+  <title>python技巧 | Monster</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="正确使用True和False的判断 正确返回None值 …">
+<meta property="og:type" content="article">
 <meta property="og:title" content="python技巧">
 <meta property="og:url" content="https://github.com/Monster1314/blog/2020/09/19/python%E6%8A%80%E5%B7%A7/index.html">
 <meta property="og:site_name" content="Monster">
@@ -23,226 +18,81 @@
 <meta property="article:modified_time" content="2020-12-08T01:33:49.161Z">
 <meta property="article:author" content="Monster">
 <meta name="twitter:card" content="summary">
-    
-    
-        
-    
-    
-    
-    
-    
-    <!--STYLES-->
-    
-<link rel="stylesheet" href="/blog/assets/css/all.css">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="Monster" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
 
-    
-<link rel="stylesheet" href="/blog/assets/css/jquery.fancybox.css">
+<meta name="generator" content="Hexo 5.2.0"></head>
 
-    
-<link rel="stylesheet" href="/blog/assets/css/thumbs.css">
-
-    
-<link rel="stylesheet" href="/blog/assets/css/tranquilpeak.css">
-
-    <!--STYLES END-->
-    
-
-    
-
-    
-        
-    
-</head>
-
-    <body>
-        <div id="blog">
-            <!-- Define author's picture -->
-
-
-    
-
-<header id="header" data-behavior="4">
-    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
-    <div class="header-title">
-        <a
-            class="header-title-link"
-            href="/blog/"
-            aria-label=""
-        >
-            Monster
-        </a>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">Monster</a>
+      </h1>
+      
     </div>
-    
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
         
-            <a
-                class="header-right-picture "
-                href="#about"
-                aria-label="Open the link: /blog/#about"
-            >
+          <a class="main-nav-link" href="/blog/">Home</a>
         
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
         
-        </a>
-    
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/Monster1314/blog"></form>
+      </div>
+    </div>
+  </div>
 </header>
+      <div class="outer">
+        <section id="main"><article id="post-python技巧" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/09/19/python%E6%8A%80%E5%B7%A7/" class="article-date">
+  <time datetime="2020-09-19T02:23:37.000Z" itemprop="datePublished">2020-09-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/python/">python</a>
+  </div>
 
-            <!-- Define author's picture -->
-
-
-<nav id="sidebar" data-behavior="4">
-    <div class="sidebar-container">
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
         
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/blog/"
-                            
-                            rel="noopener"
-                            title="Home"
-                        >
-                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Home</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/blog/all-categories"
-                            
-                            rel="noopener"
-                            title="Categories"
-                        >
-                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Categories</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/blog/all-tags"
-                            
-                            rel="noopener"
-                            title="Tags"
-                        >
-                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Tags</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="/blog/all-archives"
-                            
-                            rel="noopener"
-                            title="Archives"
-                        >
-                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Archives</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link open-algolia-search"
-                            href="#search"
-                            
-                            rel="noopener"
-                            title="Search"
-                        >
-                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Search</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-            <ul class="sidebar-buttons">
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="https://github.com/"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="GitHub"
-                        >
-                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">GitHub</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a
-                            class="sidebar-button-link "
-                            href="mailto:muzhaoyang66@163.com"
-                            
-                                target="_blank"
-                            
-                            rel="noopener"
-                            title="Mail"
-                        >
-                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Mail</span>
-                    </a>
-            </li>
-            
-        </ul>
-        
-    </div>
-</nav>
+  
+    <h1 class="article-title" itemprop="name">
+      python技巧
+    </h1>
+  
 
-            
-            <div id="main" data-behavior="4"
-                 class="
-                        hasCoverMetaIn
-                        ">
-                
-<article class="post">
+      </header>
     
-    
-        <div class="post-header main-content-wrap text-left">
-    
-        <h1 class="post-title">
-            python技巧
-        </h1>
-    
-    
-        <div class="post-meta">
-    <time datetime="2020-09-19T10:23:37+08:00">
-	
-		    Sep 19, 2020
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/blog/categories/python/">python</a>
-
-
-    
-</div>
-
-    
-</div>
-
-    
-    <div class="post-content markdown">
-        <div class="main-content-wrap">
-            <ol>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
 <li>正确使用True和False的判断</li>
 <li>正确返回None值</li>
 <li>…</li>
@@ -371,281 +221,138 @@
 </ul>
 <h3 id="38-Python3-7-Data-Class"><a href="#38-Python3-7-Data-Class" class="headerlink" title="38. Python3.7+ Data Class"></a>38. Python3.7+ Data Class</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> dataclasses <span class="keyword">import</span> dataclass</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@dataclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NewPeple</span>:</span></span><br><span class="line">    name: <span class="built_in">str</span></span><br><span class="line">    age: <span class="built_in">int</span></span><br><span class="line">    <span class="comment"># 仅仅是提示</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p1 = NewPeple(<span class="string">&#x27;A&#x27;</span>, <span class="number">20</span>)</span><br><span class="line">p2 = NewPeple(<span class="string">&#x27;A&#x27;</span>, <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(p1, p2) <span class="comment"># 普通类还要重写__str__ ,__repr__</span></span><br><span class="line">print(<span class="string">&#x27;p1=p2?&#x27;</span>, p1==p2) <span class="comment"># 普通类需要重写__eq__</span></span><br></pre></td></tr></table></figure>
 
-            
-
-
-        </div>
+      
     </div>
-    <div id="post-footer" class="post-footer main-content-wrap">
+    <footer class="article-footer">
+      <a data-url="https://github.com/Monster1314/blog/2020/09/19/python%E6%8A%80%E5%B7%A7/" data-id="ckifed15z0007j0ur307lfhgk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2020/09/25/markdown/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
         
+          markdown
         
-            <div class="post-actions-wrap">
-    <nav>
-        <ul class="post-actions post-action-nav">
-            <li class="post-action">
-                
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/blog/2020/09/25/markdown/"
-                    data-tooltip="markdown"
-                    aria-label="PREVIOUS: markdown"
-                >
-                    
-                        <i class="fa fa-angle-left" aria-hidden="true"></i>
-                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
-                    </a>
-            </li>
-            <li class="post-action">
-                
-                    <a
-                        class="post-action-btn btn btn--disabled"
-                        aria-hidden="true"
-                    >
-                        
-                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
-                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                    </a>
-            </li>
-        </ul>
-    </nav>
-    <ul class="post-actions post-action-share">
-        <li class="post-action hide-lg hide-md hide-sm">
-            <a
-                class="post-action-btn btn btn--default btn-open-shareoptions"
-                href="#btn-open-shareoptions"
-                aria-label="Share this post"
-            >
-                <i class="fa fa-share-alt" aria-hidden="true"></i>
-            </a>
-        </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/Monster1314/blog/2020/09/19/python%E6%8A%80%E5%B7%A7/&amp;title=python技巧"
-                    title="Share on QQ"
-                    aria-label="Share on QQ"
-                >
-                    <i class="fab fa-qq" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://github.com/Monster1314/blog/2020/09/19/python%E6%8A%80%E5%B7%A7/"
-                    title="Share on Qzone"
-                    aria-label="Share on Qzone"
-                >
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-        
-            
-        
-        <li class="post-action">
-            
-                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
-            
-                <i class="fa fa-list" aria-hidden="true"></i>
-            </a>
-        </li>
-    </ul>
-</div>
+      </div>
+    </a>
+  
+  
+</nav>
 
-
-        
-        
-            
-        
-    </div>
+  
 </article>
 
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/markdown/">markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/python-spider/">python-spider</a></li></ul>
+    </div>
+  </div>
 
 
-                <footer id="footer" class="main-content-wrap">
-    <span class="copyrights">
-        Copyrights &copy; 2020 Monster. All Rights Reserved.
-    </span>
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/%E6%95%99%E7%A8%8B/" style="font-size: 10px;">教程</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/09/">September 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2020/12/19/01%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/">01 爬虫基础</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/09/25/markdown/">markdown</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/09/19/python%E6%8A%80%E5%B7%A7/">python技巧</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Monster<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
 </footer>
-
-            </div>
-            
-                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
-                    <div class="post-actions-wrap">
-    <nav>
-        <ul class="post-actions post-action-nav">
-            <li class="post-action">
-                
-                    
-                <a
-                    class="post-action-btn btn btn--default tooltip--top"
-                    href="/blog/2020/09/25/markdown/"
-                    data-tooltip="markdown"
-                    aria-label="PREVIOUS: markdown"
-                >
-                    
-                        <i class="fa fa-angle-left" aria-hidden="true"></i>
-                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
-                    </a>
-            </li>
-            <li class="post-action">
-                
-                    <a
-                        class="post-action-btn btn btn--disabled"
-                        aria-hidden="true"
-                    >
-                        
-                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
-                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                    </a>
-            </li>
-        </ul>
-    </nav>
-    <ul class="post-actions post-action-share">
-        <li class="post-action hide-lg hide-md hide-sm">
-            <a
-                class="post-action-btn btn btn--default btn-open-shareoptions"
-                href="#btn-open-shareoptions"
-                aria-label="Share this post"
-            >
-                <i class="fa fa-share-alt" aria-hidden="true"></i>
-            </a>
-        </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/Monster1314/blog/2020/09/19/python%E6%8A%80%E5%B7%A7/&amp;title=python技巧"
-                    title="Share on QQ"
-                    aria-label="Share on QQ"
-                >
-                    <i class="fab fa-qq" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-            
-            
-            <li class="post-action hide-xs">
-                <a
-                    class="post-action-btn btn btn--default"
-                    target="new" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://github.com/Monster1314/blog/2020/09/19/python%E6%8A%80%E5%B7%A7/"
-                    title="Share on Qzone"
-                    aria-label="Share on Qzone"
-                >
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                </a>
-            </li>
-        
-        
-            
-        
-        <li class="post-action">
-            
-                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
-            
-                <i class="fa fa-list" aria-hidden="true"></i>
-            </a>
-        </li>
-    </ul>
-</div>
-
-
-                </div>
-                
-    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
-        <i id="btn-close-shareoptions" class="fa fa-times"></i>
-        <ul class="share-options">
-            
-                
-                
-                <li class="share-option">
-                    <a
-                        class="share-option-btn"
-                        target="new"
-                        href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/Monster1314/blog/2020/09/19/python%E6%8A%80%E5%B7%A7/&amp;title=python技巧"
-                        aria-label="Share on QQ"
-                    >
-                        <i class="fab fa-qq" aria-hidden="true"></i><span>Share on QQ</span>
-                    </a>
-                </li>
-            
-                
-                
-                <li class="share-option">
-                    <a
-                        class="share-option-btn"
-                        target="new"
-                        href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://github.com/Monster1314/blog/2020/09/19/python%E6%8A%80%E5%B7%A7/"
-                        aria-label="Share on Qzone"
-                    >
-                        <i class="fa fa-star" aria-hidden="true"></i><span>Share on Qzone</span>
-                    </a>
-                </li>
-            
-        </ul>
     </div>
-
-
-            
-        </div>
-        
-
-
-<div id="about">
-    <div id="about-card">
-        <div id="about-btn-close">
-            <i class="fa fa-times"></i>
-        </div>
-        
-            <h4 id="about-card-name">Monster</h4>
-        
-            <div id="about-card-bio"><p>author.bio</p>
-</div>
-        
-        
-            <div id="about-card-job">
-                <i class="fa fa-briefcase"></i>
-                <br/>
-                <p>author.job</p>
-
-            </div>
-        
-        
-    </div>
-</div>
-
-        
-        
-<div id="cover" style="background-image:url('/blog/assets/images/cover-v1.2.0.jpg');"></div>
-        <!--SCRIPTS-->
-
-<script src="/blog/assets/js/jquery.js"></script>
-
-
-<script src="/blog/assets/js/jquery.fancybox.js"></script>
-
-
-<script src="/blog/assets/js/thumbs.js"></script>
-
-
-<script src="/blog/assets/js/tranquilpeak.js"></script>
-
-<!--SCRIPTS END-->
-
-
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
     
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
 
 
 
-    </body>
+
+<script src="/blog/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
 </html>
