@@ -1,0 +1,626 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Monster">
+    <title>markdown - Monster</title>
+    <meta name="author" content="Monster">
+    
+    
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Monster","sameAs":["https://github.com/","mailto:muzhaoyang66@163.com"]},"articleBody":"Markdown入门概要\nMarkdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有HTML的格式。\n\n\n官方网站https://daringfireball.net/projects/markdown/\nGitHub Markdown Cheatsheethttps://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet\n课程详细\n课程介绍\n预览插件\n设置标题\n自然段改行\n引用表现\n增加分割线\n强调表现\n列表表示\n超文本链接\n代码高亮显示\n图片显示\n表格显示\n\n开发工具\n记事本等文本编辑器\n\n\nVisual Studio Code\nPycharm\nATOM\n\n标题\nhtml标题标记的生成(h1～h6)\n\n123456789101112# h1标题## h2标题### h3标题#### h4标题##### h5标题###### h6标题h1标题&#x3D;&#x3D;&#x3D;h2标题---\n\n\n\n引用\n引用文的表现方法：&gt;\n\n123我是引用&gt; 我是引用\n\n\n\n分割线\n为文章分割线：---\n\n1- ------\n\n\n\n强调\n斜体：*XXX*, _XXX_\n粗体：**XXX**, __XXX__\n\n案例：XXX, XXX\n案例：XXX , XXX\n列表\n列表符号：-\n列表符号：*\n列表符号：+\n列表符号：数字\n\n练习：\n12345678910- 项目  - 项目    - 项目1. 项目12. 项目23. 项目3- [ ] 计划任务- [x] 完成任务\n\n\n\n超文本链接\n超文本链接的书写\n\n12345https:&#x2F;&#x2F;www.python.org&#x2F;[Python.org](https:&#x2F;&#x2F;www.python.org&#x2F;)[Python.org](https:&#x2F;&#x2F;www.python.org&#x2F; &quot;python官方文档&quot;)\n\nhttps://www.python.org/\n代码高亮显示\n代码高亮显示符号：`\n代码高亮显示符号：~\n\n例子：\n123456​&#96;&#96;&#96;pythondef add(x, y)     return x+y​&#96;&#96;&#96;说明：您可以使用 &#96;add(x,y)&#96; 函数计算两个数的和。\n\n\n\n图片显示\n图片的引用与显示：\n\n![alt文字](C:/Users/muzha/Documents/WeChat Files/wxid_jqw01i0de0iv22/FileStorage/File/2020-09/markdown/图片url 图片title)\n制作图片链接1![img](https:&#x2F;&#x2F;gss0.bdstatic.com&#x2F;94o3dSag_xI4khGkpoWK1HF6hhy&#x2F;baike&#x2F;c0%3Dbaike150%2C5%2C5%2C150%2C50&#x2F;sign&#x3D;db37d3b8454a20a425133495f13bf347&#x2F;3b87e950352ac65c8819edd9f1f2b21193138a78.jpg)\n\n\n\n表格显示\n表格制作与显示\n\n使用 - 和 | 来制作表格。\n1234| TH1 | TH2 | TH3 |----|----|----| TD1 | TD3 | TD5 || TD2 | TD4 | TD6 |\n\n使用表格对齐1234| 居左 | 居中 | 居右 ||:---|:---:|---:||1 |2 |3 ||4 |5 |6 | \n\n","dateCreated":"2020-09-25T16:47:42+08:00","dateModified":"2020-12-08T09:33:46+08:00","datePublished":"2020-09-25T16:47:42+08:00","description":"Markdown入门概要\nMarkdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有HTML的格式。","headline":"markdown","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://github.com/Monster1314/blog/2020/09/25/markdown/"},"publisher":{"@type":"Organization","name":"Monster","sameAs":["https://github.com/","mailto:muzhaoyang66@163.com"]},"url":"https://github.com/Monster1314/blog/2020/09/25/markdown/"}</script>
+    <meta name="description" content="Markdown入门概要 Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有HTML的格式。">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="markdown">
+<meta property="og:url" content="https://github.com/Monster1314/blog/2020/09/25/markdown/index.html">
+<meta property="og:site_name" content="Monster">
+<meta property="og:description" content="Markdown入门概要 Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有HTML的格式。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-25T08:47:42.000Z">
+<meta property="article:modified_time" content="2020-12-08T01:33:46.506Z">
+<meta property="article:author" content="Monster">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+    
+    
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/blog/assets/css/all.css">
+
+    
+<link rel="stylesheet" href="/blog/assets/css/jquery.fancybox.css">
+
+    
+<link rel="stylesheet" href="/blog/assets/css/thumbs.css">
+
+    
+<link rel="stylesheet" href="/blog/assets/css/tranquilpeak.css">
+
+    <!--STYLES END-->
+    
+
+    
+
+    
+        
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a
+            class="header-title-link"
+            href="/blog/"
+            aria-label=""
+        >
+            Monster
+        </a>
+    </div>
+    
+        
+            <a
+                class="header-right-picture "
+                href="#about"
+                aria-label="Open the link: /blog/#about"
+            >
+        
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/blog/"
+                            
+                            rel="noopener"
+                            title="Home"
+                        >
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/blog/all-categories"
+                            
+                            rel="noopener"
+                            title="Categories"
+                        >
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/blog/all-tags"
+                            
+                            rel="noopener"
+                            title="Tags"
+                        >
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="/blog/all-archives"
+                            
+                            rel="noopener"
+                            title="Archives"
+                        >
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link open-algolia-search"
+                            href="#search"
+                            
+                            rel="noopener"
+                            title="Search"
+                        >
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="https://github.com/"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="GitHub"
+                        >
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a
+                            class="sidebar-button-link "
+                            href="mailto:muzhaoyang66@163.com"
+                            
+                                target="_blank"
+                            
+                            rel="noopener"
+                            title="Mail"
+                        >
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            markdown
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2020-09-25T16:47:42+08:00">
+	
+		    Sep 25, 2020
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/blog/categories/markdown/">markdown</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <h2 id="Markdown入门"><a href="#Markdown入门" class="headerlink" title="Markdown入门"></a>Markdown入门</h2><p><strong>概要</strong></p>
+<p>Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有HTML的格式。</p>
+<a id="more"></a>
+
+<h3 id="官方网站"><a href="#官方网站" class="headerlink" title="官方网站"></a>官方网站</h3><p><a target="_blank" rel="noopener" href="https://daringfireball.net/projects/markdown/">https://daringfireball.net/projects/markdown/</a></p>
+<h3 id="GitHub-Markdown-Cheatsheet"><a href="#GitHub-Markdown-Cheatsheet" class="headerlink" title="GitHub Markdown Cheatsheet"></a>GitHub Markdown Cheatsheet</h3><p><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet</a></p>
+<h3 id="课程详细"><a href="#课程详细" class="headerlink" title="课程详细"></a>课程详细</h3><ol>
+<li>课程介绍</li>
+<li>预览插件</li>
+<li>设置标题</li>
+<li>自然段改行</li>
+<li>引用表现</li>
+<li>增加分割线</li>
+<li>强调表现</li>
+<li>列表表示</li>
+<li>超文本链接</li>
+<li>代码高亮显示</li>
+<li>图片显示</li>
+<li>表格显示</li>
+</ol>
+<h3 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h3><ul>
+<li>记事本等文本编辑器</li>
+</ul>
+<ol>
+<li>Visual Studio Code</li>
+<li>Pycharm</li>
+<li>ATOM</li>
+</ol>
+<h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><ul>
+<li>html标题标记的生成(h1～h6)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># h1标题</span><br><span class="line">## h2标题</span><br><span class="line">### h3标题</span><br><span class="line">#### h4标题</span><br><span class="line">##### h5标题</span><br><span class="line">###### h6标题</span><br><span class="line"></span><br><span class="line">h1标题</span><br><span class="line">&#x3D;&#x3D;&#x3D;</span><br><span class="line"></span><br><span class="line">h2标题</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><ul>
+<li>引用文的表现方法：&gt;</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">我是引用</span><br><span class="line"></span><br><span class="line">&gt; 我是引用</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h3><ul>
+<li>为文章分割线：<code>---</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- ------</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h3><ul>
+<li>斜体：<code>*XXX*</code>, <code>_XXX_</code></li>
+<li>粗体：<code>**XXX**</code>,<code> __XXX__</code></li>
+</ul>
+<p>案例：<em>XXX</em>, <em>XXX</em></p>
+<p>案例：<strong>XXX</strong> , <strong>XXX</strong></p>
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><ul>
+<li>列表符号：-</li>
+<li>列表符号：*</li>
+<li>列表符号：+</li>
+<li>列表符号：数字</li>
+</ul>
+<p>练习：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- 项目</span><br><span class="line">  - 项目</span><br><span class="line">    - 项目</span><br><span class="line"></span><br><span class="line">1. 项目1</span><br><span class="line">2. 项目2</span><br><span class="line">3. 项目3</span><br><span class="line"></span><br><span class="line">- [ ] 计划任务</span><br><span class="line">- [x] 完成任务</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="超文本链接"><a href="#超文本链接" class="headerlink" title="超文本链接"></a>超文本链接</h3><ul>
+<li>超文本链接的书写</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;www.python.org&#x2F;</span><br><span class="line"></span><br><span class="line">[Python.org](https:&#x2F;&#x2F;www.python.org&#x2F;)</span><br><span class="line"></span><br><span class="line">[Python.org](https:&#x2F;&#x2F;www.python.org&#x2F; &quot;python官方文档&quot;)</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.python.org/">https://www.python.org/</a></p>
+<h3 id="代码高亮显示"><a href="#代码高亮显示" class="headerlink" title="代码高亮显示"></a>代码高亮显示</h3><ul>
+<li>代码高亮显示符号：`</li>
+<li>代码高亮显示符号：~</li>
+</ul>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">​&#96;&#96;&#96;python</span><br><span class="line">def add(x, y) </span><br><span class="line">    return x+y</span><br><span class="line">​&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line">说明：您可以使用 &#96;add(x,y)&#96; 函数计算两个数的和。</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="图片显示"><a href="#图片显示" class="headerlink" title="图片显示"></a>图片显示</h3><ul>
+<li>图片的引用与显示：<img src=""></li>
+</ul>
+<p>![alt文字](C:/Users/muzha/Documents/WeChat Files/wxid_jqw01i0de0iv22/FileStorage/File/2020-09/markdown/图片url 图片title)</p>
+<h3 id="制作图片链接"><a href="#制作图片链接" class="headerlink" title="制作图片链接"></a>制作图片链接</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![img](https:&#x2F;&#x2F;gss0.bdstatic.com&#x2F;94o3dSag_xI4khGkpoWK1HF6hhy&#x2F;baike&#x2F;c0%3Dbaike150%2C5%2C5%2C150%2C50&#x2F;sign&#x3D;db37d3b8454a20a425133495f13bf347&#x2F;3b87e950352ac65c8819edd9f1f2b21193138a78.jpg)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="表格显示"><a href="#表格显示" class="headerlink" title="表格显示"></a>表格显示</h3><ul>
+<li>表格制作与显示</li>
+</ul>
+<p>使用 <code>-</code> 和 <code>|</code> 来制作表格。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">| TH1 | TH2 | TH3 |</span><br><span class="line">----|----|----</span><br><span class="line">| TD1 | TD3 | TD5 |</span><br><span class="line">| TD2 | TD4 | TD6 |</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用表格对齐"><a href="#使用表格对齐" class="headerlink" title="使用表格对齐"></a>使用表格对齐</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">| 居左 | 居中 | 居右 |</span><br><span class="line">|:---|:---:|---:|</span><br><span class="line">|1 |2 |3 |</span><br><span class="line">|4 |5 |6 | </span><br></pre></td></tr></table></figure>
+
+
+            
+
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/blog/2020/12/19/01%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/"
+                    data-tooltip="01 爬虫基础"
+                    aria-label="PREVIOUS: 01 爬虫基础"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/blog/2020/09/19/python%E6%8A%80%E5%B7%A7/"
+                    data-tooltip="python技巧"
+                    aria-label="NEXT: python技巧"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/Monster1314/blog/2020/09/25/markdown/&amp;title=markdown"
+                    title="Share on QQ"
+                    aria-label="Share on QQ"
+                >
+                    <i class="fab fa-qq" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://github.com/Monster1314/blog/2020/09/25/markdown/"
+                    title="Share on Qzone"
+                    aria-label="Share on Qzone"
+                >
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2020 Monster. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/blog/2020/12/19/01%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/"
+                    data-tooltip="01 爬虫基础"
+                    aria-label="PREVIOUS: 01 爬虫基础"
+                >
+                    
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                    </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                <a
+                    class="post-action-btn btn btn--default tooltip--top"
+                    href="/blog/2020/09/19/python%E6%8A%80%E5%B7%A7/"
+                    data-tooltip="python技巧"
+                    aria-label="NEXT: python技巧"
+                >
+                    
+                        <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a
+                class="post-action-btn btn btn--default btn-open-shareoptions"
+                href="#btn-open-shareoptions"
+                aria-label="Share this post"
+            >
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/Monster1314/blog/2020/09/25/markdown/&amp;title=markdown"
+                    title="Share on QQ"
+                    aria-label="Share on QQ"
+                >
+                    <i class="fab fa-qq" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a
+                    class="post-action-btn btn btn--default"
+                    target="new" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://github.com/Monster1314/blog/2020/09/25/markdown/"
+                    title="Share on Qzone"
+                    aria-label="Share on Qzone"
+                >
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/Monster1314/blog/2020/09/25/markdown/&amp;title=markdown"
+                        aria-label="Share on QQ"
+                    >
+                        <i class="fab fa-qq" aria-hidden="true"></i><span>Share on QQ</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a
+                        class="share-option-btn"
+                        target="new"
+                        href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://github.com/Monster1314/blog/2020/09/25/markdown/"
+                        aria-label="Share on Qzone"
+                    >
+                        <i class="fa fa-star" aria-hidden="true"></i><span>Share on Qzone</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <h4 id="about-card-name">Monster</h4>
+        
+            <div id="about-card-bio"><p>author.bio</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </div>
+        
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/blog/assets/images/cover-v1.2.0.jpg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/blog/assets/js/jquery.js"></script>
+
+
+<script src="/blog/assets/js/jquery.fancybox.js"></script>
+
+
+<script src="/blog/assets/js/thumbs.js"></script>
+
+
+<script src="/blog/assets/js/tranquilpeak.js"></script>
+
+<!--SCRIPTS END-->
+
+
+    
+
+
+
+
+    </body>
+</html>
