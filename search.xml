@@ -282,9 +282,14 @@
     <url>/blog/2020/12/08/pycharm%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/</url>
     <content><![CDATA[<h1 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h1><p>File-Plugins</p>
 <ol>
-<li>Atom Material Icons  图标样式</li>
-<li>Material Theme UI  主题UI</li>
-<li>Translation  翻译工具<h1 id="仓库镜像"><a href="#仓库镜像" class="headerlink" title="仓库镜像"></a>仓库镜像</h1>添加以下镜像源：</li>
+<li><p>Atom Material Icons  图标样式</p>
+</li>
+<li><p>Material Theme UI  主题UI</p>
+</li>
+<li><p>Translation  翻译工具</p>
+<a id="more"></a>
+<h1 id="仓库镜像"><a href="#仓库镜像" class="headerlink" title="仓库镜像"></a>仓库镜像</h1><p>添加以下镜像源：</p>
+</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;main&#x2F;</span><br><span class="line">https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;free&#x2F;</span><br><span class="line">https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn&#x2F;simple&#x2F;</span><br></pre></td></tr></table></figure>
 
