@@ -184,23 +184,6 @@
       </categories>
   </entry>
   <entry>
-    <title>hexo资源压缩方法</title>
-    <url>/blog/2020/12/08/hexo%E8%B5%84%E6%BA%90%E5%8E%8B%E7%BC%A9%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<h3 id="hexo-all-minifier使用"><a href="#hexo-all-minifier使用" class="headerlink" title="hexo-all-minifier使用"></a><a href="https://github.com/chenzhutian/hexo-all-minifier">hexo-all-minifier</a>使用</h3><p>这款工具它兼顾了hexo-neat的易用性，和gulp的功能。</p>
-<a id="more"></a>
-
-<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install hexo-all-minifier --save</span><br></pre></td></tr></table></figure>
-
-<p>如果安装失败试试用<code>cnpm</code>（我就是这么安装成功的）</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">cnpm install hexo-all-minifier --save</span><br></pre></td></tr></table></figure>
-
-<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>在<code>_config.yml</code>里添加:</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">all_minifier:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>hexo</category>
-      </categories>
-  </entry>
-  <entry>
     <title>markdown</title>
     <url>/blog/2020/09/25/markdown/</url>
     <content><![CDATA[<h2 id="Markdown入门"><a href="#Markdown入门" class="headerlink" title="Markdown入门"></a>Markdown入门</h2><p><strong>概要</strong></p>
@@ -463,6 +446,21 @@
 ]]></content>
       <categories>
         <category>python</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>hexo资源压缩</title>
+    <url>/blog/2020/12/08/hexo%E8%B5%84%E6%BA%90%E5%8E%8B%E7%BC%A9/</url>
+    <content><![CDATA[<h3 id="hexo-all-minifier使用"><a href="#hexo-all-minifier使用" class="headerlink" title="hexo-all-minifier使用"></a><a href="https://github.com/chenzhutian/hexo-all-minifier">hexo-all-minifier</a>使用</h3><p>这款工具它兼顾了hexo-neat的易用性，和gulp的功能。</p>
+<a id="more"></a>
+
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install hexo-all-minifier --save</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>在根目录<code>_config.yml</code>里添加:</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">all_minifier:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>hexo</category>
       </categories>
   </entry>
 </search>
