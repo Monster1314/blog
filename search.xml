@@ -1,787 +1,234 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title>图片CDN加速</title>
-    <url>/blog/2020/12/08/CDN%E5%8A%A0%E9%80%9F/</url>
-    <content><![CDATA[<p>一个免费的CDN加速，<a href="https://www.jsdelivr.com/?docs=gh" >JSDELIVR</a> </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;user&#x2F;repo@version&#x2F;file</span><br><span class="line">user--GitHub用户名</span><br><span class="line">repo--分支名称</span><br><span class="line">version--版本号，可以不填</span><br><span class="line">file--图片路径，比如存储在GitHub仓库images文件夹下的1.jpg，可以写&#x2F;images&#x2F;1.jpg</span><br></pre></td></tr></table></figure>
-
-<p>将修改过后的url放入md文件中远程推送即可实现图片CDN加速。</p>
-]]></content>
+<search> 
+  
+  
+    
+    <entry>
+      <title>git-learning</title>
+      <link href="/blog/2020/12/18/git-learning/"/>
+      <url>/blog/2020/12/18/git-learning/</url>
+      
+        <content type="html"><![CDATA[<p>website: <a href="https://learngitbranching.js.org/?locale=zh_CN">click me</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>scrapy爬取漫画</title>
+      <link href="/blog/2020/12/09/scrapy%E7%88%AC%E5%8F%96%E6%BC%AB%E7%94%BB/"/>
+      <url>/blog/2020/12/09/scrapy%E7%88%AC%E5%8F%96%E6%BC%AB%E7%94%BB/</url>
+      
+        <content type="html"><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>是否苦于看漫画收费，那不如自己编个程序白嫖吧！</p><a id="more"></a><h1 id="基本环境"><a href="#基本环境" class="headerlink" title="基本环境"></a>基本环境</h1><p>python 3.6</p><p>pycharm</p><h1 id="安装scrapy"><a href="#安装scrapy" class="headerlink" title="安装scrapy"></a>安装scrapy</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install scrapy</span><br></pre></td></tr></table></figure><h1 id="创建scrapy项目"><a href="#创建scrapy项目" class="headerlink" title="创建scrapy项目"></a>创建scrapy项目</h1><p>在命令行输入：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy startproject 项目名称</span><br></pre></td></tr></table></figure><h1 id="创建爬虫文件"><a href="#创建爬虫文件" class="headerlink" title="创建爬虫文件"></a>创建爬虫文件</h1><p>命令行输入：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scrapy genspider 爬虫文件名称 域名</span><br><span class="line">注意：爬虫文件名称不能和项目名称一样</span><br><span class="line">域名：比如https://www.baidu.com,baidu.com就是其域名</span><br></pre></td></tr></table></figure><h1 id="创建start文件"><a href="#创建start文件" class="headerlink" title="创建start文件"></a>创建start文件</h1><p>在spiders同级目录下创建start.py,写入：</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scrapy <span class="keyword">import</span> cmdline</span><br><span class="line"></span><br><span class="line">cmdline.execute(<span class="string">&#x27;scrapy crawl 爬虫文件名称&#x27;</span>.split())</span><br></pre></td></tr></table></figure><h1 id="目标url"><a href="#目标url" class="headerlink" title="目标url"></a>目标url</h1><p>本文介绍爬取<a href="https://www.manhuatai.com/">漫画台</a>的漫画.</p><p>QAQ,之前爬过一次，这次发现它url规则变了,不过没关系,逢山开路,遇水架桥</p><p><img src="https://cdn.jsdelivr.net/gh/Monster1314/blog/img/manhuatai1.png" alt="img"></p><p>这里选取<a href="https://www.manhuatai.com/yjdz/">一剑独尊</a>为例：</p><p><img src="https://cdn.jsdelivr.net/gh/Monster1314/blog/img/manhuatai2.png" alt="img"></p><h1 id="分析url规律"><a href="#分析url规律" class="headerlink" title="分析url规律"></a>分析url规律</h1><p>这里看到Google开发者工具elements-XHR-preview中返回的json数据，我们可以通过分析json数据爬取该漫画。</p><p><img src="https://cdn.jsdelivr.net/gh/Monster1314/blog/img/manhuatai3.png" alt="img"></p><p>通过与其他url比对,发现只有chapter_newid部分是变化的,且上一话的url.request返回的json数据中包含了下一话的chapter_newid,如此一来url规律就分析好了.</p><h1 id="提取数据"><a href="#提取数据" class="headerlink" title="提取数据"></a>提取数据</h1><p>提取方法如下:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 提取章节名称,url规则以及该章总共多少页</span></span><br><span class="line">chapter_name = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;current_chapter&#x27;</span>][<span class="string">&#x27;chapter_name&#x27;</span>]</span><br><span class="line">rule = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;current_chapter&#x27;</span>][<span class="string">&#x27;rule&#x27;</span>]</span><br><span class="line">end_num = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;current_chapter&#x27;</span>][<span class="string">&#x27;end_num&#x27;</span>]</span><br></pre></td></tr></table></figure><p>之后因为获取的url只是一部分规则,所以需要后续处理:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, end_num + <span class="number">1</span>):</span><br><span class="line">whole_url = origin + rule.replace(<span class="string">&#x27;$$&#x27;</span>, <span class="built_in">str</span>(num)) + <span class="string">&#x27;-mht.middle.webp&#x27;</span></span><br></pre></td></tr></table></figure><h1 id="整合爬虫文件"><a href="#整合爬虫文件" class="headerlink" title="整合爬虫文件"></a>整合爬虫文件</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"><span class="keyword">from</span> ..items <span class="keyword">import</span> ManhuataispiderItem</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ManhuataiSpider</span>(<span class="params">scrapy.Spider</span>):</span></span><br><span class="line">    name = <span class="string">&#x27;manhuatai&#x27;</span></span><br><span class="line">    allowed_domains = [<span class="string">&#x27;manhuatai.com&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    start_urls = [</span><br><span class="line">        <span class="string">&#x27;https://www.manhuatai.com/api/getchapterinfo?product_id=2&amp;productname=mht&amp;platformname=pc&amp;comic_id=108393&amp;chapter_newid=di1hua-1600506710013&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span>(<span class="params">self, response</span>):</span></span><br><span class="line">        <span class="comment"># print(response.json())</span></span><br><span class="line"></span><br><span class="line">        chapter_name = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;current_chapter&#x27;</span>][<span class="string">&#x27;chapter_name&#x27;</span>]</span><br><span class="line">        rule = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;current_chapter&#x27;</span>][<span class="string">&#x27;rule&#x27;</span>]</span><br><span class="line">        end_num = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;current_chapter&#x27;</span>][<span class="string">&#x27;end_num&#x27;</span>]</span><br><span class="line">        <span class="comment"># print(chapter_newid, chapter_name, rule, end_num)</span></span><br><span class="line"></span><br><span class="line">        origin = <span class="string">&#x27;https://mhpic.dm300.com&#x27;</span></span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, end_num + <span class="number">1</span>):</span><br><span class="line">            whole_url = origin + rule.replace(<span class="string">&#x27;$$&#x27;</span>, <span class="built_in">str</span>(num)) + <span class="string">&#x27;-mht.middle.webp&#x27;</span></span><br><span class="line">            <span class="comment"># print(whole_url)</span></span><br><span class="line">            <span class="keyword">yield</span> ManhuataispiderItem(img_url=whole_url, chapter_name=chapter_name, num=num)</span><br><span class="line"></span><br><span class="line">        chapter_newid = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;next_chapter&#x27;</span>][<span class="string">&#x27;chapter_newid&#x27;</span>]</span><br><span class="line">        print(chapter_newid)</span><br><span class="line"></span><br><span class="line">        next_url = <span class="string">f&#x27;https://www.manhuatai.com/api/getchapterinfo?product_id=2&amp;productname=mht&amp;platformname=pc&amp;comic_id=108393&amp;chapter_newid=<span class="subst">&#123;chapter_newid&#125;</span>&#x27;</span></span><br><span class="line">        <span class="keyword">if</span> chapter_newid:</span><br><span class="line">            <span class="keyword">yield</span> scrapy.Request(url=next_url, callback=self.parse)</span><br><span class="line"></span><br></pre></td></tr></table></figure><h1 id="请求头设置"><a href="#请求头设置" class="headerlink" title="请求头设置"></a>请求头设置</h1><p>请求头在middlewares文件中设置:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> faker</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HeadersDownloaderMiddleware</span>:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;headers中间件&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_request</span>(<span class="params">self, request, spider</span>):</span></span><br><span class="line">        <span class="comment"># 可以拿到请求体</span></span><br><span class="line">        fake = faker.Faker()</span><br><span class="line">        <span class="comment"># request.headers  拿到请求头, 请求头是一个字典</span></span><br><span class="line">        request.headers.update(</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&#x27;user-agent&#x27;</span>: fake.user_agent(),</span><br><span class="line">                <span class="string">&#x27;authority&#x27;</span>: <span class="string">&#x27;www.manhuatai.com&#x27;</span>,</span><br><span class="line">            &#125;</span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br></pre></td></tr></table></figure><h1 id="保持数据"><a href="#保持数据" class="headerlink" title="保持数据"></a>保持数据</h1><p>保存数据在pipelines中保持,因为是二进制数据,所以需要重写:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scrapy.pipelines.images <span class="keyword">import</span> ImagesPipeline</span><br><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 二进制数据下载需要继承自 ImagesPipeline</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DownloadPicturePipeline</span>(<span class="params">ImagesPipeline</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;二进制数据的保存&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># get_media_requests  请求二进制数据的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_media_requests</span>(<span class="params">self, item, info</span>):</span></span><br><span class="line">        <span class="comment"># 需要把二进制url提取出来</span></span><br><span class="line">        img_url = item[<span class="string">&#x27;img_url&#x27;</span>]</span><br><span class="line">        <span class="comment"># 构建二进制数据请求</span></span><br><span class="line">        <span class="keyword">yield</span> scrapy.Request(url=img_url)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># file_path 定义文件保存路径</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">file_path</span>(<span class="params">self, request, response=<span class="literal">None</span>, info=<span class="literal">None</span>, *, item=<span class="literal">None</span></span>):</span></span><br><span class="line">        num = item[<span class="string">&#x27;num&#x27;</span>]</span><br><span class="line">        chapter_name = item[<span class="string">&#x27;chapter_name&#x27;</span>]</span><br><span class="line">        <span class="keyword">return</span> <span class="string">f&#x27;<span class="subst">&#123;chapter_name&#125;</span>/<span class="subst">&#123;num&#125;</span>.jpg&#x27;</span></span><br></pre></td></tr></table></figure><h1 id="settings设置"><a href="#settings设置" class="headerlink" title="settings设置"></a>settings设置</h1><ol><li><pre><code class="python">ROBOTSTXT_OBEY = False<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. &#96;&#96;&#96;python</span><br><span class="line">   SPIDER_MIDDLEWARES &#x3D; &#123;</span><br><span class="line">       &#39;ManhuataiSpider.middlewares.HeadersDownloaderMiddleware&#39;: 543,</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></code></pre></li><li><pre><code class="python">ITEM_PIPELINES = &#123;   &#39;ManhuataiSpider.pipelines.DownloadPicturePipeline&#39;: 300,&#125;<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">4. &#96;&#96;&#96;python</span><br><span class="line">   IMAGES_STORE &#x3D; &#39;.&#x2F;images&#39;  # 在最后一定要添加,否则无法保存</span><br></pre></td></tr></table></figure></code></pre></li></ol><h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>打开start.py文件,运行等待即可看到漫画被爬取了.</p>]]></content>
+      
+      
       <categories>
-        <category>hexo博客</category>
+          
+          <category> scrapy </category>
+          
       </categories>
-      <tags>
-        <tag>-教程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>爬虫 01 爬虫基础</title>
-    <url>/blog/2020/12/01/01%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<h1 id="1-Python爬虫"><a href="#1-Python爬虫" class="headerlink" title="1. Python爬虫"></a>1. Python爬虫</h1><h2 id="1-1-爬虫用途"><a href="#1-1-爬虫用途" class="headerlink" title="1.1 爬虫用途"></a>1.1 爬虫用途</h2><hr>
-<p><strong>网络爬虫</strong>：按照一定的规则，自动地爬取互联网信息的程序。</p>
-<a id="more"></a>
-
-<h2 id="1-2-应用方向"><a href="#1-2-应用方向" class="headerlink" title="1.2 应用方向"></a>1.2 应用方向</h2><hr>
-<h3 id="1-2-1-定制搜索引擎"><a href="#1-2-1-定制搜索引擎" class="headerlink" title="1.2.1 定制搜索引擎"></a>1.2.1 定制搜索引擎</h3><p><strong>学习爬虫，可以私人定制一个搜索引擎，并且可以对搜索引擎的数据工作原理进行更深层次的理解</strong></p>
-<h3 id="1-2-2-seo优化"><a href="#1-2-2-seo优化" class="headerlink" title="1.2.2 seo优化"></a>1.2.2 seo优化</h3><p>学习爬虫，可以更深层次理解搜索引擎爬虫工作原理，从而<strong>可以更好地进行搜索引擎优化</strong></p>
-<h3 id="1-2-3-数据分析"><a href="#1-2-3-数据分析" class="headerlink" title="1.2.3 数据分析"></a>1.2.3 数据分析</h3><hr>
-<p><strong>大数据时代，要进行数据分析，首先要有数据源，而学习爬虫，可以让我们获取更多的数据，并且这些数据源可以按我们的目的进行采集，去掉很多无关数据。</strong>        </p>
-<h3 id="1-2-4-找工作"><a href="#1-2-4-找工作" class="headerlink" title="1.2.4 找工作"></a>1.2.4 找工作</h3><p><strong>还是要恰饭的嘛。</strong></p>
-<h2 id="1-3-为什么要用Python爬虫"><a href="#1-3-为什么要用Python爬虫" class="headerlink" title="1.3 为什么要用Python爬虫"></a>1.3 为什么要用Python爬虫</h2><hr>
-<ol>
-<li>PHP：天生不适合</li>
-<li>Java：生态圈完善，但语言本身较笨重，毕竟人生苦短……</li>
-<li>C/C++：运行效率没得说，大拇指，但学起来也太难了叭。</li>
-<li>Python：代码简洁优美，开发效率高。谁叫我这么菜，只想学简单的。</li>
-</ol>
-<h3 id="1-3-1-一个python爬虫"><a href="#1-3-1-一个python爬虫" class="headerlink" title="1.3.1 一个python爬虫"></a>1.3.1 一个python爬虫</h3><p>使用python爬取百度网址</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests  <span class="comment"># 导入爬虫requests库</span></span><br><span class="line"></span><br><span class="line">url = <span class="string">&#x27;http://www.baidu.com&#x27;</span></span><br><span class="line">response = requests.get(url=url)  <span class="comment"># 向指定url地址发送请求</span></span><br><span class="line">print(response)  <span class="comment"># 返回状态码，200表示请求成功</span></span><br><span class="line">print(response.text)  <span class="comment"># 返回百度页面的html</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="2-爬虫"><a href="#2-爬虫" class="headerlink" title="2. 爬虫"></a>2. 爬虫</h1><h2 id="2-1-爬虫分类"><a href="#2-1-爬虫分类" class="headerlink" title="2.1 爬虫分类"></a>2.1 爬虫分类</h2><hr>
-<h3 id="2-1-1-通用爬虫"><a href="#2-1-1-通用爬虫" class="headerlink" title="2.1.1 通用爬虫"></a>2.1.1 通用爬虫</h3><p>通用爬虫是搜索引擎抓取系统（百度、Google、Sogou等）一个重要组成部分。主要是将互联网上的网页下载到本地，形成一个互联网内容的镜像备份，为搜索引擎提供搜索支撑。</p>
-<p><strong>搜索引擎工作原理：</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Monster1314/blog/img/search.png" alt="img"></p>
-<ul>
-<li><p><strong>第一步： 抓取网页</strong></p>
-<p>搜索引擎去网站上抓取数据</p>
-</li>
-<li><p><strong>第二步：数据存储</strong></p>
-<p>搜索引擎通过爬虫得到的网页，将数据存入原始页面数据库（文档库）。其中的页面数据与用户浏览器得到的HTML是完全一样的。</p>
-</li>
-<li><p><strong>第三步：提供检索服务，网站排名</strong></p>
-<p>搜索引擎将爬虫抓取回来的页面，进行各种步骤的预处理：中文分词，消除噪音，索引处理等</p>
-</li>
-</ul>
-<p><strong>搜索引擎局限性</strong>：</p>
-<ol>
-<li>搜索引擎抓取的是整个网页，不是具体详细的信息；</li>
-<li>搜索引擎无法提供针对具体某个客户需求的搜索结果。</li>
-</ol>
-<h3 id="2-1-2-聚焦爬虫"><a href="#2-1-2-聚焦爬虫" class="headerlink" title="2.1.2 聚焦爬虫"></a>2.1.2 聚焦爬虫</h3><p>聚焦爬虫，是“面向特定主题需求”的一种网络爬虫程序，它与通用搜索引擎爬虫的区别在于：<strong>聚焦爬虫在实施网页抓取时会对内容进行处理筛选，尽量保证只抓取与需求相关的网页数据。</strong></p>
-<p>我们学当然要学聚焦爬虫 =v= 。</p>
-<h3 id="2-1-3-Robots协议"><a href="#2-1-3-Robots协议" class="headerlink" title="2.1.3 Robots协议"></a>2.1.3 Robots协议</h3><p>Robots协议也称爬虫协议、机器人协议等，全称呢个“网络爬虫排除标准”（Robots Exclusion Protocol）,网站通过Robot协议告诉搜索引擎哪些页面可以抓取，哪些页面不能抓取，如：</p>
-<p>淘宝：<a href="https://www.taobao.com/robots.txt">https://www.taobao.com/robots.txt</a></p>
-<p>百度：<a href="https://www.baidu.com/robots.txt">https://www.baidu.com/robots.txt</a></p>
-<h1 id="3-请求与相应"><a href="#3-请求与相应" class="headerlink" title="3. 请求与相应"></a>3. 请求与相应</h1><ol>
-<li>当我们在浏览器输入<a href="https://www.baidu.com时,浏览器会发送一个request请求去获取https//baidu.com%E7%9A%84html%E6%96%87%E4%BB%B6%EF%BC%8C%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%94%E5%9B%9EResponse%E5%AF%B9%E8%B1%A1%E7%BB%99%E6%B5%8F%E8%A7%88%E5%99%A8%E3%80%82">https://www.baidu.com时，浏览器会发送一个Request请求去获取https://baidu.com的html文件，服务器返回Response对象给浏览器。</a></li>
-<li>浏览器分析Response中的HTML，发现其中引用了很多文件，如Images文件、CSS文件。浏览器会自动再次发送请求去获取图片等。</li>
-<li>当所有文件都下载成功后，网页会根据HTML语法结构，完整显示出来。</li>
-</ol>
-<h1 id="4-Chrome-开发者工具"><a href="#4-Chrome-开发者工具" class="headerlink" title="4. Chrome 开发者工具"></a>4. Chrome 开发者工具</h1><p>一般爬虫用的最多的是<strong>Chrome开发者工具</strong>，在谷歌浏览器中右击，左击“检查”，或者按快捷键F12即可打开开发者工具。</p>
-<h2 id="4-1-元素面板（Elements）"><a href="#4-1-元素面板（Elements）" class="headerlink" title="4.1 元素面板（Elements）"></a>4.1 元素面板（Elements）</h2><hr>
-<p><img src="https://cdn.jsdelivr.net/gh/Monster1314/blog/img/elements.png" alt="img"></p>
-<p>打开谷歌开发者工具，点击elements，在这里可以看到网页的html，同时后续css/xpath/re都是从这里获取资源定位。</p>
-<p>选页面某一节点右击也可复制xpath路径、css路径等。</p>
-<h2 id="4-2-控制台面板（Console）"><a href="#4-2-控制台面板（Console）" class="headerlink" title="4.2 控制台面板（Console）"></a>4.2 控制台面板（Console）</h2><hr>
-<p><img src="https://cdn.jsdelivr.net/gh/Monster1314/blog/img/console.png" alt="img"></p>
-<p>控制台面板是用于显示JS和DOM对象信息的单独窗口。js解密会用console调试运行js代码。</p>
-<h2 id="4-3-资源面板（Source）"><a href="#4-3-资源面板（Source）" class="headerlink" title="4.3 资源面板（Source）"></a>4.3 资源面板（Source）</h2><hr>
-<p><img src="https://cdn.jsdelivr.net/gh/Monster1314/blog/img/source.png" alt="img"></p>
-<p>左侧可以看到源文件以树结构进行展示。</p>
-<p>中间可以用来调试js代码。</p>
-<p>右侧是断点调试功能区。</p>
-<h2 id="4-4-网络面板（Network）"><a href="#4-4-网络面板（Network）" class="headerlink" title="4.4 网络面板（Network）"></a>4.4 网络面板（Network）</h2><hr>
-<p><img src="https://cdn.jsdelivr.net/gh/Monster1314/blog/img/network.png" alt="img"></p>
-<p>网络（Network）面板记录页面上每个网络操作的相关信息，包括详细的耗时数据、HTTP标头和Cookie等。</p>
-<h3 id="4-4-1-工具栏"><a href="#4-4-1-工具栏" class="headerlink" title="4.4.1 工具栏"></a>4.4.1 工具栏</h3><p><img src="https://cdn.jsdelivr.net/gh/Monster1314/blog/img/tool.png" alt="img"></p>
-<p>从左到右：</p>
-<p><strong>Stop recording network log</strong></p>
-<p>默认情况下，只要开发者工具在开启状态，就会记录所有网络请求。红色表示开始，灰色表示关闭。</p>
-<p><strong>Clear</strong></p>
-<p>清空所有数据</p>
-<p><strong>Filter</strong></p>
-<p>数据包过滤，红色打开，蓝色关闭。经常使用它来过滤一些HTTP请求，如Ajax异步请求、图片、视频等。</p>
-<p><strong>Search</strong></p>
-<p>搜索框，只要在ALL里出现过的内容，就可以被直接搜索到。常用于数据检索与JS解密。</p>
-<p><strong>Preserve log</strong></p>
-<p>保留日志。当分析多个页面跳转的内容时，一定要勾上，不然页面跳转会把历史清空。</p>
-<p><strong>Disable cache</strong></p>
-<p>清空Javascript、css文件缓存，获取最新的。</p>
-<p><strong>Hide data URLs</strong></p>
-<p>用于是否隐藏dataurl。什么是dataurl？传统的通常img标记的src属性指定了一个远程服务器的资源，浏览器针对每个外部资源需要向服务器发送一次拉去资源请求。而Data URL技术是图片数据以base64字符串格式嵌入到了页面中，和HTML融为一体。</p>
-<h3 id="4-4-2-Requests详情"><a href="#4-4-2-Requests详情" class="headerlink" title="4.4.2 Requests详情"></a>4.4.2 Requests详情</h3><p><strong>请求头</strong></p>
-<p><strong>Headers</strong>是显示HTTP请求的Headers，我们通过这个能看到请求的方式，以及携带的请求参数等。</p>
-<ul>
-<li><p>General</p>
-</li>
-<li><p>Response Headers</p>
-</li>
-<li><p>Request Headers</p>
-</li>
-</ul>
-<p><strong>预览</strong></p>
-<p>Preview是请求结果的预览。</p>
-<p><strong>响应体</strong></p>
-<p>Response是请求返回的结果，一般是整个网站的源代码。如果该请求是异步请求，返回的结果一般是json文本数据。</p>
-<p>此数据与浏览器展示的网页可能不一致，因为浏览器是动态加载的。</p>
-]]></content>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>git方法</title>
+      <link href="/blog/2020/12/09/git/"/>
+      <url>/blog/2020/12/09/git/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Git-与-GitHub"><a href="#Git-与-GitHub" class="headerlink" title="Git 与 GitHub"></a>Git 与 GitHub</h1><h2 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h2><ol><li>git branch “name”   创建名为name的新分支</li><li>git checkout &lt; name &gt;   切换到新分支上</li><li>git checkout -b &lt; name &gt;  创建并切换到新分支</li></ol><a id="more"></a><h2 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h2><ol><li>git merge &lt; branch name &gt;  在分支下互相使用，最终合并到一起。在哪个分支下使用就合并到哪个分支下</li><li>git rebase &lt; target branch &gt;  实际上就是取出一系列的提交记录，“复制”它们，然后在另外一个地方逐个的放下去。 在哪个分支下使用，就改变哪个分支，合并到另一个分支上。互相用一次也可以合并到一起。</li></ol><h2 id="分离head"><a href="#分离head" class="headerlink" title="分离head"></a>分离head</h2><ol><li> git checkout C1     C1是哈希值，使用时可以只使用哈希值前几个字母</li></ol><h2 id="相对引用"><a href="#相对引用" class="headerlink" title="相对引用"></a>相对引用</h2><ol><li><p>git checkout master^  HEAD指向返回到master的父节点    </p></li><li><p>git checkout master^^  == git checkout master^2</p></li><li><p>git checkout HEAD~4  HEAD向上移动四次</p></li><li><p>git branch -f master HEAD~3  | 哈希值     将master向上移动三次/移到对应哈希值的节点</p></li></ol><h2 id="撤销改变"><a href="#撤销改变" class="headerlink" title="撤销改变"></a>撤销改变</h2><ol><li>git reset HEAD~1  该分支向上移动1，虽然在你的本地分支中使用 <code>git reset</code> 很方便，但是这种“改写历史”的方法对大家一起使用的远程分支是无效的哦！</li><li>git revert HEAD  在我们要撤销的提交记录后面居然多了一个新提交！这是因为新提交记录 <code>C2&#39;</code> 引入了更改 —— 这些更改刚好是用来撤销 <code>C2</code> 这个提交的。也就是说 <code>C2&#39;</code> 的状态与 <code>C1</code>是相同的。revert 之后就可以把你的更改推送到远程仓库与别人分享啦。</li></ol><h2 id="整理提交记录"><a href="#整理提交记录" class="headerlink" title="整理提交记录"></a>整理提交记录</h2><p> 开发人员有时会说“我想要把这个提交放到这里, 那个提交放到刚才那个提交的后面”</p><ol><li><p>git cherry-pick &lt; 提交号 &gt;  如果你想将一些提交复制到当前所在的位置（<code>HEAD</code>）下面的话， cherry-pick 是最直接的方式了。我个人非常喜欢 <code>cherry-pick</code>，因为它特别简单。</p><p>如git cherry-pick C1 C2   该分支复制C1 C2，并向下移动</p></li></ol><h2 id="交互式rebase"><a href="#交互式rebase" class="headerlink" title="交互式rebase"></a>交互式rebase</h2><p>如果你不清楚你想要的提交记录的哈希值呢? 幸好 Git 帮你想到了这一点, 我们可以利用交互式的 rebase —— 如果你想从一系列的提交记录中找到想要的记录, 这就是最好的方法了</p><p>交互式 rebase 指的是使用带参数 <code>--interactive</code> 的 rebase 命令, 简写为 <code>-i</code></p><ol><li>git rebase -i HEAD~4  打开UI窗口，对向上3个加所在位置共四个进行操作</li></ol><h2 id="本地栈式提交"><a href="#本地栈式提交" class="headerlink" title="本地栈式提交"></a>本地栈式提交</h2><p>来看一个在开发中经常会遇到的情况：我正在解决某个特别棘手的 Bug，为了便于调试而在代码中添加了一些调试命令并向控制台打印了一些信息。</p><p>这些调试和打印语句都在它们各自的提交记录里。最后我终于找到了造成这个 Bug 的根本原因，解决掉以后觉得沾沾自喜！</p><p>最后就差把 <code>bugFix</code> 分支里的工作合并回 <code>master</code> 分支了。你可以选择通过 fast-forward 快速合并到 <code>master</code> 分支上，但这样的话 <code>master</code> 分支就会包含我这些调试语句了。你肯定不想这样，应该还有更好的方式……</p><p>实际我们只要让 Git 复制解决问题的那一个提交记录就可以了。跟之前我们在“整理提交记录”中学到的一样，我们可以使用</p><ul><li><code>git rebase -i</code></li><li><code>git cherry-pick</code></li></ul><p>来达到目的。</p><h2 id="提交的技巧"><a href="#提交的技巧" class="headerlink" title="提交的技巧"></a>提交的技巧</h2><p>你之前在 <code>newImage</code> 分支上进行了一次提交，然后又基于它创建了 <code>caption</code> 分支，然后又提交了一次。</p><p>此时你想对的某个以前的提交记录进行一些小小的调整。比如设计师想修改一下 <code>newImage</code> 中图片的分辨率，尽管那个提交记录并不是最新的了。</p><p>我们可以通过下面的方法来克服困难：</p><ul><li>先用 <code>git rebase -i</code> 将提交重新排序，然后把我们想要修改的提交记录挪到最前</li><li>然后用 <code>git commit --amend</code> 来进行一些小修改</li><li>接着再用 <code>git rebase -i</code> 来将他们调回原来的顺序</li><li>最后我们把 master 移到修改的最前端（用你自己喜欢的方法），就大功告成啦！</li></ul><p>当然完成这个任务的方法不止上面提到的一种（我知道你在看 cherry-pick 啦），之后我们会多点关注这些技巧啦，但现在暂时只专注上面这种方法。 最后有必要说明一下目标状态中的那几个<code>&#39;</code> —— 我们把这个提交移动了两次，每移动一次会产生一个 <code>&#39;</code>；而 C2 上多出来的那个是我们在使用了 amend 参数提交时产生的，所以最终结果就是这样了。</p><p>也就是说，我在对比结果的时候只会对比提交树的结构，对于 <code>&#39;</code> 的数量上的不同，并不纳入对比范围内。只要你的 <code>master</code>分支结构与目标结构相同，我就算你通过。</p><h2 id="Git-Tag"><a href="#Git-Tag" class="headerlink" title="Git Tag"></a>Git Tag</h2><p>相信通过前面课程的学习你已经发现了：分支很容易被人为移动，并且当有新的提交时，它也会移动。分支很容易被改变，大部分分支还只是临时的，并且还一直在变。</p><p>你可能会问了：有没有什么可以<em>永远</em>指向某个提交记录的标识呢，比如软件发布新的大版本，或者是修正一些重要的 Bug 或是增加了某些新特性，有没有比分支更好的可以永远指向这些提交的方法呢？</p><p>当然有了！Git 的 tag 就是干这个用的啊，它们可以（在某种程度上 —— 因为标签可以被删除后重新在另外一个位置创建同名的标签）永久地将某个特定的提交命名为里程碑，然后就可以像分支一样引用了。</p><p>更难得的是，它们并不会随着新的提交而移动。你也不能检出到某个标签上面进行修改提交，它就像是提交树上的一个锚点，标识了某个特定的位置。</p><p>git tag v1 C1  我们将这个标签命名为 <code>v1</code>，并且明确地让它指向提交记录 <code>C1</code>，如果你不指定提交记录，Git 会用 <code>HEAD</code> 所指向的位置。</p><h2 id="Git-Describe"><a href="#Git-Describe" class="headerlink" title="Git Describe"></a>Git Describe</h2><p>由于标签在代码库中起着“锚点”的作用，Git 还为此专门设计了一个命令用来<strong>描述</strong>离你最近的锚点（也就是标签），它就是 <code>git describe</code>！</p><p>Git Describe 能帮你在提交历史中移动了多次以后找到方向；当你用 <code>git bisect</code>（一个查找产生 Bug 的提交记录的指令）找到某个提交记录时，或者是当你坐在你那刚刚度假回来的同事的电脑前时， 可能会用到这个命令。</p><p><code>git describe</code> 的语法是：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git describe &lt;ref&gt;</span><br></pre></td></tr></table></figure><p><code>&lt;ref&gt;</code> 可以是任何能被 Git 识别成提交记录的引用，如果你没有指定的话，Git 会以你目前所检出的位置（<code>HEAD</code>）。</p><p>它输出的结果是这样的：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;tag&gt;_&lt;numCommits&gt;_g&lt;hash&gt;</span><br></pre></td></tr></table></figure><p><code>tag</code> 表示的是离 <code>ref</code> 最近的标签， <code>numCommits</code> 是表示这个 <code>ref</code> 与 <code>tag</code> 相差有多少个提交记录， <code>hash</code> 表示的是你所给定的 <code>ref</code> 所表示的提交记录哈希值的前几位。</p><p>当 <code>ref</code> 提交记录上有某个标签时，则只输出标签名称</p><h2 id="多次rebase"><a href="#多次rebase" class="headerlink" title="多次rebase"></a>多次rebase</h2><p>你的领导给你提了点要求 —— 他们希望得到有序的提交历史，也就是我们最终的结果应该是 <code>C6&#39;</code> 在 <code>C7&#39;</code> 上面， <code>C5&#39;</code>在 <code>C6&#39;</code> 上面，依此类推。</p><p>即使你搞砸了也没关系，用 <code>reset</code> 命令就可以重新开始了。记得看看我们提供的答案，看你能否使用更少的命令来完成任务！</p><p>git rebase master bugFix 将bugFix rebase到master分支上</p><h2 id="两个父节点"><a href="#两个父节点" class="headerlink" title="两个父节点"></a>两个父节点</h2><p>操作符 <code>^</code> 与 <code>~</code> 符一样，后面也可以跟一个数字。</p><p>但是该操作符后面的数字与 <code>~</code> 后面的不同，并不是用来指定向上返回几代，而是指定合并提交记录的某个父提交。还记得前面提到过的一个合并提交有两个父提交吧，所以遇到这样的节点时该选择哪条路径就不是很清晰了。</p><p>Git 默认选择合并提交的“第一个”父提交，在操作符 <code>^</code> 后跟一个数字可以改变这一默认行为。</p><p>git checkout HEAD^2 返回到另一个父提交，直着下来的是父提交1。这些操作符还支持链式操作 </p><p>git checkout HEAD<del>^2</del>2    HEAD返回的话再次切换分支即可</p><h2 id="纠缠不清的分支"><a href="#纠缠不清的分支" class="headerlink" title="纠缠不清的分支"></a>纠缠不清的分支</h2><p>现在我们的 <code>master</code> 分支是比 <code>one</code>、<code>two</code> 和 <code>three</code> 要多几个提交。出于某种原因，我们需要把 <code>master</code> 分支上最近的几次提交做不同的调整后，分别添加到各个的分支上。</p><p><code>one</code> 需要重新排序并删除 <code>C5</code>，<code>two</code> 仅需要重排排序，而 <code>three</code> 只需要提交一次。</p><p>慢慢来，你会找到答案的 —— 记得通关之后用 <code>show solution</code> 看看我们的答案哦。</p><h2 id="远程"><a href="#远程" class="headerlink" title="远程"></a>远程</h2><p>我们的本地仓库多了一个名为 <code>o/master</code> 的分支, 这种类型的分支就叫<strong>远程</strong>分支。由于远程分支的特性导致其拥有一些特殊属性。</p><p>远程分支反映了远程仓库(在你上次和它通信时)的<strong>状态</strong>。这会有助于你理解本地的工作与公共工作的差别 —— 这是你与别人分享工作成果前至关重要的一步.</p><p>远程分支有一个特别的属性，在你检出时自动进入分离 HEAD 状态。Git 这么做是出于不能直接在这些分支上进行操作的原因, 你必须在别的地方完成你的工作, （更新了远程分支之后）再用远程分享你的工作成果。</p><h3 id="为什么有-o-？"><a href="#为什么有-o-？" class="headerlink" title="为什么有 o/？"></a>为什么有 <code>o/</code>？</h3><p>你可能想问这些远程分支的前面的 <code>o/</code> 是什么意思呢？好吧, 远程分支有一个命名规范 —— 它们的格式是:</p><ul><li><code>&lt;remote name&gt;/&lt;branch name&gt;</code></li></ul><p>因此，如果你看到一个名为 <code>o/master</code> 的分支，那么这个分支就叫 <code>master</code>，远程仓库的名称就是 <code>o</code>。</p><p>大多数的开发人员会将它们主要的远程仓库命名为 <code>origin</code>，并不是 <code>o</code>。这是因为当你用 <code>git clone</code> 某个仓库时，Git 已经帮你把远程仓库的名称设置为 <code>origin</code> 了</p><p>不过 <code>origin</code> 对于我们的 UI 来说太长了，因此不得不使用简写 <code>o</code> :) 但是要记住, 当你使用真正的 Git 时, 你的远程仓库默认为 <code>origin</code>!</p><h2 id="Git-Fetch"><a href="#Git-Fetch" class="headerlink" title="Git Fetch"></a>Git Fetch</h2><p><code>git fetch</code> 完成了仅有的但是很重要的两步:</p><ul><li>从远程仓库下载本地仓库中缺失的提交记录</li><li>更新远程分支指针(如 <code>o/master</code>)</li></ul><p><code>git fetch</code> 实际上将本地仓库中的远程分支更新成了远程仓库相应分支最新的状态。</p><p>如果你还记得上一节课程中我们说过的，远程分支反映了远程仓库在你<strong>最后一次与它通信时</strong>的状态，<code>git fetch</code> 就是你与远程仓库通信的方式了！希望我说的够明白了，你已经了解 <code>git fetch</code> 与远程分支之间的关系了吧。</p><p><code>git fetch</code> 通常通过互联网（使用 <code>http://</code> 或 <code>git://</code> 协议) 与远程仓库通信。</p><p><code>git fetch</code> 并不会改变你本地仓库的状态。它不会更新你的 <code>master</code> 分支，也不会修改你磁盘上的文件。</p><p>理解这一点很重要，因为许多开发人员误以为执行了 <code>git fetch</code> 以后，他们本地仓库就与远程仓库同步了。它可能已经将进行这一操作所需的所有数据都下载了下来，但是<strong>并没有</strong>修改你本地的文件。我们在后面的课程中将会讲解能完成该操作的命令 :D</p><p>所以, 你可以将 <code>git fetch</code> 的理解为单纯的下载操作。</p><h2 id="Git-Pull"><a href="#Git-Pull" class="headerlink" title="Git Pull"></a>Git Pull</h2><p>其实有很多方法的 —— 当远程分支中有新的提交时，你可以像合并本地分支那样来合并远程分支。也就是说就是你可以执行以下命令:</p><ul><li><code>git cherry-pick o/master</code></li><li><code>git rebase o/master</code></li><li><code>git merge o/master</code></li><li>等等</li></ul><p>实际上，由于先抓取更新再合并到本地分支这个流程很常用，因此 Git 提供了一个专门的命令来完成这两个操作。它就是我们要讲的 <code>git pull</code>。  = git fetch + git merge o/master</p><h2 id="模拟团队合作"><a href="#模拟团队合作" class="headerlink" title="模拟团队合作"></a>模拟团队合作</h2><h2 id="Git-Push"><a href="#Git-Push" class="headerlink" title="Git Push"></a>Git Push</h2><p>OK，我们已经学过了如何从远程仓库获取更新并合并到本地的分支当中。这非常棒……但是我如何与大家分享<strong>我的</strong>成果呢？</p><p>嗯，上传自己分享内容与下载他人的分享刚好相反，那与 <code>git pull</code> 相反的命令是什么呢？<code>git push</code>！</p><p><code>git push</code> 负责将<strong>你的</strong>变更上传到指定的远程仓库，并在远程仓库上合并你的新提交记录。一旦 <code>git push</code> 完成, 你的朋友们就可以从这个远程仓库下载你分享的成果了！</p><p>你可以将 <code>git push</code> 想象成发布你成果的命令。它有许多应用技巧，稍后我们会了解到，但是咱们还是先从基础的开始吧……</p><p><em>注意 —— <code>git push</code> 不带任何参数时的行为与 Git 的一个名为 <code>push.default</code> 的配置有关。它的默认值取决于你正使用的 Git 的版本，但是在教程中我们使用的是 <code>upstream</code>。 这没什么太大的影响，但是在你的项目中进行推送之前，最好检查一下这个配置。</em></p><h2 id="偏离的提交历史"><a href="#偏离的提交历史" class="headerlink" title="偏离的提交历史"></a>偏离的提交历史</h2><p>假设你周一克隆了一个仓库，然后开始研发某个新功能。到周五时，你新功能开发测试完毕，可以发布了。但是 —— 天啊！你的同事这周写了一堆代码，还改了许多你的功能中使用的 API，这些变动会导致你新开发的功能变得不可用。但是他们已经将那些提交推送到远程仓库了，因此你的工作就变成了基于项目<strong>旧版</strong>的代码，与远程仓库最新的代码不匹配了。</p><p>这种情况下, <code>git push</code> 就不知道该如何操作了。如果你执行 <code>git push</code>，Git 应该让远程仓库回到星期一那天的状态吗？还是直接在新代码的基础上添加你的代码，亦或由于你的提交已经过时而直接忽略你的提交？</p><p>因为这情况（历史偏离）有许多的不确定性，Git 是不会允许你 <code>push</code> 变更的。实际上它会强制你先合并远程最新的代码，然后才能分享你的工作。</p><p>那该如何解决这个问题呢？很简单，你需要做的就是使你的工作基于最新的远程分支。</p><p>有许多方法做到这一点呢，不过最直接的方法就是通过 rebase 调整你的工作。咱们继续，看看怎么 rebase！</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch; git rebase o/master; git push</span><br></pre></td></tr></table></figure><p>我们用 <code>git fetch</code> 更新了本地仓库中的远程分支，然后用 rebase 将我们的工作移动到最新的提交记录下，最后再用 <code>git push</code> 推送到远程仓库。</p><p>还有其它的方法可以在远程仓库变更了以后更新我的工作吗? 当然有，我们还可以使用 <code>merge</code></p><p>尽管 <code>git merge</code> 不会移动你的工作（它会创建新的合并提交），但是它会告诉 Git 你已经合并了远程仓库的所有变更。这是因为远程分支现在是你本地分支的祖先，也就是说你的提交已经包含了远程分支的所有变化。</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch; git merge o/master; git push</span><br></pre></td></tr></table></figure><p>很好！但是要敲那么多命令，有没有更简单一点的？</p><p>当然 —— 前面已经介绍过 <code>git pull</code> 就是 fetch 和 merge 的简写，类似的 <code>git pull --rebase</code> 就是 fetch 和 rebase 的简写！</p><p><code>git pull; git push</code></p><h2 id="锁定的master"><a href="#锁定的master" class="headerlink" title="锁定的master"></a>锁定的master</h2><p>如果你是在一个大的合作团队中工作, 很可能是master被锁定了, 需要一些Pull Request流程来合并修改。如果你直接提交(commit)到本地master, 然后试图推送(push)修改, 你将会收到这样类似的信息:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">! [远程服务器拒绝] master -&gt; master (TF402455: 不允许推送(push)这个分支; 你必须使用pull request来更新这个分支.)</span><br></pre></td></tr></table></figure><h4 id="为什么会被拒绝"><a href="#为什么会被拒绝" class="headerlink" title="为什么会被拒绝?"></a>为什么会被拒绝?</h4><p>远程服务器拒绝直接推送(push)提交到master, 因为策略配置要求 pull requests 来提交更新.</p><p>你应该按照流程,新建一个分支, 推送(push)这个分支并申请pull request,但是你忘记并直接提交给了master.现在你卡住并且无法推送你的更新.</p><h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><p>新建一个分支feature, 推送到远程服务器. 然后reset你的master分支和远程服务器保持一致, 否则下次你pull并且他人的提交和你冲突的时候就会有问题.</p><h2 id="合并特性分支"><a href="#合并特性分支" class="headerlink" title="合并特性分支"></a>合并特性分支</h2><p>在大型项目中开发人员通常会在（从 <code>master</code> 上分出来的）特性分支上工作，工作完成后只做一次集成。这跟前面课程的描述很相像（把 side 分支推送到远程仓库），不过本节我们会深入一些.</p><p>但是有些开发人员只在 master 上做 push、pull —— 这样的话 master 总是最新的，始终与远程分支 (o/master) 保持一致。</p><p>对于接下来这个工作流，我们集成了两个步骤：</p><ul><li>将特性分支集成到 <code>master</code> 上</li><li>推送并更新远程分支</li></ul><h2 id="为什么不用-merge-呢"><a href="#为什么不用-merge-呢" class="headerlink" title="为什么不用 merge 呢?"></a>为什么不用 merge 呢?</h2><p>为了 push 新变更到远程仓库，你要做的就是<strong>包含</strong>远程仓库中最新变更。意思就是只要你的本地分支包含了远程分支（如 <code>o/master</code>）中的最新变更就可以了，至于具体是用 rebase 还是 merge，并没有限制。</p><p>那么既然没有规定限制，为何前面几节都在着重于 rebase 呢？为什么在操作远程分支时不喜欢用 <code>merge</code> 呢？</p><p>优点:</p><ul><li>Rebase 使你的提交树变得很干净, 所有的提交都在一条线上</li></ul><p>缺点:</p><ul><li>Rebase 修改了提交树的历史</li></ul><p>比如, 提交 C1 可以被 rebase 到 C3 之后。这看起来 C1 中的工作是在 C3 之后进行的，但实际上是在 C3 之前。</p><p>一些开发人员喜欢保留提交历史，因此更偏爱 merge。而其他人（比如我自己）可能更喜欢干净的提交树，于是偏爱 rebase。仁者见仁，智者见智。 :D</p><h2 id="远程追踪"><a href="#远程追踪" class="headerlink" title="远程追踪"></a>远程追踪</h2><p>Git 好像知道 <code>master</code> 与 <code>o/master</code> 是相关的。当然这些分支的名字是相似的，可能会让你觉得是依此将远程分支 master 和本地的 master 分支进行了关联。这种关联在以下两种情况下可以清楚地得到展示：</p><ul><li>pull 操作时, 提交记录会被先下载到 o/master 上，之后再合并到本地的 master 分支。隐含的合并目标由这个关联确定的。</li><li>push 操作时, 我们把工作从 <code>master</code> 推到远程仓库中的 <code>master</code> 分支(同时会更新远程分支 <code>o/master</code>) 。这个推送的目的地也是由这种关联确定的！</li></ul><p>直接了当地讲，<code>master</code> 和 <code>o/master</code> 的关联关系就是由分支的“remote tracking”属性决定的。<code>master</code> 被设定为跟踪 <code>o/master</code> —— 这意味着为 <code>master</code> 分支指定了推送的目的地以及拉取后合并的目标。</p><p>你可能想知道 <code>master</code> 分支上这个属性是怎么被设定的，你并没有用任何命令指定过这个属性呀！好吧, 当你克隆仓库的时候, Git 就自动帮你把这个属性设置好了。</p><p>当你克隆时, Git 会为远程仓库中的每个分支在本地仓库中创建一个远程分支（比如 <code>o/master</code>）。然后再创建一个跟踪远程仓库中活动分支的本地分支，默认情况下这个本地分支会被命名为 <code>master</code>。</p><p>克隆完成后，你会得到一个本地分支（如果没有这个本地分支的话，你的目录就是“空白”的），但是可以查看远程仓库中所有的分支（如果你好奇心很强的话）。这样做对于本地仓库和远程仓库来说，都是最佳选择。</p><p>这也解释了为什么会在克隆的时候会看到下面的输出：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">local</span> branch <span class="string">&quot;master&quot;</span> <span class="built_in">set</span> to track remote branch <span class="string">&quot;o/master&quot;</span></span><br></pre></td></tr></table></figure><h3 id="我能自己指定这个属性吗？"><a href="#我能自己指定这个属性吗？" class="headerlink" title="我能自己指定这个属性吗？"></a>我能自己指定这个属性吗？</h3><p>当然可以啦！你可以让任意分支跟踪 <code>o/master</code>, 然后该分支会像 <code>master</code> 分支一样得到隐含的 push 目的地以及 merge 的目标。 这意味着你可以在分支 <code>totallyNotMaster</code> 上执行 <code>git push</code>，将工作推送到远程仓库的 <code>master</code> 分支上。</p><p>有两种方法设置这个属性，第一种就是通过远程分支检出一个新的分支，执行:</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b totallyNotMaster o/master</span><br></pre></td></tr></table></figure><p>就可以创建一个名为 <code>totallyNotMaster</code> 的分支，它跟踪远程分支 <code>o/master</code>。</p><h3 id="第二种方法"><a href="#第二种方法" class="headerlink" title="第二种方法"></a>第二种方法</h3><p>另一种设置远程追踪分支的方法就是使用：<code>git branch -u</code> 命令，执行：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -u o/master foo</span><br></pre></td></tr></table></figure><p>这样 <code>foo</code> 就会跟踪 <code>o/master</code> 了。如果当前就在 foo 分支上, 还可以省略 foo：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -u o/master</span><br></pre></td></tr></table></figure><h2 id="Git-Push-参数"><a href="#Git-Push-参数" class="headerlink" title="Git Push 参数"></a>Git Push 参数</h2><p> 既然你知道了远程跟踪分支，我们可以开始揭开 git push、fetch 和 pull 的神秘面纱了。我们会逐个介绍这几个命令，它们在理念上是非常相似的。</p><p>首先来看 <code>git push</code>。在远程跟踪课程中，你已经学到了 Git 是通过当前检出分支的属性来确定远程仓库以及要 push 的目的地的。这是未指定参数时的行为，我们可以为 push 指定参数，语法是：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push &lt;remote&gt; &lt;place&gt;</span><br></pre></td></tr></table></figure><p><code>&lt;place&gt;</code> 参数是什么意思呢？我们稍后会深入其中的细节, 先看看例子, 这个命令是:</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure><p>把这个命令翻译过来就是：</p><p><em>切到本地仓库中的“master”分支，获取所有的提交，再到远程仓库“origin”中找到“master”分支，将远程仓库中没有的提交记录都添加上去，搞定之后告诉我。</em></p><p>我们通过“place”参数来告诉 Git 提交记录来自于 master, 要推送到远程仓库中的 master。它实际就是要同步的两个仓库的位置。</p><p>需要注意的是，因为我们通过指定参数告诉了 Git 所有它需要的信息, 所以它就忽略了我们所检出的分支的属性！</p><p>例子：git checkout C0; git push origin master 正常上传</p><p>​            git checkout C0; git push 什么都没发生</p><p>当为 git push 指定 place 参数为 <code>master</code> 时，我们同时指定了提交记录的来源和去向。</p><p>你可能想问 —— 如果来源和去向分支的名称不同呢？比如你想把本地的 <code>foo</code> 分支推送到远程仓库中的 <code>bar</code> 分支。</p><p>哎，很遗憾 Git 做不到…… 开个玩笑，别当真！当然是可以的啦 :) Git 拥有超强的灵活性（有点过于灵活了）</p><p>接下来咱们看看是怎么做的……</p><p>要同时为源和目的地指定 <code>&lt;place&gt;</code> 的话，只需要用冒号 <code>:</code> 将二者连起来就可以了：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin &lt;<span class="built_in">source</span>&gt;:&lt;destination&gt;</span><br></pre></td></tr></table></figure><p>这个参数实际的值是个 refspec，“refspec” 是一个自造的词，意思是 Git 能识别的位置（比如分支 <code>foo</code> 或者 <code>HEAD~1</code>）</p><p>一旦你指定了独立的来源和目的地，就可以组织出言简意赅的远程操作命令了</p><p>记住，<code>source</code> 可以是任何 Git 能识别的位置 </p><p>例：git push origin foo^:master</p><p>如果你要推送到的目的分支不存在会怎么样呢？没问题！Git 会在远程仓库中根据你提供的名称帮你创建这个分支！</p><h2 id="Git-Fetch-参数"><a href="#Git-Fetch-参数" class="headerlink" title="Git Fetch 参数"></a>Git Fetch 参数</h2><p>我们刚学习了 git push 的参数，很酷的 <code>&lt;place&gt;</code> 参数，还有用冒号分隔的 refspecs（<code>&lt;source&gt;:&lt;destination&gt;</code>）。 这些参数可以用于 <code>git fetch</code> 吗？</p><p>你猜中了！<code>git fetch</code> 的参数和 <code>git push</code> 极其相似。他们的概念是相同的，只是方向相反罢了（因为现在你是下载，而非上传）</p><h3 id="lt-place-gt-参数"><a href="#lt-place-gt-参数" class="headerlink" title="&lt;place&gt; 参数"></a><code>&lt;place&gt;</code> 参数</h3><p>如果你像如下命令这样为 git fetch 设置 的话：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch origin foo</span><br></pre></td></tr></table></figure><p>Git 会到远程仓库的 <code>foo</code> 分支上，然后获取所有本地不存在的提交，放到本地的 <code>o/foo</code> 上。</p><p>“如果我们指定 <code>&lt;source&gt;:&lt;destination&gt;</code> 会发生什么呢？”</p><p>如果你觉得直接更新本地分支很爽，那你就用冒号分隔的 refspec 吧。不过，你不能在当前检出的分支上干这个事，但是其它分支是可以的。</p><p>这里有一点是需要注意的 —— <code>source</code> 现在指的是远程仓库中的位置，而 <code>&lt;destination&gt;</code> 才是要放置提交的本地仓库的位置。它与 git push 刚好相反，这是可以讲的通的，因为我们在往相反的方向传送数据。</p><p>理论上虽然行的通，但开发人员很少这么做。我在这里介绍它主要是为了从概念上说明 <code>fetch</code> 和 <code>push</code> 的相似性，只是方向相反罢了。</p><p>如果 <code>git fetch</code> 没有参数，它会下载所有的提交记录到各个远程分支……</p><h2 id="没有source的source"><a href="#没有source的source" class="headerlink" title="没有source的source"></a>没有source的source</h2><p>Git 有两种关于 <code>&lt;source&gt;</code> 的用法是比较诡异的，即你可以在 git push 或 git fetch 时不指定任何 <code>source</code>，方法就是仅保留冒号和 destination 部分，source 部分留空。</p><ul><li><code>git push origin :side</code></li><li><code>git fetch origin :bugFix</code></li></ul><p>我们分别来看一下这两条命令的作用……</p><p>如果 push 空 到远程仓库会如何呢？它会删除远程仓库中的分支！</p><p>如果 fetch 空 到本地，会在本地创建一个新分支。</p><h2 id="Git-Pull参数"><a href="#Git-Pull参数" class="headerlink" title="Git Pull参数"></a>Git Pull参数</h2><p>既然你已经掌握关于 <code>git fetch</code> 和 <code>git push</code> 参数的方方面面了，关于 git pull 几乎没有什么可以讲的了 :)</p><p>因为 git pull 到头来就是 fetch 后跟 merge 的缩写。你可以理解为用同样的参数执行 git fetch，然后再 merge 你所抓取到的提交记录。</p><p>还可以和其它更复杂的参数一起使用, 来看一些例子:</p><p>以下命令在 Git 中是等效的:</p><p><code>git pull origin foo</code> 相当于：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch origin foo; git merge o/foo</span><br></pre></td></tr></table></figure><p>还有…</p><p><code>git pull origin bar~1:bugFix</code> 相当于：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch origin bar~1:bugFix; git merge bugFix</span><br></pre></td></tr></table></figure><p>git pull 实际上就是 fetch + merge 的缩写, git pull 唯一关注的是提交最终合并到哪里（也就是为 git fetch 所提供的 destination 参数）</p><p>通过指定 <code>master</code> 我们更新了 <code>o/master</code>。然后将 <code>o/master</code> merge 到我们的检出位置，<strong>无论</strong>我们当前检出的位置是哪。</p>]]></content>
+      
+      
       <categories>
-        <category>python-spider</category>
+          
+          <category> git </category>
+          
       </categories>
-      <tags>
-        <tag>教程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo+github搭建教程</title>
-    <url>/blog/2020/12/08/hexo-github%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Github Pages 是GitHub提供的免费静态网页托管服务，可以用来托管博客、项目网站等静态网页。支持Jekyll、Hugo、Hexo编译静态资源，本文的主题是GitHub+Hexo。</p>
-<a id="more"></a>
-
-<h1 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h1><ol>
-<li>NodeJs，Hexo是基于NodeJs驱动的一款博客框架</li>
-<li>Git，</li>
-<li>npm<h1 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h1>在某个文件夹下，右键打开git bash执行以下命令：</li>
-</ol>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-<p>之后执行下列命令：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">hexo init filename</span><br><span class="line"><span class="built_in">cd</span> filename</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-
-<p>新建完成后，运行hexo s，其中s是sever的缩写。之后访问 <a href="http://localhost:4000/">http://localhost:4000</a> 就可以预览效果了。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-<h1 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h1><ol>
-<li>账号注册</li>
-<li>创建一个仓库<h1 id="配置SSH"><a href="#配置SSH" class="headerlink" title="配置SSH"></a>配置SSH</h1>有ssh则使用下列命令查看：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cat ~&#x2F;.ssh&#x2F;id_rsa.pub</span><br></pre></td></tr></table></figure>
-没有ssh则执行以下命令生成：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;用户名&quot;</span><br><span class="line">git config --global user.email &quot;邮箱地址&quot;</span><br><span class="line">ssh-keygen -t rsa -C &quot;上面的邮箱&quot;</span><br></pre></td></tr></table></figure>
-
-<p>之后将id_rsa.pub（公钥）添加到GitHub ssh key上。</p>
-<h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>修改 _ config.yml文件，在文件最后：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: 仓库git地址，不用http</span><br><span class="line">  branch: 分支名称</span><br></pre></td></tr></table></figure>
-
-<p>安装部署插件hexo-deployer-git</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<p>本地推送：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo s</span><br></pre></td></tr></table></figure>
-
-<p>远程推送：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
-
-<h1 id="写作"><a href="#写作" class="headerlink" title="写作"></a>写作</h1><p>在文件根目录下打开git bash，执行命令，创建新md文件，在./source/_posts下编辑即可：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new 文章标题</span><br></pre></td></tr></table></figure>
-
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>hexo资源压缩</title>
+      <link href="/blog/2020/12/08/hexo%E8%B5%84%E6%BA%90%E5%8E%8B%E7%BC%A9/"/>
+      <url>/blog/2020/12/08/hexo%E8%B5%84%E6%BA%90%E5%8E%8B%E7%BC%A9/</url>
+      
+        <content type="html"><![CDATA[<h3 id="hexo-all-minifier使用"><a href="#hexo-all-minifier使用" class="headerlink" title="hexo-all-minifier使用"></a><a href="https://github.com/chenzhutian/hexo-all-minifier">hexo-all-minifier</a>使用</h3><p>这款工具它兼顾了hexo-neat的易用性，和gulp的功能。</p><a id="more"></a><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-all-minifier --save</span><br></pre></td></tr></table></figure><h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>在根目录<code>_config.yml</code>里添加:</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">all_minifier:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
       <categories>
-        <category>hexo博客</category>
+          
+          <category> hexo </category>
+          
       </categories>
-      <tags>
-        <tag>教程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo博客注意事项</title>
-    <url>/blog/2020/12/08/hexo%E5%8D%9A%E5%AE%A2%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/</url>
-    <content><![CDATA[<h1 id="markdown文件"><a href="#markdown文件" class="headerlink" title="markdown文件"></a>markdown文件</h1><ol>
-<li>不能含有诸如句号（中英文状态）之类的存在，否则无法推送成功.后来发现这个是可以推送成功的,我人晕了.</li>
-</ol>
-]]></content>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>hexo博客注意事项</title>
+      <link href="/blog/2020/12/08/hexo%E5%8D%9A%E5%AE%A2%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/"/>
+      <url>/blog/2020/12/08/hexo%E5%8D%9A%E5%AE%A2%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/</url>
+      
+        <content type="html"><![CDATA[<h1 id="markdown文件"><a href="#markdown文件" class="headerlink" title="markdown文件"></a>markdown文件</h1><ol><li>不能含有诸如句号（中英文状态）之类的存在，否则无法推送成功.后来发现这个是可以推送成功的,我人晕了.</li></ol>]]></content>
+      
+      
       <categories>
-        <category>pycharm</category>
+          
+          <category> pycharm </category>
+          
       </categories>
-  </entry>
-  <entry>
-    <title>hexo资源压缩</title>
-    <url>/blog/2020/12/08/hexo%E8%B5%84%E6%BA%90%E5%8E%8B%E7%BC%A9/</url>
-    <content><![CDATA[<h3 id="hexo-all-minifier使用"><a href="#hexo-all-minifier使用" class="headerlink" title="hexo-all-minifier使用"></a><a href="https://github.com/chenzhutian/hexo-all-minifier">hexo-all-minifier</a>使用</h3><p>这款工具它兼顾了hexo-neat的易用性，和gulp的功能。</p>
-<a id="more"></a>
-
-<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install hexo-all-minifier --save</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>在根目录<code>_config.yml</code>里添加:</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">all_minifier:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>pycharm基本设置</title>
+      <link href="/blog/2020/12/08/pycharm%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/"/>
+      <url>/blog/2020/12/08/pycharm%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/</url>
+      
+        <content type="html"><![CDATA[<h1 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h1><p>File-Plugins</p><ol><li><p>Atom Material Icons  图标样式</p></li><li><p>Material Theme UI  主题UI</p></li><li><p>Translation  翻译工具</p><a id="more"></a><h1 id="仓库镜像"><a href="#仓库镜像" class="headerlink" title="仓库镜像"></a>仓库镜像</h1><p>添加以下镜像源：</p></li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;main&#x2F;</span><br><span class="line">https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;free&#x2F;</span><br><span class="line">https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn&#x2F;simple&#x2F;</span><br></pre></td></tr></table></figure><h1 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h1><p>推荐默认字体UI，大小为16，间距1.4</p><h1 id="专业版激活"><a href="#专业版激活" class="headerlink" title="专业版激活"></a>专业版激活</h1><p><a href="http://idea.medeming.com/jets/">激活网站</a></p><h1 id="禁止自动更新"><a href="#禁止自动更新" class="headerlink" title="禁止自动更新"></a>禁止自动更新</h1><p>apparence-system settings-updates，取消勾选automatically check</p>]]></content>
+      
+      
       <categories>
-        <category>hexo</category>
+          
+          <category> pycharm </category>
+          
       </categories>
-  </entry>
-  <entry>
-    <title>markdown</title>
-    <url>/blog/2020/09/25/markdown/</url>
-    <content><![CDATA[<h2 id="Markdown入门"><a href="#Markdown入门" class="headerlink" title="Markdown入门"></a>Markdown入门</h2><p><strong>概要</strong></p>
-<p>Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有HTML的格式。</p>
-<a id="more"></a>
-
-<h3 id="官方网站"><a href="#官方网站" class="headerlink" title="官方网站"></a>官方网站</h3><p><a href="https://daringfireball.net/projects/markdown/">https://daringfireball.net/projects/markdown/</a></p>
-<h3 id="GitHub-Markdown-Cheatsheet"><a href="#GitHub-Markdown-Cheatsheet" class="headerlink" title="GitHub Markdown Cheatsheet"></a>GitHub Markdown Cheatsheet</h3><p><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet</a></p>
-<h3 id="课程详细"><a href="#课程详细" class="headerlink" title="课程详细"></a>课程详细</h3><ol>
-<li>课程介绍</li>
-<li>预览插件</li>
-<li>设置标题</li>
-<li>自然段改行</li>
-<li>引用表现</li>
-<li>增加分割线</li>
-<li>强调表现</li>
-<li>列表表示</li>
-<li>超文本链接</li>
-<li>代码高亮显示</li>
-<li>图片显示</li>
-<li>表格显示</li>
-</ol>
-<h3 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h3><ul>
-<li>记事本等文本编辑器</li>
-</ul>
-<ol>
-<li>Visual Studio Code</li>
-<li>Pycharm</li>
-<li>ATOM</li>
-</ol>
-<h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><ul>
-<li>html标题标记的生成(h1～h6)</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># h1标题</span><br><span class="line">## h2标题</span><br><span class="line">### h3标题</span><br><span class="line">#### h4标题</span><br><span class="line">##### h5标题</span><br><span class="line">###### h6标题</span><br><span class="line"></span><br><span class="line">h1标题</span><br><span class="line">&#x3D;&#x3D;&#x3D;</span><br><span class="line"></span><br><span class="line">h2标题</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><ul>
-<li>引用文的表现方法：&gt;</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">我是引用</span><br><span class="line"></span><br><span class="line">&gt; 我是引用</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h3><ul>
-<li>为文章分割线：<code>---</code></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- ------</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h3><ul>
-<li>斜体：<code>*XXX*</code>, <code>_XXX_</code></li>
-<li>粗体：<code>**XXX**</code>,<code> __XXX__</code></li>
-</ul>
-<p>案例：<em>XXX</em>, <em>XXX</em></p>
-<p>案例：<strong>XXX</strong> , <strong>XXX</strong></p>
-<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><ul>
-<li>列表符号：-</li>
-<li>列表符号：*</li>
-<li>列表符号：+</li>
-<li>列表符号：数字</li>
-</ul>
-<p>练习：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- 项目</span><br><span class="line">  - 项目</span><br><span class="line">    - 项目</span><br><span class="line"></span><br><span class="line">1. 项目1</span><br><span class="line">2. 项目2</span><br><span class="line">3. 项目3</span><br><span class="line"></span><br><span class="line">- [ ] 计划任务</span><br><span class="line">- [x] 完成任务</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="超文本链接"><a href="#超文本链接" class="headerlink" title="超文本链接"></a>超文本链接</h3><ul>
-<li>超文本链接的书写</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;www.python.org&#x2F;</span><br><span class="line"></span><br><span class="line">[Python.org](https:&#x2F;&#x2F;www.python.org&#x2F;)</span><br><span class="line"></span><br><span class="line">[Python.org](https:&#x2F;&#x2F;www.python.org&#x2F; &quot;python官方文档&quot;)</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://www.python.org/">https://www.python.org/</a></p>
-<h3 id="代码高亮显示"><a href="#代码高亮显示" class="headerlink" title="代码高亮显示"></a>代码高亮显示</h3><ul>
-<li>代码高亮显示符号：`</li>
-<li>代码高亮显示符号：~</li>
-</ul>
-<p>例子：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">​&#96;&#96;&#96;python</span><br><span class="line">def add(x, y) </span><br><span class="line">    return x+y</span><br><span class="line">​&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line">说明：您可以使用 &#96;add(x,y)&#96; 函数计算两个数的和。</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="图片显示"><a href="#图片显示" class="headerlink" title="图片显示"></a>图片显示</h3><ul>
-<li>图片的引用与显示：<img src=""></li>
-</ul>
-<p>![alt文字](C:/Users/muzha/Documents/WeChat Files/wxid_jqw01i0de0iv22/FileStorage/File/2020-09/markdown/图片url 图片title)</p>
-<h3 id="制作图片链接"><a href="#制作图片链接" class="headerlink" title="制作图片链接"></a>制作图片链接</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">![img](https:&#x2F;&#x2F;gss0.bdstatic.com&#x2F;94o3dSag_xI4khGkpoWK1HF6hhy&#x2F;baike&#x2F;c0%3Dbaike150%2C5%2C5%2C150%2C50&#x2F;sign&#x3D;db37d3b8454a20a425133495f13bf347&#x2F;3b87e950352ac65c8819edd9f1f2b21193138a78.jpg)</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="表格显示"><a href="#表格显示" class="headerlink" title="表格显示"></a>表格显示</h3><ul>
-<li>表格制作与显示</li>
-</ul>
-<p>使用 <code>-</code> 和 <code>|</code> 来制作表格。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">| TH1 | TH2 | TH3 |</span><br><span class="line">----|----|----</span><br><span class="line">| TD1 | TD3 | TD5 |</span><br><span class="line">| TD2 | TD4 | TD6 |</span><br></pre></td></tr></table></figure>
-
-<h3 id="使用表格对齐"><a href="#使用表格对齐" class="headerlink" title="使用表格对齐"></a>使用表格对齐</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">| 居左 | 居中 | 居右 |</span><br><span class="line">|:---|:---:|---:|</span><br><span class="line">|1 |2 |3 |</span><br><span class="line">|4 |5 |6 | </span><br></pre></td></tr></table></figure>
-
-]]></content>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>图片CDN加速</title>
+      <link href="/blog/2020/12/08/CDN%E5%8A%A0%E9%80%9F/"/>
+      <url>/blog/2020/12/08/CDN%E5%8A%A0%E9%80%9F/</url>
+      
+        <content type="html"><![CDATA[<p>一个免费的CDN加速，<a href="https://www.jsdelivr.com/?docs=gh" >JSDELIVR</a> </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;user&#x2F;repo@version&#x2F;file</span><br><span class="line">user--GitHub用户名</span><br><span class="line">repo--分支名称</span><br><span class="line">version--版本号，可以不填</span><br><span class="line">file--图片路径，比如存储在GitHub仓库images文件夹下的1.jpg，可以写&#x2F;images&#x2F;1.jpg</span><br></pre></td></tr></table></figure><p>将修改过后的url放入md文件中远程推送即可实现图片CDN加速。</p>]]></content>
+      
+      
       <categories>
-        <category>markdown</category>
+          
+          <category> hexo博客 </category>
+          
       </categories>
-  </entry>
-  <entry>
-    <title>pycharm基本设置</title>
-    <url>/blog/2020/12/08/pycharm%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/</url>
-    <content><![CDATA[<h1 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h1><p>File-Plugins</p>
-<ol>
-<li><p>Atom Material Icons  图标样式</p>
-</li>
-<li><p>Material Theme UI  主题UI</p>
-</li>
-<li><p>Translation  翻译工具</p>
-<a id="more"></a>
-<h1 id="仓库镜像"><a href="#仓库镜像" class="headerlink" title="仓库镜像"></a>仓库镜像</h1><p>添加以下镜像源：</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;main&#x2F;</span><br><span class="line">https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;free&#x2F;</span><br><span class="line">https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn&#x2F;simple&#x2F;</span><br></pre></td></tr></table></figure>
-
-<h1 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h1><p>推荐默认字体UI，大小为16，间距1.4</p>
-<h1 id="专业版激活"><a href="#专业版激活" class="headerlink" title="专业版激活"></a>专业版激活</h1><p><a href="http://idea.medeming.com/jets/">激活网站</a></p>
-<h1 id="禁止自动更新"><a href="#禁止自动更新" class="headerlink" title="禁止自动更新"></a>禁止自动更新</h1><p>apparence-system settings-updates，取消勾选automatically check</p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> -教程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>hexo+github搭建教程</title>
+      <link href="/blog/2020/12/08/hexo-github%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/"/>
+      <url>/blog/2020/12/08/hexo-github%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/</url>
+      
+        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Github Pages 是GitHub提供的免费静态网页托管服务，可以用来托管博客、项目网站等静态网页。支持Jekyll、Hugo、Hexo编译静态资源，本文的主题是GitHub+Hexo。</p><a id="more"></a><h1 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h1><ol><li>NodeJs，Hexo是基于NodeJs驱动的一款博客框架</li><li>Git，</li><li>npm<h1 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h1>在某个文件夹下，右键打开git bash执行以下命令：</li></ol><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure><p>之后执行下列命令：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init filename</span><br><span class="line"><span class="built_in">cd</span> filename</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure><p>新建完成后，运行hexo s，其中s是sever的缩写。之后访问 <a href="http://localhost:4000/">http://localhost:4000</a> 就可以预览效果了。</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure><h1 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h1><ol><li>账号注册</li><li>创建一个仓库<h1 id="配置SSH"><a href="#配置SSH" class="headerlink" title="配置SSH"></a>配置SSH</h1>有ssh则使用下列命令查看：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~&#x2F;.ssh&#x2F;id_rsa.pub</span><br></pre></td></tr></table></figure>没有ssh则执行以下命令生成：</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;用户名&quot;</span><br><span class="line">git config --global user.email &quot;邮箱地址&quot;</span><br><span class="line">ssh-keygen -t rsa -C &quot;上面的邮箱&quot;</span><br></pre></td></tr></table></figure><p>之后将id_rsa.pub（公钥）添加到GitHub ssh key上。</p><h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>修改 _ config.yml文件，在文件最后：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: 仓库git地址，不用http</span><br><span class="line">  branch: 分支名称</span><br></pre></td></tr></table></figure><p>安装部署插件hexo-deployer-git</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure><p>本地推送：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo s</span><br></pre></td></tr></table></figure><p>远程推送：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure><h1 id="写作"><a href="#写作" class="headerlink" title="写作"></a>写作</h1><p>在文件根目录下打开git bash，执行命令，创建新md文件，在./source/_posts下编辑即可：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new 文章标题</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
       <categories>
-        <category>pycharm</category>
+          
+          <category> hexo博客 </category>
+          
       </categories>
-  </entry>
-  <entry>
-    <title>python技巧</title>
-    <url>/blog/2020/09/19/python%E6%8A%80%E5%B7%A7/</url>
-    <content><![CDATA[<ol>
-<li>正确使用True和False的判断</li>
-<li>正确返回None值</li>
-<li>…</li>
-</ol>
-<a id="more"></a>
-
-<h3 id="1-正确使用True和False的判断"><a href="#1-正确使用True和False的判断" class="headerlink" title="1. 正确使用True和False的判断"></a>1. 正确使用True和False的判断</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">false_value = [</span><br><span class="line">    `[],`</span><br><span class="line"></span><br><span class="line">    `&#123;&#125;,`</span><br><span class="line"></span><br><span class="line">    `<span class="literal">False</span>,`</span><br><span class="line"></span><br><span class="line">    `<span class="string">&#x27;&#x27;</span>,`</span><br><span class="line"></span><br><span class="line">    `<span class="number">0</span>,`</span><br><span class="line"></span><br><span class="line">    `<span class="number">0.0</span>,`</span><br><span class="line"></span><br><span class="line">    `<span class="literal">None</span>,`</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> false_value:</span><br><span class="line">    print(<span class="literal">True</span> <span class="keyword">if</span> value <span class="keyword">else</span> <span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-正确返回None值"><a href="#2-正确返回None值" class="headerlink" title="2. 正确返回None值"></a>2. 正确返回None值</h3><p>一个函数里面可能多个返回值都为True或False，这时候就要用is明确指定返回值，如None</p>
-<h3 id="3-if条件优化"><a href="#3-if条件优化" class="headerlink" title="3. if条件优化"></a>3. if条件优化</h3><ul>
-<li>直接判断——效率最低</li>
-<li>in list 列表判断——效率最高,推荐 </li>
-<li>in set 集合——效率居中</li>
-</ul>
-<h3 id="4-字符串格式化技巧"><a href="#4-字符串格式化技巧" class="headerlink" title="4. 字符串格式化技巧"></a>4. 字符串格式化技巧</h3><ul>
-<li>直接拼接</li>
-<li>“{}”.format </li>
-<li><code>&#39;%s&#39;%()</code></li>
-<li>python3.6+，<code>f&#39;my age is &#123;age&#125;&#39;</code> 推荐</li>
-</ul>
-<h3 id="5-Flat-is-better-than-nested"><a href="#5-Flat-is-better-than-nested" class="headerlink" title="5. Flat is better than nested"></a>5. Flat is better than nested</h3><ul>
-<li><code>import this</code> 可以打印python之禅</li>
-<li>nested 指的是if 嵌套、一层层包裹，不推荐</li>
-<li>flat要代码扁平化，用if、 elif，避免多个if，不满足条件直接返回，推荐</li>
-</ul>
-<h3 id="6-列表解析，也就是列表推导式"><a href="#6-列表解析，也就是列表推导式" class="headerlink" title="6. 列表解析，也就是列表推导式"></a>6. 列表解析，也就是列表推导式</h3><p>除了减少代码量之外，还能提高运行效率，时间接近原来的一半</p>
-<h4 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h4><p><code>[item for item in items if item%2 == 0]</code></p>
-<h3 id="7-字典解析"><a href="#7-字典解析" class="headerlink" title="7. 字典解析"></a>7. 字典解析</h3><h4 id="示例：-1"><a href="#示例：-1" class="headerlink" title="示例："></a>示例：</h4><p><code>a = [1, 2, 3, 4, 5, 6]</code></p>
-<p><code>&#123;item:str(item) for item in a&#125;</code></p>
-<h3 id="8-字典合并"><a href="#8-字典合并" class="headerlink" title="8. 字典合并"></a>8. 字典合并</h3><ul>
-<li>循环添加，也可以字典解析，但并不推荐</li>
-<li>update更新，`d1.update(d2)<br>`</li>
-<li>python3.5+， <code>&#123;**d1, **d2, **d3&#125;</code>推荐</li>
-</ul>
-<h3 id="9-字典安全访问"><a href="#9-字典安全访问" class="headerlink" title="9. 字典安全访问"></a>9. 字典安全访问</h3><ul>
-<li>用<code>try-except</code>抛出异常</li>
-<li>d.get(‘’)<br># 默认空返回None，也可以设置</li>
-</ul>
-<p>`    d.get(‘name’,’unkown’)</p>
-<h1 id="设置空返回unknown"><a href="#设置空返回unknown" class="headerlink" title="设置空返回unknown`"></a>设置空返回unknown`</h1><ul>
-<li>python内置defaultdict</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> collection <span class="keyword">import</span> defaultdict</span><br><span class="line">d_new = defaultdict(lamda:<span class="string">&#x27;missing&#x27;</span>, d)</span><br><span class="line">d_new[<span class="string">&#x27;name&#x27;</span>] <span class="comment"># 返回name对应的</span></span><br><span class="line">d_new[<span class="string">&#x27;asdf&#x27;</span>] <span class="comment"># 不存在则返回missing</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="10-关于for循环，类中实现for循环"><a href="#10-关于for循环，类中实现for循环" class="headerlink" title="10. 关于for循环，类中实现for循环"></a>10. 关于for循环，类中实现for循环</h3><h4 id="示例：-2"><a href="#示例：-2" class="headerlink" title="示例："></a>示例：</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.data = []</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        self.data.append(x)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment"># return self.data.__iter__()</span></span><br><span class="line">        <span class="comment"># 这里也可以加一个for循环</span></span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> self.data:</span><br><span class="line">            <span class="keyword">yield</span> item</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>():</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, x, y</span>):</span></span><br><span class="line">        self.x = x</span><br><span class="line">        self.y = y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">b1 = B(x=<span class="number">1</span>, y=<span class="number">2</span>)</span><br><span class="line">b2 = B(x=<span class="number">3</span>, y=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">a.add(b1)</span><br><span class="line">a.add(b2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> a:</span><br><span class="line">    print(item.x, item.y)</span><br></pre></td></tr></table></figure>
-
-<h3 id="11-为什么要使用yield"><a href="#11-为什么要使用yield" class="headerlink" title="11. 为什么要使用yield"></a>11. 为什么要使用yield</h3><p>一次性读取可能会占用太多内存，yield可以提高效率</p>
-<h3 id="12-如何在递归调用中使用yield"><a href="#12-如何在递归调用中使用yield" class="headerlink" title="12. 如何在递归调用中使用yield"></a>12. 如何在递归调用中使用yield</h3><h4 id="示例：-3"><a href="#示例：-3" class="headerlink" title="示例："></a>示例：</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">path = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_file</span>(<span class="params">folder_name</span>):</span></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> os.listdir(folder_name):</span><br><span class="line">    full_path = os.path.join(folder_name, item)</span><br><span class="line">    <span class="keyword">if</span> os.path.isfile(full_path):</span><br><span class="line">        <span class="keyword">yield</span> full_path</span><br><span class="line">    <span class="keyword">elif</span> os.path.isdir(full_path):</span><br><span class="line">        <span class="comment"># 方法一</span></span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> get_file(full_path):</span><br><span class="line">        <span class="keyword">yield</span> item</span><br><span class="line">        <span class="comment"># 方法二,python3</span></span><br><span class="line">        <span class="keyword">yield</span> <span class="keyword">from</span> get_file(full_path)</span><br><span class="line"><span class="keyword">for</span> file_name <span class="keyword">in</span> get_file(path):</span><br><span class="line">    print(file_name)</span><br></pre></td></tr></table></figure>
-
-<h3 id="13-巧用lambda"><a href="#13-巧用lambda" class="headerlink" title="13. 巧用lambda"></a>13. 巧用lambda</h3><p>函数参数为函数时，可以考虑能否用lambda实现</p>
-<p>Jupyter shift+tab可以查看信息，比如sort排序传入key</p>
-<h3 id="14-处理程序中的异常"><a href="#14-处理程序中的异常" class="headerlink" title="14. 处理程序中的异常"></a>14. 处理程序中的异常</h3><p>try-except，可以具体抛出某些异常。</p>
-<p>总的如<code>except Exception as e：</code></p>
-<p>具体的如<code>except DNSError:</code></p>
-<h3 id="15-函数默认参数"><a href="#15-函数默认参数" class="headerlink" title="15. 函数默认参数"></a>15. 函数默认参数</h3><p>为函数参数设置默认值</p>
-<h3 id="16-可变数量参数"><a href="#16-可变数量参数" class="headerlink" title="16. 可变数量参数"></a>16. 可变数量参数</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">function</span>(<span class="params">x, *args</span>):</span></span><br><span class="line">    print(args)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line"><span class="comment"># 结果</span></span><br><span class="line">[<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 注意： 使用```*args```之后，x就不能赋值了，否则会报错SyntaxError</span></span><br><span class="line"><span class="comment"># 当如下形式时，x必须赋值,否则会报错TypeError：</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">function</span>(<span class="params">*args, x</span>):</span></span><br><span class="line">    print(args, x)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function(<span class="number">1</span>,<span class="number">2</span>,x=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="17-字典和-kwargs-的关系"><a href="#17-字典和-kwargs-的关系" class="headerlink" title="17. 字典和```**kwargs```的关系"></a>17. 字典和```**kwargs```的关系</h3><p>实现可变数量位置参数</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">function</span>(<span class="params">x, **kwargs</span>):</span></span><br><span class="line">    print(x, kwargs)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function(x=<span class="number">1</span>, a=<span class="number">2</span>, b=<span class="number">3</span>, c=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行结果</span></span><br><span class="line"><span class="number">1</span> &#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">2</span>, <span class="string">&#x27;b&#x27;</span>:<span class="number">3</span>, <span class="string">&#x27;c&#x27;</span>:<span class="number">4</span>&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum1</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    print(x+y)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">sum</span>(x=<span class="number">1</span>, y=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">sum</span>(**&#123;<span class="string">&#x27;x&#x27;</span>:<span class="number">1</span>, <span class="string">&#x27;y&#x27;</span>:<span class="string">&#x27;2&#x27;</span>&#125;)</span><br><span class="line"><span class="comment"># 传入参数\`\`\`\_\_&#123;&#x27;x&#x27;:1, &#x27;y&#x27;:2&#125;\`\`\`与传入参数\`\`\`x=1, y=2\`\`\\`返回结果一样</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="18-默认参数陷阱"><a href="#18-默认参数陷阱" class="headerlink" title="18. 默认参数陷阱"></a>18. 默认参数陷阱</h3><p>不建议用列表作为参数</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bad_default_arg</span>(<span class="params">s, time, target=[]</span>):</span></span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(time):</span><br><span class="line">        target.append(a)</span><br><span class="line">        <span class="keyword">return</span> target</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">bad_default_arg(s=<span class="string">&#x27;a&#x27;</span>, time=<span class="number">3</span>) <span class="comment"># 返回 [&#x27;a&#x27;, &#x27;a&#x27;, &#x27;a&#x27;]</span></span><br><span class="line">bad_default_arg(s=<span class="string">&#x27;b&#x27;</span>, time=<span class="number">3</span>, target=<span class="string">&#x27;a&#x27;</span>) <span class="comment"># 返回 [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;b&#x27;, &#x27;b&#x27;]</span></span><br><span class="line">bad_default_arg(s=<span class="string">&#x27;AB&#x27;</span>, time=<span class="number">2</span>) <span class="comment"># 返回 [&#x27;a&#x27;, &#x27;a&#x27;, &#x27;a&#x27;, &#x27;AB&#x27;, &#x27;AB&#x27;]</span></span><br><span class="line"><span class="comment"># 使用列表作为参数时，假如不指定，则会使用上一次的默认值</span></span><br><span class="line">bad_default_arg(s=<span class="string">&#x27;F&#x27;</span>, time=<span class="number">2</span>) <span class="comment"># 返回 [&#x27;a&#x27;, &#x27;a&#x27;, &#x27;a&#x27;, &#x27;AB&#x27;, &#x27;AB&#x27;, &#x27;F&#x27;, &#x27;F&#x27;]</span></span><br><span class="line">解决方法：</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">good_default_arg</span>(<span class="params">s, time, target=<span class="literal">None</span></span>):</span></span><br><span class="line">    <span class="keyword">if</span> target <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        target = []</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(time):</span><br><span class="line">        target.append(a)</span><br><span class="line">        <span class="keyword">return</span> target</span><br></pre></td></tr></table></figure>
-
-<h3 id="19-尽量避免使用-from-xxx-import"><a href="#19-尽量避免使用-from-xxx-import" class="headerlink" title="19. 尽量避免使用```from xxx import *```"></a>19. 尽量避免使用```from xxx import *```</h3><p>库中方法可能与已命名方法重名，建议用什么引入什么</p>
-<h3 id="20-合理使用virtualenv与pip"><a href="#20-合理使用virtualenv与pip" class="headerlink" title="20. 合理使用virtualenv与pip"></a>20. 合理使用virtualenv与pip</h3><ol>
-<li>进入文件，virtualenv –python3.6 env 创建虚拟环境</li>
-<li>激活环境， source env/bin/activate</li>
-<li>安装使用的库</li>
-<li>pip freeze，把已安装的库写入txt文件里</li>
-<li>退出环境， deactivate</li>
-<li>pip install -r xxx.txt 安装所有的依赖</li>
-</ol>
-<h3 id="21-类的属性和实例属性"><a href="#21-类的属性和实例属性" class="headerlink" title="21. 类的属性和实例属性"></a>21. 类的属性和实例属性</h3><ul>
-<li>class类中定义属性，尽量在__init__下定义</li>
-<li>或者在class下定义</li>
-</ul>
-<h3 id="22-类实例的受保护属性和私有属性"><a href="#22-类实例的受保护属性和私有属性" class="headerlink" title="22. 类实例的受保护属性和私有属性"></a>22. 类实例的受保护属性和私有属性</h3><ul>
-<li>加一个下划线_，仍然可以被访问，即受保护</li>
-<li>加两个下划线__，无法被访问，即私有，但是实际上还是可以访问的，只不过名字编程了_类名__属性名</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;docstring for A&quot;&quot;&quot;</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, age</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(A, self).__init__()</span><br><span class="line">        self.__name = name</span><br><span class="line">        self.__age = age</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = A(name=<span class="string">&#x27;python&#x27;</span>, age=<span class="number">27</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a.__age  <span class="comment"># 无法被访问</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="23-使用类的property"><a href="#23-使用类的property" class="headerlink" title="23. 使用类的property"></a>23. 使用类的property</h3><p>访问类的属性，需要property，但是是只读的</p>
-<p>要修改的话，可以定义setter</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, age</span>):</span></span><br><span class="line">        self.__name = name</span><br><span class="line">        self.__age = age</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@property</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">name</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="keyword">return</span> self._name</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@property</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">age</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="keyword">return</span> self._age</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@age.setter</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">age</span>(<span class="params">self, value</span>):</span></span><br><span class="line">    self.__age = value</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">    print(<span class="string">&#x27;My name is &#123;&#125; and my age is &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(self.__name, self.__age))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">b = B(<span class="string">&#x27;Demo&#x27;</span>, <span class="number">30</span>)</span><br><span class="line">print(b)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">b.age = <span class="number">40</span> <span class="comment"># 可以修改</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="24-tuple元组技巧"><a href="#24-tuple元组技巧" class="headerlink" title="24. tuple元组技巧"></a>24. tuple元组技巧</h3><ul>
-<li>同时赋值，保证个数一致</li>
-<li>enumerate(),将列表变为元组</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a &#x3D; [1, 2, 3, 4]</span><br><span class="line">for item in enumerate(a):</span><br><span class="line">    print(item)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 返回</span><br><span class="line">（0，1）</span><br><span class="line">（1，2）</span><br><span class="line">（2，3）</span><br><span class="line">（3，4）</span><br></pre></td></tr></table></figure>
-
-<h3 id="25-特殊元组namedtuple"><a href="#25-特殊元组namedtuple" class="headerlink" title="25. 特殊元组namedtuple"></a>25. 特殊元组namedtuple</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> collections</span><br><span class="line">Student = collections.namedtuple(<span class="string">&#x27;Student&#x27;</span>, <span class="string">&#x27;id, name, score&#x27;</span>)</span><br><span class="line">students = [</span><br><span class="line">    Student(<span class="number">1</span>, <span class="string">&#x27;ABC&#x27;</span>, <span class="number">90</span>),</span><br><span class="line">    Student(<span class="number">2</span>, <span class="string">&#x27;XYZ&#x27;</span>, <span class="number">85</span>),</span><br><span class="line">    Student(<span class="number">3</span>, <span class="string">&#x27;asdf&#x27;</span>, <span class="number">80</span>)</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用</span></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> students:</span><br><span class="line">    print(<span class="string">&#x27;name=&#123;&#125;, id=&#123;&#125;, score=&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(s.name, s.<span class="built_in">id</span>, s.score))</span><br></pre></td></tr></table></figure>
-
-<p>提高可读性及可维护性，效率并无太大区别</p>
-<h3 id="26-dict和zip"><a href="#26-dict和zip" class="headerlink" title="26. dict和zip"></a>26. dict和zip</h3><p>创建字典</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 1</span></span><br><span class="line"><span class="built_in">dict</span>(a=<span class="number">1</span>,b=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2</span></span><br><span class="line">data = ((<span class="string">&#x27;a&#x27;</span>:<span class="number">1</span>), (<span class="string">&#x27;b&#x27;</span>:<span class="number">2</span>)) <span class="comment"># 只要是可迭代对象都行</span></span><br><span class="line"><span class="built_in">dict</span>(data)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3</span></span><br><span class="line"><span class="comment"># 两个元素数量相同的列表</span></span><br><span class="line"><span class="built_in">dict</span>(<span class="built_in">zip</span>(x,y))  <span class="comment"># 生成对应字典</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="27-字典按照key-value大小排序"><a href="#27-字典按照key-value大小排序" class="headerlink" title="27. 字典按照key/value大小排序"></a>27. 字典按照key/value大小排序</h3><p><code>dict(sorted(d.items(), key=lambda x:x[1], reverse=True))</code></p>
-<h3 id="28-通过debug学习Python生成器"><a href="#28-通过debug学习Python生成器" class="headerlink" title="28. 通过debug学习Python生成器"></a>28. 通过debug学习Python生成器</h3><p>yield生成器</p>
-<h3 id="29-string操作技巧"><a href="#29-string操作技巧" class="headerlink" title="29. string操作技巧"></a>29. string操作技巧</h3><p><code>s = &#39; Last Checkpoint: a few seconds ago (unsaved changes) &#39;</code></p>
-<p>最好是链条式做完，而不是一个一个做</p>
-<h3 id="30-列表解析取代map和filter"><a href="#30-列表解析取代map和filter" class="headerlink" title="30. 列表解析取代map和filter"></a>30. 列表解析取代map和filter</h3><h3 id="31-上下文管理"><a href="#31-上下文管理" class="headerlink" title="31. 上下文管理"></a>31. 上下文管理</h3><p>with open</p>
-<h3 id="32-一个单独的下划线可以怎么用"><a href="#32-一个单独的下划线可以怎么用" class="headerlink" title="32. 一个单独的下划线可以怎么用"></a>32. 一个单独的下划线可以怎么用</h3><ul>
-<li>for循环中，不使用i，可用_代替</li>
-<li>输入1+2返回3，实际上3就赋值给了_</li>
-<li>取用列表或元组的元素时，无关紧要的可用_代替</li>
-</ul>
-<h3 id="33-str-和-repr-区别"><a href="#33-str-和-repr-区别" class="headerlink" title="33. ```__str__和__repr__```区别"></a>33. ```__str__和__repr__```区别</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, age</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.age = age</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">f&#x27;name=<span class="subst">&#123;self.name&#125;</span>, age=<span class="subst">&#123;self.age&#125;</span>&#x27;</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">f&#x27;name:<span class="subst">&#123;self.name&#125;</span>, age:<span class="subst">&#123;self.age&#125;</span>&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p = Person(<span class="string">&#x27;Python&#x27;</span>, <span class="number">27</span>)</span><br><span class="line">print(p)  <span class="comment"># 先找__str__没有再找__repr__,都没有打印地址</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p <span class="comment"># 命令行中输入p，有__repr__才能返回值，否则返回地址</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="34-定义自己的exception"><a href="#34-定义自己的exception" class="headerlink" title="34. 定义自己的exception"></a>34. 定义自己的exception</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> exception <span class="keyword">import</span> NameTooShort</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">validate</span>(<span class="params">name</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(name) &lt; <span class="number">10</span>:</span><br><span class="line">        <span class="keyword">raise</span> NameTooShort(<span class="string">&#x27;Name is too short.&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    validate(<span class="string">&#x27;test&#x27;</span>)</span><br><span class="line"><span class="keyword">except</span> NameTooShort <span class="keyword">as</span> e:</span><br><span class="line">    print(e)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># exceprion.py 文件下</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NameTooShort</span>(<span class="params">ValueError</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="comment"># 多个错误可以定义一个基类继承自Exception，其他错误都继承这个基类</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="35-mypy做静态类型检查"><a href="#35-mypy做静态类型检查" class="headerlink" title="35. mypy做静态类型检查"></a>35. mypy做静态类型检查</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum</span>(<span class="params">x: <span class="built_in">int</span>, y: <span class="built_in">int</span></span>) -&gt; int:</span> <span class="comment"># x、y都是int对象，函数返回int对象</span></span><br><span class="line">    <span class="keyword">return</span> x + y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    print(<span class="built_in">sum</span>(<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)) <span class="comment"># 并不会报错，用mypy会提示希望是int，但却是str类型</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="36-改进的namedtuple"><a href="#36-改进的namedtuple" class="headerlink" title="36. 改进的namedtuple"></a>36. 改进的namedtuple</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># python3.6+</span></span><br><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> NamedTuple</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Car</span>(<span class="params">NmaedTuple</span>):</span></span><br><span class="line">    color: <span class="built_in">str</span></span><br><span class="line">    mileage: <span class="built_in">float</span></span><br><span class="line">    automatic: <span class="built_in">bool</span></span><br><span class="line">    <span class="comment"># 以上类型只是建议，不用对应的类型也不会报错，mypy会报错</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">car = Car(<span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;100.01&#x27;</span>, <span class="literal">False</span>)</span><br><span class="line">car.mileage = <span class="number">100</span> <span class="comment"># 会报错，因为不支持修改数据</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="37-用哪种数据结构存储数据"><a href="#37-用哪种数据结构存储数据" class="headerlink" title="37. 用哪种数据结构存储数据"></a>37. 用哪种数据结构存储数据</h3><ul>
-<li>为了简单用dict或tuple，字典数据得不到保护，元组数据顺序不能乱</li>
-<li>class，灵活，但是普通class属性还是可以改变的，也可以添加属性</li>
-<li>NamedTuple，定义子类，得到有效保护</li>
-</ul>
-<h3 id="38-Python3-7-Data-Class"><a href="#38-Python3-7-Data-Class" class="headerlink" title="38. Python3.7+ Data Class"></a>38. Python3.7+ Data Class</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> dataclasses <span class="keyword">import</span> dataclass</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@dataclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NewPeple</span>:</span></span><br><span class="line">    name: <span class="built_in">str</span></span><br><span class="line">    age: <span class="built_in">int</span></span><br><span class="line">    <span class="comment"># 仅仅是提示</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p1 = NewPeple(<span class="string">&#x27;A&#x27;</span>, <span class="number">20</span>)</span><br><span class="line">p2 = NewPeple(<span class="string">&#x27;A&#x27;</span>, <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(p1, p2) <span class="comment"># 普通类还要重写__str__ ,__repr__</span></span><br><span class="line">print(<span class="string">&#x27;p1=p2?&#x27;</span>, p1==p2) <span class="comment"># 普通类需要重写__eq__</span></span><br></pre></td></tr></table></figure>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> 教程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>爬虫 01 爬虫基础</title>
+      <link href="/blog/2020/12/01/01%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/"/>
+      <url>/blog/2020/12/01/01%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-Python爬虫"><a href="#1-Python爬虫" class="headerlink" title="1. Python爬虫"></a>1. Python爬虫</h1><h2 id="1-1-爬虫用途"><a href="#1-1-爬虫用途" class="headerlink" title="1.1 爬虫用途"></a>1.1 爬虫用途</h2><hr><p><strong>网络爬虫</strong>：按照一定的规则，自动地爬取互联网信息的程序。</p><a id="more"></a><h2 id="1-2-应用方向"><a href="#1-2-应用方向" class="headerlink" title="1.2 应用方向"></a>1.2 应用方向</h2><hr><h3 id="1-2-1-定制搜索引擎"><a href="#1-2-1-定制搜索引擎" class="headerlink" title="1.2.1 定制搜索引擎"></a>1.2.1 定制搜索引擎</h3><p><strong>学习爬虫，可以私人定制一个搜索引擎，并且可以对搜索引擎的数据工作原理进行更深层次的理解</strong></p><h3 id="1-2-2-seo优化"><a href="#1-2-2-seo优化" class="headerlink" title="1.2.2 seo优化"></a>1.2.2 seo优化</h3><p>学习爬虫，可以更深层次理解搜索引擎爬虫工作原理，从而<strong>可以更好地进行搜索引擎优化</strong></p><h3 id="1-2-3-数据分析"><a href="#1-2-3-数据分析" class="headerlink" title="1.2.3 数据分析"></a>1.2.3 数据分析</h3><hr><p><strong>大数据时代，要进行数据分析，首先要有数据源，而学习爬虫，可以让我们获取更多的数据，并且这些数据源可以按我们的目的进行采集，去掉很多无关数据。</strong>        </p><h3 id="1-2-4-找工作"><a href="#1-2-4-找工作" class="headerlink" title="1.2.4 找工作"></a>1.2.4 找工作</h3><p><strong>还是要恰饭的嘛。</strong></p><h2 id="1-3-为什么要用Python爬虫"><a href="#1-3-为什么要用Python爬虫" class="headerlink" title="1.3 为什么要用Python爬虫"></a>1.3 为什么要用Python爬虫</h2><hr><ol><li>PHP：天生不适合</li><li>Java：生态圈完善，但语言本身较笨重，毕竟人生苦短……</li><li>C/C++：运行效率没得说，大拇指，但学起来也太难了叭。</li><li>Python：代码简洁优美，开发效率高。谁叫我这么菜，只想学简单的。</li></ol><h3 id="1-3-1-一个python爬虫"><a href="#1-3-1-一个python爬虫" class="headerlink" title="1.3.1 一个python爬虫"></a>1.3.1 一个python爬虫</h3><p>使用python爬取百度网址</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests  <span class="comment"># 导入爬虫requests库</span></span><br><span class="line"></span><br><span class="line">url = <span class="string">&#x27;http://www.baidu.com&#x27;</span></span><br><span class="line">response = requests.get(url=url)  <span class="comment"># 向指定url地址发送请求</span></span><br><span class="line">print(response)  <span class="comment"># 返回状态码，200表示请求成功</span></span><br><span class="line">print(response.text)  <span class="comment"># 返回百度页面的html</span></span><br></pre></td></tr></table></figure><h1 id="2-爬虫"><a href="#2-爬虫" class="headerlink" title="2. 爬虫"></a>2. 爬虫</h1><h2 id="2-1-爬虫分类"><a href="#2-1-爬虫分类" class="headerlink" title="2.1 爬虫分类"></a>2.1 爬虫分类</h2><hr><h3 id="2-1-1-通用爬虫"><a href="#2-1-1-通用爬虫" class="headerlink" title="2.1.1 通用爬虫"></a>2.1.1 通用爬虫</h3><p>通用爬虫是搜索引擎抓取系统（百度、Google、Sogou等）一个重要组成部分。主要是将互联网上的网页下载到本地，形成一个互联网内容的镜像备份，为搜索引擎提供搜索支撑。</p><p><strong>搜索引擎工作原理：</strong></p><p><img src="https://cdn.jsdelivr.net/gh/Monster1314/blog/img/search.png" alt="img"></p><ul><li><p><strong>第一步： 抓取网页</strong></p><p>搜索引擎去网站上抓取数据</p></li><li><p><strong>第二步：数据存储</strong></p><p>搜索引擎通过爬虫得到的网页，将数据存入原始页面数据库（文档库）。其中的页面数据与用户浏览器得到的HTML是完全一样的。</p></li><li><p><strong>第三步：提供检索服务，网站排名</strong></p><p>搜索引擎将爬虫抓取回来的页面，进行各种步骤的预处理：中文分词，消除噪音，索引处理等</p></li></ul><p><strong>搜索引擎局限性</strong>：</p><ol><li>搜索引擎抓取的是整个网页，不是具体详细的信息；</li><li>搜索引擎无法提供针对具体某个客户需求的搜索结果。</li></ol><h3 id="2-1-2-聚焦爬虫"><a href="#2-1-2-聚焦爬虫" class="headerlink" title="2.1.2 聚焦爬虫"></a>2.1.2 聚焦爬虫</h3><p>聚焦爬虫，是“面向特定主题需求”的一种网络爬虫程序，它与通用搜索引擎爬虫的区别在于：<strong>聚焦爬虫在实施网页抓取时会对内容进行处理筛选，尽量保证只抓取与需求相关的网页数据。</strong></p><p>我们学当然要学聚焦爬虫 =v= 。</p><h3 id="2-1-3-Robots协议"><a href="#2-1-3-Robots协议" class="headerlink" title="2.1.3 Robots协议"></a>2.1.3 Robots协议</h3><p>Robots协议也称爬虫协议、机器人协议等，全称呢个“网络爬虫排除标准”（Robots Exclusion Protocol）,网站通过Robot协议告诉搜索引擎哪些页面可以抓取，哪些页面不能抓取，如：</p><p>淘宝：<a href="https://www.taobao.com/robots.txt">https://www.taobao.com/robots.txt</a></p><p>百度：<a href="https://www.baidu.com/robots.txt">https://www.baidu.com/robots.txt</a></p><h1 id="3-请求与相应"><a href="#3-请求与相应" class="headerlink" title="3. 请求与相应"></a>3. 请求与相应</h1><ol><li>当我们在浏览器输入<a href="https://www.baidu.com时,浏览器会发送一个request请求去获取https//baidu.com%E7%9A%84html%E6%96%87%E4%BB%B6%EF%BC%8C%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%94%E5%9B%9EResponse%E5%AF%B9%E8%B1%A1%E7%BB%99%E6%B5%8F%E8%A7%88%E5%99%A8%E3%80%82">https://www.baidu.com时，浏览器会发送一个Request请求去获取https://baidu.com的html文件，服务器返回Response对象给浏览器。</a></li><li>浏览器分析Response中的HTML，发现其中引用了很多文件，如Images文件、CSS文件。浏览器会自动再次发送请求去获取图片等。</li><li>当所有文件都下载成功后，网页会根据HTML语法结构，完整显示出来。</li></ol><h1 id="4-Chrome-开发者工具"><a href="#4-Chrome-开发者工具" class="headerlink" title="4. Chrome 开发者工具"></a>4. Chrome 开发者工具</h1><p>一般爬虫用的最多的是<strong>Chrome开发者工具</strong>，在谷歌浏览器中右击，左击“检查”，或者按快捷键F12即可打开开发者工具。</p><h2 id="4-1-元素面板（Elements）"><a href="#4-1-元素面板（Elements）" class="headerlink" title="4.1 元素面板（Elements）"></a>4.1 元素面板（Elements）</h2><hr><p><img src="https://cdn.jsdelivr.net/gh/Monster1314/blog/img/elements.png" alt="img"></p><p>打开谷歌开发者工具，点击elements，在这里可以看到网页的html，同时后续css/xpath/re都是从这里获取资源定位。</p><p>选页面某一节点右击也可复制xpath路径、css路径等。</p><h2 id="4-2-控制台面板（Console）"><a href="#4-2-控制台面板（Console）" class="headerlink" title="4.2 控制台面板（Console）"></a>4.2 控制台面板（Console）</h2><hr><p><img src="https://cdn.jsdelivr.net/gh/Monster1314/blog/img/console.png" alt="img"></p><p>控制台面板是用于显示JS和DOM对象信息的单独窗口。js解密会用console调试运行js代码。</p><h2 id="4-3-资源面板（Source）"><a href="#4-3-资源面板（Source）" class="headerlink" title="4.3 资源面板（Source）"></a>4.3 资源面板（Source）</h2><hr><p><img src="https://cdn.jsdelivr.net/gh/Monster1314/blog/img/source.png" alt="img"></p><p>左侧可以看到源文件以树结构进行展示。</p><p>中间可以用来调试js代码。</p><p>右侧是断点调试功能区。</p><h2 id="4-4-网络面板（Network）"><a href="#4-4-网络面板（Network）" class="headerlink" title="4.4 网络面板（Network）"></a>4.4 网络面板（Network）</h2><hr><p><img src="https://cdn.jsdelivr.net/gh/Monster1314/blog/img/network.png" alt="img"></p><p>网络（Network）面板记录页面上每个网络操作的相关信息，包括详细的耗时数据、HTTP标头和Cookie等。</p><h3 id="4-4-1-工具栏"><a href="#4-4-1-工具栏" class="headerlink" title="4.4.1 工具栏"></a>4.4.1 工具栏</h3><p><img src="https://cdn.jsdelivr.net/gh/Monster1314/blog/img/tool.png" alt="img"></p><p>从左到右：</p><p><strong>Stop recording network log</strong></p><p>默认情况下，只要开发者工具在开启状态，就会记录所有网络请求。红色表示开始，灰色表示关闭。</p><p><strong>Clear</strong></p><p>清空所有数据</p><p><strong>Filter</strong></p><p>数据包过滤，红色打开，蓝色关闭。经常使用它来过滤一些HTTP请求，如Ajax异步请求、图片、视频等。</p><p><strong>Search</strong></p><p>搜索框，只要在ALL里出现过的内容，就可以被直接搜索到。常用于数据检索与JS解密。</p><p><strong>Preserve log</strong></p><p>保留日志。当分析多个页面跳转的内容时，一定要勾上，不然页面跳转会把历史清空。</p><p><strong>Disable cache</strong></p><p>清空Javascript、css文件缓存，获取最新的。</p><p><strong>Hide data URLs</strong></p><p>用于是否隐藏dataurl。什么是dataurl？传统的通常img标记的src属性指定了一个远程服务器的资源，浏览器针对每个外部资源需要向服务器发送一次拉去资源请求。而Data URL技术是图片数据以base64字符串格式嵌入到了页面中，和HTML融为一体。</p><h3 id="4-4-2-Requests详情"><a href="#4-4-2-Requests详情" class="headerlink" title="4.4.2 Requests详情"></a>4.4.2 Requests详情</h3><p><strong>请求头</strong></p><p><strong>Headers</strong>是显示HTTP请求的Headers，我们通过这个能看到请求的方式，以及携带的请求参数等。</p><ul><li><p>General</p></li><li><p>Response Headers</p></li><li><p>Request Headers</p></li></ul><p><strong>预览</strong></p><p>Preview是请求结果的预览。</p><p><strong>响应体</strong></p><p>Response是请求返回的结果，一般是整个网站的源代码。如果该请求是异步请求，返回的结果一般是json文本数据。</p><p>此数据与浏览器展示的网页可能不一致，因为浏览器是动态加载的。</p>]]></content>
+      
+      
       <categories>
-        <category>python</category>
+          
+          <category> python-spider </category>
+          
       </categories>
-  </entry>
-  <entry>
-    <title>git方法</title>
-    <url>/blog/2020/12/09/git/</url>
-    <content><![CDATA[<h1 id="Git-与-GitHub"><a href="#Git-与-GitHub" class="headerlink" title="Git 与 GitHub"></a>Git 与 GitHub</h1><h2 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h2><ol>
-<li>git branch “name”   创建名为name的新分支</li>
-<li>git checkout &lt; name &gt;   切换到新分支上</li>
-<li>git checkout -b &lt; name &gt;  创建并切换到新分支</li>
-</ol>
-<a id="more"></a>
-
-<h2 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h2><ol>
-<li>git merge &lt; branch name &gt;  在分支下互相使用，最终合并到一起。在哪个分支下使用就合并到哪个分支下</li>
-<li>git rebase &lt; target branch &gt;  实际上就是取出一系列的提交记录，“复制”它们，然后在另外一个地方逐个的放下去。 在哪个分支下使用，就改变哪个分支，合并到另一个分支上。互相用一次也可以合并到一起。</li>
-</ol>
-<h2 id="分离head"><a href="#分离head" class="headerlink" title="分离head"></a>分离head</h2><ol>
-<li> git checkout C1     C1是哈希值，使用时可以只使用哈希值前几个字母</li>
-</ol>
-<h2 id="相对引用"><a href="#相对引用" class="headerlink" title="相对引用"></a>相对引用</h2><ol>
-<li><p>git checkout master^  HEAD指向返回到master的父节点    </p>
-</li>
-<li><p>git checkout master^^  == git checkout master^2</p>
-</li>
-<li><p>git checkout HEAD~4  HEAD向上移动四次</p>
-</li>
-<li><p>git branch -f master HEAD~3  | 哈希值     将master向上移动三次/移到对应哈希值的节点</p>
-</li>
-</ol>
-<h2 id="撤销改变"><a href="#撤销改变" class="headerlink" title="撤销改变"></a>撤销改变</h2><ol>
-<li>git reset HEAD~1  该分支向上移动1，虽然在你的本地分支中使用 <code>git reset</code> 很方便，但是这种“改写历史”的方法对大家一起使用的远程分支是无效的哦！</li>
-<li>git revert HEAD  在我们要撤销的提交记录后面居然多了一个新提交！这是因为新提交记录 <code>C2&#39;</code> 引入了更改 —— 这些更改刚好是用来撤销 <code>C2</code> 这个提交的。也就是说 <code>C2&#39;</code> 的状态与 <code>C1</code>是相同的。revert 之后就可以把你的更改推送到远程仓库与别人分享啦。</li>
-</ol>
-<h2 id="整理提交记录"><a href="#整理提交记录" class="headerlink" title="整理提交记录"></a>整理提交记录</h2><p> 开发人员有时会说“我想要把这个提交放到这里, 那个提交放到刚才那个提交的后面”</p>
-<ol>
-<li><p>git cherry-pick &lt; 提交号 &gt;  如果你想将一些提交复制到当前所在的位置（<code>HEAD</code>）下面的话， cherry-pick 是最直接的方式了。我个人非常喜欢 <code>cherry-pick</code>，因为它特别简单。</p>
-<p>如git cherry-pick C1 C2   该分支复制C1 C2，并向下移动</p>
-</li>
-</ol>
-<h2 id="交互式rebase"><a href="#交互式rebase" class="headerlink" title="交互式rebase"></a>交互式rebase</h2><p>如果你不清楚你想要的提交记录的哈希值呢? 幸好 Git 帮你想到了这一点, 我们可以利用交互式的 rebase —— 如果你想从一系列的提交记录中找到想要的记录, 这就是最好的方法了</p>
-<p>交互式 rebase 指的是使用带参数 <code>--interactive</code> 的 rebase 命令, 简写为 <code>-i</code></p>
-<ol>
-<li>git rebase -i HEAD~4  打开UI窗口，对向上3个加所在位置共四个进行操作</li>
-</ol>
-<h2 id="本地栈式提交"><a href="#本地栈式提交" class="headerlink" title="本地栈式提交"></a>本地栈式提交</h2><p>来看一个在开发中经常会遇到的情况：我正在解决某个特别棘手的 Bug，为了便于调试而在代码中添加了一些调试命令并向控制台打印了一些信息。</p>
-<p>这些调试和打印语句都在它们各自的提交记录里。最后我终于找到了造成这个 Bug 的根本原因，解决掉以后觉得沾沾自喜！</p>
-<p>最后就差把 <code>bugFix</code> 分支里的工作合并回 <code>master</code> 分支了。你可以选择通过 fast-forward 快速合并到 <code>master</code> 分支上，但这样的话 <code>master</code> 分支就会包含我这些调试语句了。你肯定不想这样，应该还有更好的方式……</p>
-<p>实际我们只要让 Git 复制解决问题的那一个提交记录就可以了。跟之前我们在“整理提交记录”中学到的一样，我们可以使用</p>
-<ul>
-<li><code>git rebase -i</code></li>
-<li><code>git cherry-pick</code></li>
-</ul>
-<p>来达到目的。</p>
-<h2 id="提交的技巧"><a href="#提交的技巧" class="headerlink" title="提交的技巧"></a>提交的技巧</h2><p>你之前在 <code>newImage</code> 分支上进行了一次提交，然后又基于它创建了 <code>caption</code> 分支，然后又提交了一次。</p>
-<p>此时你想对的某个以前的提交记录进行一些小小的调整。比如设计师想修改一下 <code>newImage</code> 中图片的分辨率，尽管那个提交记录并不是最新的了。</p>
-<p>我们可以通过下面的方法来克服困难：</p>
-<ul>
-<li>先用 <code>git rebase -i</code> 将提交重新排序，然后把我们想要修改的提交记录挪到最前</li>
-<li>然后用 <code>git commit --amend</code> 来进行一些小修改</li>
-<li>接着再用 <code>git rebase -i</code> 来将他们调回原来的顺序</li>
-<li>最后我们把 master 移到修改的最前端（用你自己喜欢的方法），就大功告成啦！</li>
-</ul>
-<p>当然完成这个任务的方法不止上面提到的一种（我知道你在看 cherry-pick 啦），之后我们会多点关注这些技巧啦，但现在暂时只专注上面这种方法。 最后有必要说明一下目标状态中的那几个<code>&#39;</code> —— 我们把这个提交移动了两次，每移动一次会产生一个 <code>&#39;</code>；而 C2 上多出来的那个是我们在使用了 amend 参数提交时产生的，所以最终结果就是这样了。</p>
-<p>也就是说，我在对比结果的时候只会对比提交树的结构，对于 <code>&#39;</code> 的数量上的不同，并不纳入对比范围内。只要你的 <code>master</code>分支结构与目标结构相同，我就算你通过。</p>
-<h2 id="Git-Tag"><a href="#Git-Tag" class="headerlink" title="Git Tag"></a>Git Tag</h2><p>相信通过前面课程的学习你已经发现了：分支很容易被人为移动，并且当有新的提交时，它也会移动。分支很容易被改变，大部分分支还只是临时的，并且还一直在变。</p>
-<p>你可能会问了：有没有什么可以<em>永远</em>指向某个提交记录的标识呢，比如软件发布新的大版本，或者是修正一些重要的 Bug 或是增加了某些新特性，有没有比分支更好的可以永远指向这些提交的方法呢？</p>
-<p>当然有了！Git 的 tag 就是干这个用的啊，它们可以（在某种程度上 —— 因为标签可以被删除后重新在另外一个位置创建同名的标签）永久地将某个特定的提交命名为里程碑，然后就可以像分支一样引用了。</p>
-<p>更难得的是，它们并不会随着新的提交而移动。你也不能检出到某个标签上面进行修改提交，它就像是提交树上的一个锚点，标识了某个特定的位置。</p>
-<p>git tag v1 C1  我们将这个标签命名为 <code>v1</code>，并且明确地让它指向提交记录 <code>C1</code>，如果你不指定提交记录，Git 会用 <code>HEAD</code> 所指向的位置。</p>
-<h2 id="Git-Describe"><a href="#Git-Describe" class="headerlink" title="Git Describe"></a>Git Describe</h2><p>由于标签在代码库中起着“锚点”的作用，Git 还为此专门设计了一个命令用来<strong>描述</strong>离你最近的锚点（也就是标签），它就是 <code>git describe</code>！</p>
-<p>Git Describe 能帮你在提交历史中移动了多次以后找到方向；当你用 <code>git bisect</code>（一个查找产生 Bug 的提交记录的指令）找到某个提交记录时，或者是当你坐在你那刚刚度假回来的同事的电脑前时， 可能会用到这个命令。</p>
-<p><code>git describe</code> 的语法是：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git describe &lt;ref&gt;</span><br></pre></td></tr></table></figure>
-
-<p><code>&lt;ref&gt;</code> 可以是任何能被 Git 识别成提交记录的引用，如果你没有指定的话，Git 会以你目前所检出的位置（<code>HEAD</code>）。</p>
-<p>它输出的结果是这样的：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;tag&gt;_&lt;numCommits&gt;_g&lt;hash&gt;</span><br></pre></td></tr></table></figure>
-
-<p><code>tag</code> 表示的是离 <code>ref</code> 最近的标签， <code>numCommits</code> 是表示这个 <code>ref</code> 与 <code>tag</code> 相差有多少个提交记录， <code>hash</code> 表示的是你所给定的 <code>ref</code> 所表示的提交记录哈希值的前几位。</p>
-<p>当 <code>ref</code> 提交记录上有某个标签时，则只输出标签名称</p>
-<h2 id="多次rebase"><a href="#多次rebase" class="headerlink" title="多次rebase"></a>多次rebase</h2><p>你的领导给你提了点要求 —— 他们希望得到有序的提交历史，也就是我们最终的结果应该是 <code>C6&#39;</code> 在 <code>C7&#39;</code> 上面， <code>C5&#39;</code>在 <code>C6&#39;</code> 上面，依此类推。</p>
-<p>即使你搞砸了也没关系，用 <code>reset</code> 命令就可以重新开始了。记得看看我们提供的答案，看你能否使用更少的命令来完成任务！</p>
-<p>git rebase master bugFix 将bugFix rebase到master分支上</p>
-<h2 id="两个父节点"><a href="#两个父节点" class="headerlink" title="两个父节点"></a>两个父节点</h2><p>操作符 <code>^</code> 与 <code>~</code> 符一样，后面也可以跟一个数字。</p>
-<p>但是该操作符后面的数字与 <code>~</code> 后面的不同，并不是用来指定向上返回几代，而是指定合并提交记录的某个父提交。还记得前面提到过的一个合并提交有两个父提交吧，所以遇到这样的节点时该选择哪条路径就不是很清晰了。</p>
-<p>Git 默认选择合并提交的“第一个”父提交，在操作符 <code>^</code> 后跟一个数字可以改变这一默认行为。</p>
-<p>git checkout HEAD^2 返回到另一个父提交，直着下来的是父提交1。这些操作符还支持链式操作 </p>
-<p>git checkout HEAD<del>^2</del>2    HEAD返回的话再次切换分支即可</p>
-<h2 id="纠缠不清的分支"><a href="#纠缠不清的分支" class="headerlink" title="纠缠不清的分支"></a>纠缠不清的分支</h2><p>现在我们的 <code>master</code> 分支是比 <code>one</code>、<code>two</code> 和 <code>three</code> 要多几个提交。出于某种原因，我们需要把 <code>master</code> 分支上最近的几次提交做不同的调整后，分别添加到各个的分支上。</p>
-<p><code>one</code> 需要重新排序并删除 <code>C5</code>，<code>two</code> 仅需要重排排序，而 <code>three</code> 只需要提交一次。</p>
-<p>慢慢来，你会找到答案的 —— 记得通关之后用 <code>show solution</code> 看看我们的答案哦。</p>
-<h2 id="远程"><a href="#远程" class="headerlink" title="远程"></a>远程</h2><p>我们的本地仓库多了一个名为 <code>o/master</code> 的分支, 这种类型的分支就叫<strong>远程</strong>分支。由于远程分支的特性导致其拥有一些特殊属性。</p>
-<p>远程分支反映了远程仓库(在你上次和它通信时)的<strong>状态</strong>。这会有助于你理解本地的工作与公共工作的差别 —— 这是你与别人分享工作成果前至关重要的一步.</p>
-<p>远程分支有一个特别的属性，在你检出时自动进入分离 HEAD 状态。Git 这么做是出于不能直接在这些分支上进行操作的原因, 你必须在别的地方完成你的工作, （更新了远程分支之后）再用远程分享你的工作成果。</p>
-<h3 id="为什么有-o-？"><a href="#为什么有-o-？" class="headerlink" title="为什么有 o/？"></a>为什么有 <code>o/</code>？</h3><p>你可能想问这些远程分支的前面的 <code>o/</code> 是什么意思呢？好吧, 远程分支有一个命名规范 —— 它们的格式是:</p>
-<ul>
-<li><code>&lt;remote name&gt;/&lt;branch name&gt;</code></li>
-</ul>
-<p>因此，如果你看到一个名为 <code>o/master</code> 的分支，那么这个分支就叫 <code>master</code>，远程仓库的名称就是 <code>o</code>。</p>
-<p>大多数的开发人员会将它们主要的远程仓库命名为 <code>origin</code>，并不是 <code>o</code>。这是因为当你用 <code>git clone</code> 某个仓库时，Git 已经帮你把远程仓库的名称设置为 <code>origin</code> 了</p>
-<p>不过 <code>origin</code> 对于我们的 UI 来说太长了，因此不得不使用简写 <code>o</code> :) 但是要记住, 当你使用真正的 Git 时, 你的远程仓库默认为 <code>origin</code>!</p>
-<h2 id="Git-Fetch"><a href="#Git-Fetch" class="headerlink" title="Git Fetch"></a>Git Fetch</h2><p><code>git fetch</code> 完成了仅有的但是很重要的两步:</p>
-<ul>
-<li>从远程仓库下载本地仓库中缺失的提交记录</li>
-<li>更新远程分支指针(如 <code>o/master</code>)</li>
-</ul>
-<p><code>git fetch</code> 实际上将本地仓库中的远程分支更新成了远程仓库相应分支最新的状态。</p>
-<p>如果你还记得上一节课程中我们说过的，远程分支反映了远程仓库在你<strong>最后一次与它通信时</strong>的状态，<code>git fetch</code> 就是你与远程仓库通信的方式了！希望我说的够明白了，你已经了解 <code>git fetch</code> 与远程分支之间的关系了吧。</p>
-<p><code>git fetch</code> 通常通过互联网（使用 <code>http://</code> 或 <code>git://</code> 协议) 与远程仓库通信。</p>
-<p><code>git fetch</code> 并不会改变你本地仓库的状态。它不会更新你的 <code>master</code> 分支，也不会修改你磁盘上的文件。</p>
-<p>理解这一点很重要，因为许多开发人员误以为执行了 <code>git fetch</code> 以后，他们本地仓库就与远程仓库同步了。它可能已经将进行这一操作所需的所有数据都下载了下来，但是<strong>并没有</strong>修改你本地的文件。我们在后面的课程中将会讲解能完成该操作的命令 :D</p>
-<p>所以, 你可以将 <code>git fetch</code> 的理解为单纯的下载操作。</p>
-<h2 id="Git-Pull"><a href="#Git-Pull" class="headerlink" title="Git Pull"></a>Git Pull</h2><p>其实有很多方法的 —— 当远程分支中有新的提交时，你可以像合并本地分支那样来合并远程分支。也就是说就是你可以执行以下命令:</p>
-<ul>
-<li><code>git cherry-pick o/master</code></li>
-<li><code>git rebase o/master</code></li>
-<li><code>git merge o/master</code></li>
-<li>等等</li>
-</ul>
-<p>实际上，由于先抓取更新再合并到本地分支这个流程很常用，因此 Git 提供了一个专门的命令来完成这两个操作。它就是我们要讲的 <code>git pull</code>。  = git fetch + git merge o/master</p>
-<h2 id="模拟团队合作"><a href="#模拟团队合作" class="headerlink" title="模拟团队合作"></a>模拟团队合作</h2><h2 id="Git-Push"><a href="#Git-Push" class="headerlink" title="Git Push"></a>Git Push</h2><p>OK，我们已经学过了如何从远程仓库获取更新并合并到本地的分支当中。这非常棒……但是我如何与大家分享<strong>我的</strong>成果呢？</p>
-<p>嗯，上传自己分享内容与下载他人的分享刚好相反，那与 <code>git pull</code> 相反的命令是什么呢？<code>git push</code>！</p>
-<p><code>git push</code> 负责将<strong>你的</strong>变更上传到指定的远程仓库，并在远程仓库上合并你的新提交记录。一旦 <code>git push</code> 完成, 你的朋友们就可以从这个远程仓库下载你分享的成果了！</p>
-<p>你可以将 <code>git push</code> 想象成发布你成果的命令。它有许多应用技巧，稍后我们会了解到，但是咱们还是先从基础的开始吧……</p>
-<p><em>注意 —— <code>git push</code> 不带任何参数时的行为与 Git 的一个名为 <code>push.default</code> 的配置有关。它的默认值取决于你正使用的 Git 的版本，但是在教程中我们使用的是 <code>upstream</code>。 这没什么太大的影响，但是在你的项目中进行推送之前，最好检查一下这个配置。</em></p>
-<h2 id="偏离的提交历史"><a href="#偏离的提交历史" class="headerlink" title="偏离的提交历史"></a>偏离的提交历史</h2><p>假设你周一克隆了一个仓库，然后开始研发某个新功能。到周五时，你新功能开发测试完毕，可以发布了。但是 —— 天啊！你的同事这周写了一堆代码，还改了许多你的功能中使用的 API，这些变动会导致你新开发的功能变得不可用。但是他们已经将那些提交推送到远程仓库了，因此你的工作就变成了基于项目<strong>旧版</strong>的代码，与远程仓库最新的代码不匹配了。</p>
-<p>这种情况下, <code>git push</code> 就不知道该如何操作了。如果你执行 <code>git push</code>，Git 应该让远程仓库回到星期一那天的状态吗？还是直接在新代码的基础上添加你的代码，亦或由于你的提交已经过时而直接忽略你的提交？</p>
-<p>因为这情况（历史偏离）有许多的不确定性，Git 是不会允许你 <code>push</code> 变更的。实际上它会强制你先合并远程最新的代码，然后才能分享你的工作。</p>
-<p>那该如何解决这个问题呢？很简单，你需要做的就是使你的工作基于最新的远程分支。</p>
-<p>有许多方法做到这一点呢，不过最直接的方法就是通过 rebase 调整你的工作。咱们继续，看看怎么 rebase！</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git fetch; git rebase o/master; git push</span><br></pre></td></tr></table></figure>
-
-<p>我们用 <code>git fetch</code> 更新了本地仓库中的远程分支，然后用 rebase 将我们的工作移动到最新的提交记录下，最后再用 <code>git push</code> 推送到远程仓库。</p>
-<p>还有其它的方法可以在远程仓库变更了以后更新我的工作吗? 当然有，我们还可以使用 <code>merge</code></p>
-<p>尽管 <code>git merge</code> 不会移动你的工作（它会创建新的合并提交），但是它会告诉 Git 你已经合并了远程仓库的所有变更。这是因为远程分支现在是你本地分支的祖先，也就是说你的提交已经包含了远程分支的所有变化。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git fetch; git merge o/master; git push</span><br></pre></td></tr></table></figure>
-
-
-
-<p>很好！但是要敲那么多命令，有没有更简单一点的？</p>
-<p>当然 —— 前面已经介绍过 <code>git pull</code> 就是 fetch 和 merge 的简写，类似的 <code>git pull --rebase</code> 就是 fetch 和 rebase 的简写！</p>
-<p><code>git pull; git push</code></p>
-<h2 id="锁定的master"><a href="#锁定的master" class="headerlink" title="锁定的master"></a>锁定的master</h2><p>如果你是在一个大的合作团队中工作, 很可能是master被锁定了, 需要一些Pull Request流程来合并修改。如果你直接提交(commit)到本地master, 然后试图推送(push)修改, 你将会收到这样类似的信息:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">! [远程服务器拒绝] master -&gt; master (TF402455: 不允许推送(push)这个分支; 你必须使用pull request来更新这个分支.)</span><br></pre></td></tr></table></figure>
-
-<h4 id="为什么会被拒绝"><a href="#为什么会被拒绝" class="headerlink" title="为什么会被拒绝?"></a>为什么会被拒绝?</h4><p>远程服务器拒绝直接推送(push)提交到master, 因为策略配置要求 pull requests 来提交更新.</p>
-<p>你应该按照流程,新建一个分支, 推送(push)这个分支并申请pull request,但是你忘记并直接提交给了master.现在你卡住并且无法推送你的更新.</p>
-<h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><p>新建一个分支feature, 推送到远程服务器. 然后reset你的master分支和远程服务器保持一致, 否则下次你pull并且他人的提交和你冲突的时候就会有问题.</p>
-<h2 id="合并特性分支"><a href="#合并特性分支" class="headerlink" title="合并特性分支"></a>合并特性分支</h2><p>在大型项目中开发人员通常会在（从 <code>master</code> 上分出来的）特性分支上工作，工作完成后只做一次集成。这跟前面课程的描述很相像（把 side 分支推送到远程仓库），不过本节我们会深入一些.</p>
-<p>但是有些开发人员只在 master 上做 push、pull —— 这样的话 master 总是最新的，始终与远程分支 (o/master) 保持一致。</p>
-<p>对于接下来这个工作流，我们集成了两个步骤：</p>
-<ul>
-<li>将特性分支集成到 <code>master</code> 上</li>
-<li>推送并更新远程分支</li>
-</ul>
-<h2 id="为什么不用-merge-呢"><a href="#为什么不用-merge-呢" class="headerlink" title="为什么不用 merge 呢?"></a>为什么不用 merge 呢?</h2><p>为了 push 新变更到远程仓库，你要做的就是<strong>包含</strong>远程仓库中最新变更。意思就是只要你的本地分支包含了远程分支（如 <code>o/master</code>）中的最新变更就可以了，至于具体是用 rebase 还是 merge，并没有限制。</p>
-<p>那么既然没有规定限制，为何前面几节都在着重于 rebase 呢？为什么在操作远程分支时不喜欢用 <code>merge</code> 呢？</p>
-<p>优点:</p>
-<ul>
-<li>Rebase 使你的提交树变得很干净, 所有的提交都在一条线上</li>
-</ul>
-<p>缺点:</p>
-<ul>
-<li>Rebase 修改了提交树的历史</li>
-</ul>
-<p>比如, 提交 C1 可以被 rebase 到 C3 之后。这看起来 C1 中的工作是在 C3 之后进行的，但实际上是在 C3 之前。</p>
-<p>一些开发人员喜欢保留提交历史，因此更偏爱 merge。而其他人（比如我自己）可能更喜欢干净的提交树，于是偏爱 rebase。仁者见仁，智者见智。 :D</p>
-<h2 id="远程追踪"><a href="#远程追踪" class="headerlink" title="远程追踪"></a>远程追踪</h2><p>Git 好像知道 <code>master</code> 与 <code>o/master</code> 是相关的。当然这些分支的名字是相似的，可能会让你觉得是依此将远程分支 master 和本地的 master 分支进行了关联。这种关联在以下两种情况下可以清楚地得到展示：</p>
-<ul>
-<li>pull 操作时, 提交记录会被先下载到 o/master 上，之后再合并到本地的 master 分支。隐含的合并目标由这个关联确定的。</li>
-<li>push 操作时, 我们把工作从 <code>master</code> 推到远程仓库中的 <code>master</code> 分支(同时会更新远程分支 <code>o/master</code>) 。这个推送的目的地也是由这种关联确定的！</li>
-</ul>
-<p>直接了当地讲，<code>master</code> 和 <code>o/master</code> 的关联关系就是由分支的“remote tracking”属性决定的。<code>master</code> 被设定为跟踪 <code>o/master</code> —— 这意味着为 <code>master</code> 分支指定了推送的目的地以及拉取后合并的目标。</p>
-<p>你可能想知道 <code>master</code> 分支上这个属性是怎么被设定的，你并没有用任何命令指定过这个属性呀！好吧, 当你克隆仓库的时候, Git 就自动帮你把这个属性设置好了。</p>
-<p>当你克隆时, Git 会为远程仓库中的每个分支在本地仓库中创建一个远程分支（比如 <code>o/master</code>）。然后再创建一个跟踪远程仓库中活动分支的本地分支，默认情况下这个本地分支会被命名为 <code>master</code>。</p>
-<p>克隆完成后，你会得到一个本地分支（如果没有这个本地分支的话，你的目录就是“空白”的），但是可以查看远程仓库中所有的分支（如果你好奇心很强的话）。这样做对于本地仓库和远程仓库来说，都是最佳选择。</p>
-<p>这也解释了为什么会在克隆的时候会看到下面的输出：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">local</span> branch <span class="string">&quot;master&quot;</span> <span class="built_in">set</span> to track remote branch <span class="string">&quot;o/master&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="我能自己指定这个属性吗？"><a href="#我能自己指定这个属性吗？" class="headerlink" title="我能自己指定这个属性吗？"></a>我能自己指定这个属性吗？</h3><p>当然可以啦！你可以让任意分支跟踪 <code>o/master</code>, 然后该分支会像 <code>master</code> 分支一样得到隐含的 push 目的地以及 merge 的目标。 这意味着你可以在分支 <code>totallyNotMaster</code> 上执行 <code>git push</code>，将工作推送到远程仓库的 <code>master</code> 分支上。</p>
-<p>有两种方法设置这个属性，第一种就是通过远程分支检出一个新的分支，执行:</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git checkout -b totallyNotMaster o/master</span><br></pre></td></tr></table></figure>
-
-<p>就可以创建一个名为 <code>totallyNotMaster</code> 的分支，它跟踪远程分支 <code>o/master</code>。</p>
-<h3 id="第二种方法"><a href="#第二种方法" class="headerlink" title="第二种方法"></a>第二种方法</h3><p>另一种设置远程追踪分支的方法就是使用：<code>git branch -u</code> 命令，执行：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git branch -u o/master foo</span><br></pre></td></tr></table></figure>
-
-<p>这样 <code>foo</code> 就会跟踪 <code>o/master</code> 了。如果当前就在 foo 分支上, 还可以省略 foo：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git branch -u o/master</span><br></pre></td></tr></table></figure>
-
-<h2 id="Git-Push-参数"><a href="#Git-Push-参数" class="headerlink" title="Git Push 参数"></a>Git Push 参数</h2><p> 既然你知道了远程跟踪分支，我们可以开始揭开 git push、fetch 和 pull 的神秘面纱了。我们会逐个介绍这几个命令，它们在理念上是非常相似的。</p>
-<p>首先来看 <code>git push</code>。在远程跟踪课程中，你已经学到了 Git 是通过当前检出分支的属性来确定远程仓库以及要 push 的目的地的。这是未指定参数时的行为，我们可以为 push 指定参数，语法是：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git push &lt;remote&gt; &lt;place&gt;</span><br></pre></td></tr></table></figure>
-
-<p><code>&lt;place&gt;</code> 参数是什么意思呢？我们稍后会深入其中的细节, 先看看例子, 这个命令是:</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
-
-<p>把这个命令翻译过来就是：</p>
-<p><em>切到本地仓库中的“master”分支，获取所有的提交，再到远程仓库“origin”中找到“master”分支，将远程仓库中没有的提交记录都添加上去，搞定之后告诉我。</em></p>
-<p>我们通过“place”参数来告诉 Git 提交记录来自于 master, 要推送到远程仓库中的 master。它实际就是要同步的两个仓库的位置。</p>
-<p>需要注意的是，因为我们通过指定参数告诉了 Git 所有它需要的信息, 所以它就忽略了我们所检出的分支的属性！</p>
-<p>例子：git checkout C0; git push origin master 正常上传</p>
-<p>​            git checkout C0; git push 什么都没发生</p>
-<p>当为 git push 指定 place 参数为 <code>master</code> 时，我们同时指定了提交记录的来源和去向。</p>
-<p>你可能想问 —— 如果来源和去向分支的名称不同呢？比如你想把本地的 <code>foo</code> 分支推送到远程仓库中的 <code>bar</code> 分支。</p>
-<p>哎，很遗憾 Git 做不到…… 开个玩笑，别当真！当然是可以的啦 :) Git 拥有超强的灵活性（有点过于灵活了）</p>
-<p>接下来咱们看看是怎么做的……</p>
-<p>要同时为源和目的地指定 <code>&lt;place&gt;</code> 的话，只需要用冒号 <code>:</code> 将二者连起来就可以了：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git push origin &lt;<span class="built_in">source</span>&gt;:&lt;destination&gt;</span><br></pre></td></tr></table></figure>
-
-<p>这个参数实际的值是个 refspec，“refspec” 是一个自造的词，意思是 Git 能识别的位置（比如分支 <code>foo</code> 或者 <code>HEAD~1</code>）</p>
-<p>一旦你指定了独立的来源和目的地，就可以组织出言简意赅的远程操作命令了</p>
-<p>记住，<code>source</code> 可以是任何 Git 能识别的位置 </p>
-<p>例：git push origin foo^:master</p>
-<p>如果你要推送到的目的分支不存在会怎么样呢？没问题！Git 会在远程仓库中根据你提供的名称帮你创建这个分支！</p>
-<h2 id="Git-Fetch-参数"><a href="#Git-Fetch-参数" class="headerlink" title="Git Fetch 参数"></a>Git Fetch 参数</h2><p>我们刚学习了 git push 的参数，很酷的 <code>&lt;place&gt;</code> 参数，还有用冒号分隔的 refspecs（<code>&lt;source&gt;:&lt;destination&gt;</code>）。 这些参数可以用于 <code>git fetch</code> 吗？</p>
-<p>你猜中了！<code>git fetch</code> 的参数和 <code>git push</code> 极其相似。他们的概念是相同的，只是方向相反罢了（因为现在你是下载，而非上传）</p>
-<h3 id="lt-place-gt-参数"><a href="#lt-place-gt-参数" class="headerlink" title="&lt;place&gt; 参数"></a><code>&lt;place&gt;</code> 参数</h3><p>如果你像如下命令这样为 git fetch 设置 的话：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git fetch origin foo</span><br></pre></td></tr></table></figure>
-
-<p>Git 会到远程仓库的 <code>foo</code> 分支上，然后获取所有本地不存在的提交，放到本地的 <code>o/foo</code> 上。</p>
-<p>“如果我们指定 <code>&lt;source&gt;:&lt;destination&gt;</code> 会发生什么呢？”</p>
-<p>如果你觉得直接更新本地分支很爽，那你就用冒号分隔的 refspec 吧。不过，你不能在当前检出的分支上干这个事，但是其它分支是可以的。</p>
-<p>这里有一点是需要注意的 —— <code>source</code> 现在指的是远程仓库中的位置，而 <code>&lt;destination&gt;</code> 才是要放置提交的本地仓库的位置。它与 git push 刚好相反，这是可以讲的通的，因为我们在往相反的方向传送数据。</p>
-<p>理论上虽然行的通，但开发人员很少这么做。我在这里介绍它主要是为了从概念上说明 <code>fetch</code> 和 <code>push</code> 的相似性，只是方向相反罢了。</p>
-<p>如果 <code>git fetch</code> 没有参数，它会下载所有的提交记录到各个远程分支……</p>
-<h2 id="没有source的source"><a href="#没有source的source" class="headerlink" title="没有source的source"></a>没有source的source</h2><p>Git 有两种关于 <code>&lt;source&gt;</code> 的用法是比较诡异的，即你可以在 git push 或 git fetch 时不指定任何 <code>source</code>，方法就是仅保留冒号和 destination 部分，source 部分留空。</p>
-<ul>
-<li><code>git push origin :side</code></li>
-<li><code>git fetch origin :bugFix</code></li>
-</ul>
-<p>我们分别来看一下这两条命令的作用……</p>
-<p>如果 push 空 到远程仓库会如何呢？它会删除远程仓库中的分支！</p>
-<p>如果 fetch 空 到本地，会在本地创建一个新分支。</p>
-<h2 id="Git-Pull参数"><a href="#Git-Pull参数" class="headerlink" title="Git Pull参数"></a>Git Pull参数</h2><p>既然你已经掌握关于 <code>git fetch</code> 和 <code>git push</code> 参数的方方面面了，关于 git pull 几乎没有什么可以讲的了 :)</p>
-<p>因为 git pull 到头来就是 fetch 后跟 merge 的缩写。你可以理解为用同样的参数执行 git fetch，然后再 merge 你所抓取到的提交记录。</p>
-<p>还可以和其它更复杂的参数一起使用, 来看一些例子:</p>
-<p>以下命令在 Git 中是等效的:</p>
-<p><code>git pull origin foo</code> 相当于：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git fetch origin foo; git merge o/foo</span><br></pre></td></tr></table></figure>
-
-<p>还有…</p>
-<p><code>git pull origin bar~1:bugFix</code> 相当于：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git fetch origin bar~1:bugFix; git merge bugFix</span><br></pre></td></tr></table></figure>
-
-<p>git pull 实际上就是 fetch + merge 的缩写, git pull 唯一关注的是提交最终合并到哪里（也就是为 git fetch 所提供的 destination 参数）</p>
-<p>通过指定 <code>master</code> 我们更新了 <code>o/master</code>。然后将 <code>o/master</code> merge 到我们的检出位置，<strong>无论</strong>我们当前检出的位置是哪。</p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> 教程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>markdown</title>
+      <link href="/blog/2020/09/25/markdown/"/>
+      <url>/blog/2020/09/25/markdown/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Markdown入门"><a href="#Markdown入门" class="headerlink" title="Markdown入门"></a>Markdown入门</h2><p><strong>概要</strong></p><p>Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有HTML的格式。</p><a id="more"></a><h3 id="官方网站"><a href="#官方网站" class="headerlink" title="官方网站"></a>官方网站</h3><p><a href="https://daringfireball.net/projects/markdown/">https://daringfireball.net/projects/markdown/</a></p><h3 id="GitHub-Markdown-Cheatsheet"><a href="#GitHub-Markdown-Cheatsheet" class="headerlink" title="GitHub Markdown Cheatsheet"></a>GitHub Markdown Cheatsheet</h3><p><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet</a></p><h3 id="课程详细"><a href="#课程详细" class="headerlink" title="课程详细"></a>课程详细</h3><ol><li>课程介绍</li><li>预览插件</li><li>设置标题</li><li>自然段改行</li><li>引用表现</li><li>增加分割线</li><li>强调表现</li><li>列表表示</li><li>超文本链接</li><li>代码高亮显示</li><li>图片显示</li><li>表格显示</li></ol><h3 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h3><ul><li>记事本等文本编辑器</li></ul><ol><li>Visual Studio Code</li><li>Pycharm</li><li>ATOM</li></ol><h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><ul><li>html标题标记的生成(h1～h6)</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># h1标题</span><br><span class="line">## h2标题</span><br><span class="line">### h3标题</span><br><span class="line">#### h4标题</span><br><span class="line">##### h5标题</span><br><span class="line">###### h6标题</span><br><span class="line"></span><br><span class="line">h1标题</span><br><span class="line">&#x3D;&#x3D;&#x3D;</span><br><span class="line"></span><br><span class="line">h2标题</span><br><span class="line">---</span><br></pre></td></tr></table></figure><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><ul><li>引用文的表现方法：&gt;</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">我是引用</span><br><span class="line"></span><br><span class="line">&gt; 我是引用</span><br></pre></td></tr></table></figure><h3 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h3><ul><li>为文章分割线：<code>---</code></li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- ------</span><br></pre></td></tr></table></figure><h3 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h3><ul><li>斜体：<code>*XXX*</code>, <code>_XXX_</code></li><li>粗体：<code>**XXX**</code>,<code> __XXX__</code></li></ul><p>案例：<em>XXX</em>, <em>XXX</em></p><p>案例：<strong>XXX</strong> , <strong>XXX</strong></p><h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><ul><li>列表符号：-</li><li>列表符号：*</li><li>列表符号：+</li><li>列表符号：数字</li></ul><p>练习：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- 项目</span><br><span class="line">  - 项目</span><br><span class="line">    - 项目</span><br><span class="line"></span><br><span class="line">1. 项目1</span><br><span class="line">2. 项目2</span><br><span class="line">3. 项目3</span><br><span class="line"></span><br><span class="line">- [ ] 计划任务</span><br><span class="line">- [x] 完成任务</span><br></pre></td></tr></table></figure><h3 id="超文本链接"><a href="#超文本链接" class="headerlink" title="超文本链接"></a>超文本链接</h3><ul><li>超文本链接的书写</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;www.python.org&#x2F;</span><br><span class="line"></span><br><span class="line">[Python.org](https:&#x2F;&#x2F;www.python.org&#x2F;)</span><br><span class="line"></span><br><span class="line">[Python.org](https:&#x2F;&#x2F;www.python.org&#x2F; &quot;python官方文档&quot;)</span><br></pre></td></tr></table></figure><p><a href="https://www.python.org/">https://www.python.org/</a></p><h3 id="代码高亮显示"><a href="#代码高亮显示" class="headerlink" title="代码高亮显示"></a>代码高亮显示</h3><ul><li>代码高亮显示符号：`</li><li>代码高亮显示符号：~</li></ul><p>例子：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">​&#96;&#96;&#96;python</span><br><span class="line">def add(x, y) </span><br><span class="line">    return x+y</span><br><span class="line">​&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line">说明：您可以使用 &#96;add(x,y)&#96; 函数计算两个数的和。</span><br></pre></td></tr></table></figure><h3 id="图片显示"><a href="#图片显示" class="headerlink" title="图片显示"></a>图片显示</h3><ul><li>图片的引用与显示：<img src=""></li></ul><p>![alt文字](C:/Users/muzha/Documents/WeChat Files/wxid_jqw01i0de0iv22/FileStorage/File/2020-09/markdown/图片url 图片title)</p><h3 id="制作图片链接"><a href="#制作图片链接" class="headerlink" title="制作图片链接"></a>制作图片链接</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![img](https:&#x2F;&#x2F;gss0.bdstatic.com&#x2F;94o3dSag_xI4khGkpoWK1HF6hhy&#x2F;baike&#x2F;c0%3Dbaike150%2C5%2C5%2C150%2C50&#x2F;sign&#x3D;db37d3b8454a20a425133495f13bf347&#x2F;3b87e950352ac65c8819edd9f1f2b21193138a78.jpg)</span><br></pre></td></tr></table></figure><h3 id="表格显示"><a href="#表格显示" class="headerlink" title="表格显示"></a>表格显示</h3><ul><li>表格制作与显示</li></ul><p>使用 <code>-</code> 和 <code>|</code> 来制作表格。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">| TH1 | TH2 | TH3 |</span><br><span class="line">----|----|----</span><br><span class="line">| TD1 | TD3 | TD5 |</span><br><span class="line">| TD2 | TD4 | TD6 |</span><br></pre></td></tr></table></figure><h3 id="使用表格对齐"><a href="#使用表格对齐" class="headerlink" title="使用表格对齐"></a>使用表格对齐</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">| 居左 | 居中 | 居右 |</span><br><span class="line">|:---|:---:|---:|</span><br><span class="line">|1 |2 |3 |</span><br><span class="line">|4 |5 |6 | </span><br></pre></td></tr></table></figure>]]></content>
+      
+      
       <categories>
-        <category>git</category>
+          
+          <category> markdown </category>
+          
       </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>scrapy爬取漫画</title>
-    <url>/blog/2020/12/09/scrapy%E7%88%AC%E5%8F%96%E6%BC%AB%E7%94%BB/</url>
-    <content><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>是否苦于看漫画收费，那不如自己编个程序白嫖吧！</p>
-<a id="more"></a>
-
-<h1 id="基本环境"><a href="#基本环境" class="headerlink" title="基本环境"></a>基本环境</h1><p>python 3.6</p>
-<p>pycharm</p>
-<h1 id="安装scrapy"><a href="#安装scrapy" class="headerlink" title="安装scrapy"></a>安装scrapy</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">pip install scrapy</span><br></pre></td></tr></table></figure>
-
-<h1 id="创建scrapy项目"><a href="#创建scrapy项目" class="headerlink" title="创建scrapy项目"></a>创建scrapy项目</h1><p>在命令行输入：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">scrapy startproject 项目名称</span><br></pre></td></tr></table></figure>
-
-<h1 id="创建爬虫文件"><a href="#创建爬虫文件" class="headerlink" title="创建爬虫文件"></a>创建爬虫文件</h1><p>命令行输入：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">scrapy genspider 爬虫文件名称 域名</span><br><span class="line">注意：爬虫文件名称不能和项目名称一样</span><br><span class="line">域名：比如https://www.baidu.com,baidu.com就是其域名</span><br></pre></td></tr></table></figure>
-
-<h1 id="创建start文件"><a href="#创建start文件" class="headerlink" title="创建start文件"></a>创建start文件</h1><p>在spiders同级目录下创建start.py,写入：</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> scrapy <span class="keyword">import</span> cmdline</span><br><span class="line"></span><br><span class="line">cmdline.execute(<span class="string">&#x27;scrapy crawl 爬虫文件名称&#x27;</span>.split())</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="目标url"><a href="#目标url" class="headerlink" title="目标url"></a>目标url</h1><p>本文介绍爬取<a href="https://www.manhuatai.com/">漫画台</a>的漫画.</p>
-<p>QAQ,之前爬过一次，这次发现它url规则变了,不过没关系,逢山开路,遇水架桥</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Monster1314/blog/img/manhuatai1.png" alt="img"></p>
-<p>这里选取<a href="https://www.manhuatai.com/yjdz/">一剑独尊</a>为例：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Monster1314/blog/img/manhuatai2.png" alt="img"></p>
-<h1 id="分析url规律"><a href="#分析url规律" class="headerlink" title="分析url规律"></a>分析url规律</h1><p>这里看到Google开发者工具elements-XHR-preview中返回的json数据，我们可以通过分析json数据爬取该漫画。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Monster1314/blog/img/manhuatai3.png" alt="img"></p>
-<p>通过与其他url比对,发现只有chapter_newid部分是变化的,且上一话的url.request返回的json数据中包含了下一话的chapter_newid,如此一来url规律就分析好了.</p>
-<h1 id="提取数据"><a href="#提取数据" class="headerlink" title="提取数据"></a>提取数据</h1><p>提取方法如下:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 提取章节名称,url规则以及该章总共多少页</span></span><br><span class="line">chapter_name = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;current_chapter&#x27;</span>][<span class="string">&#x27;chapter_name&#x27;</span>]</span><br><span class="line">rule = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;current_chapter&#x27;</span>][<span class="string">&#x27;rule&#x27;</span>]</span><br><span class="line">end_num = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;current_chapter&#x27;</span>][<span class="string">&#x27;end_num&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
-<p>之后因为获取的url只是一部分规则,所以需要后续处理:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, end_num + <span class="number">1</span>):</span><br><span class="line">	whole_url = origin + rule.replace(<span class="string">&#x27;$$&#x27;</span>, <span class="built_in">str</span>(num)) + <span class="string">&#x27;-mht.middle.webp&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="整合爬虫文件"><a href="#整合爬虫文件" class="headerlink" title="整合爬虫文件"></a>整合爬虫文件</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"><span class="keyword">from</span> ..items <span class="keyword">import</span> ManhuataispiderItem</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ManhuataiSpider</span>(<span class="params">scrapy.Spider</span>):</span></span><br><span class="line">    name = <span class="string">&#x27;manhuatai&#x27;</span></span><br><span class="line">    allowed_domains = [<span class="string">&#x27;manhuatai.com&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    start_urls = [</span><br><span class="line">        <span class="string">&#x27;https://www.manhuatai.com/api/getchapterinfo?product_id=2&amp;productname=mht&amp;platformname=pc&amp;comic_id=108393&amp;chapter_newid=di1hua-1600506710013&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span>(<span class="params">self, response</span>):</span></span><br><span class="line">        <span class="comment"># print(response.json())</span></span><br><span class="line"></span><br><span class="line">        chapter_name = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;current_chapter&#x27;</span>][<span class="string">&#x27;chapter_name&#x27;</span>]</span><br><span class="line">        rule = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;current_chapter&#x27;</span>][<span class="string">&#x27;rule&#x27;</span>]</span><br><span class="line">        end_num = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;current_chapter&#x27;</span>][<span class="string">&#x27;end_num&#x27;</span>]</span><br><span class="line">        <span class="comment"># print(chapter_newid, chapter_name, rule, end_num)</span></span><br><span class="line"></span><br><span class="line">        origin = <span class="string">&#x27;https://mhpic.dm300.com&#x27;</span></span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, end_num + <span class="number">1</span>):</span><br><span class="line">            whole_url = origin + rule.replace(<span class="string">&#x27;$$&#x27;</span>, <span class="built_in">str</span>(num)) + <span class="string">&#x27;-mht.middle.webp&#x27;</span></span><br><span class="line">            <span class="comment"># print(whole_url)</span></span><br><span class="line">            <span class="keyword">yield</span> ManhuataispiderItem(img_url=whole_url, chapter_name=chapter_name, num=num)</span><br><span class="line"></span><br><span class="line">        chapter_newid = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;next_chapter&#x27;</span>][<span class="string">&#x27;chapter_newid&#x27;</span>]</span><br><span class="line">        print(chapter_newid)</span><br><span class="line"></span><br><span class="line">        next_url = <span class="string">f&#x27;https://www.manhuatai.com/api/getchapterinfo?product_id=2&amp;productname=mht&amp;platformname=pc&amp;comic_id=108393&amp;chapter_newid=<span class="subst">&#123;chapter_newid&#125;</span>&#x27;</span></span><br><span class="line">        <span class="keyword">if</span> chapter_newid:</span><br><span class="line">            <span class="keyword">yield</span> scrapy.Request(url=next_url, callback=self.parse)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h1 id="请求头设置"><a href="#请求头设置" class="headerlink" title="请求头设置"></a>请求头设置</h1><p>请求头在middlewares文件中设置:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> faker</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HeadersDownloaderMiddleware</span>:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;headers中间件&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_request</span>(<span class="params">self, request, spider</span>):</span></span><br><span class="line">        <span class="comment"># 可以拿到请求体</span></span><br><span class="line">        fake = faker.Faker()</span><br><span class="line">        <span class="comment"># request.headers  拿到请求头, 请求头是一个字典</span></span><br><span class="line">        request.headers.update(</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&#x27;user-agent&#x27;</span>: fake.user_agent(),</span><br><span class="line">                <span class="string">&#x27;authority&#x27;</span>: <span class="string">&#x27;www.manhuatai.com&#x27;</span>,</span><br><span class="line">            &#125;</span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="保持数据"><a href="#保持数据" class="headerlink" title="保持数据"></a>保持数据</h1><p>保存数据在pipelines中保持,因为是二进制数据,所以需要重写:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> scrapy.pipelines.images <span class="keyword">import</span> ImagesPipeline</span><br><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 二进制数据下载需要继承自 ImagesPipeline</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DownloadPicturePipeline</span>(<span class="params">ImagesPipeline</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;二进制数据的保存&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># get_media_requests  请求二进制数据的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_media_requests</span>(<span class="params">self, item, info</span>):</span></span><br><span class="line">        <span class="comment"># 需要把二进制url提取出来</span></span><br><span class="line">        img_url = item[<span class="string">&#x27;img_url&#x27;</span>]</span><br><span class="line">        <span class="comment"># 构建二进制数据请求</span></span><br><span class="line">        <span class="keyword">yield</span> scrapy.Request(url=img_url)</span><br><span class="line">	</span><br><span class="line">    <span class="comment"># file_path 定义文件保存路径</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">file_path</span>(<span class="params">self, request, response=<span class="literal">None</span>, info=<span class="literal">None</span>, *, item=<span class="literal">None</span></span>):</span></span><br><span class="line">        num = item[<span class="string">&#x27;num&#x27;</span>]</span><br><span class="line">        chapter_name = item[<span class="string">&#x27;chapter_name&#x27;</span>]</span><br><span class="line">        <span class="keyword">return</span> <span class="string">f&#x27;<span class="subst">&#123;chapter_name&#125;</span>/<span class="subst">&#123;num&#125;</span>.jpg&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="settings设置"><a href="#settings设置" class="headerlink" title="settings设置"></a>settings设置</h1><ol>
-<li><pre><code class="python">ROBOTSTXT_OBEY = False
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">2. &#96;&#96;&#96;python</span><br><span class="line">   SPIDER_MIDDLEWARES &#x3D; &#123;</span><br><span class="line">       &#39;ManhuataiSpider.middlewares.HeadersDownloaderMiddleware&#39;: 543,</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></code></pre>
-</li>
-<li><pre><code class="python">ITEM_PIPELINES = &#123;
-   &#39;ManhuataiSpider.pipelines.DownloadPicturePipeline&#39;: 300,
-&#125;
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">4. &#96;&#96;&#96;python</span><br><span class="line">   IMAGES_STORE &#x3D; &#39;.&#x2F;images&#39;  # 在最后一定要添加,否则无法保存</span><br></pre></td></tr></table></figure>
-
-
-</code></pre>
-</li>
-</ol>
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>打开start.py文件,运行等待即可看到漫画被爬取了.</p>
-]]></content>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>python技巧</title>
+      <link href="/blog/2020/09/19/python%E6%8A%80%E5%B7%A7/"/>
+      <url>/blog/2020/09/19/python%E6%8A%80%E5%B7%A7/</url>
+      
+        <content type="html"><![CDATA[<ol><li>正确使用True和False的判断</li><li>正确返回None值</li><li>…</li></ol><a id="more"></a><h3 id="1-正确使用True和False的判断"><a href="#1-正确使用True和False的判断" class="headerlink" title="1. 正确使用True和False的判断"></a>1. 正确使用True和False的判断</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">false_value = [</span><br><span class="line">    `[],`</span><br><span class="line"></span><br><span class="line">    `&#123;&#125;,`</span><br><span class="line"></span><br><span class="line">    `<span class="literal">False</span>,`</span><br><span class="line"></span><br><span class="line">    `<span class="string">&#x27;&#x27;</span>,`</span><br><span class="line"></span><br><span class="line">    `<span class="number">0</span>,`</span><br><span class="line"></span><br><span class="line">    `<span class="number">0.0</span>,`</span><br><span class="line"></span><br><span class="line">    `<span class="literal">None</span>,`</span><br><span class="line">]</span><br></pre></td></tr></table></figure><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> false_value:</span><br><span class="line">    print(<span class="literal">True</span> <span class="keyword">if</span> value <span class="keyword">else</span> <span class="literal">False</span>)</span><br></pre></td></tr></table></figure><h3 id="2-正确返回None值"><a href="#2-正确返回None值" class="headerlink" title="2. 正确返回None值"></a>2. 正确返回None值</h3><p>一个函数里面可能多个返回值都为True或False，这时候就要用is明确指定返回值，如None</p><h3 id="3-if条件优化"><a href="#3-if条件优化" class="headerlink" title="3. if条件优化"></a>3. if条件优化</h3><ul><li>直接判断——效率最低</li><li>in list 列表判断——效率最高,推荐 </li><li>in set 集合——效率居中</li></ul><h3 id="4-字符串格式化技巧"><a href="#4-字符串格式化技巧" class="headerlink" title="4. 字符串格式化技巧"></a>4. 字符串格式化技巧</h3><ul><li>直接拼接</li><li>“{}”.format </li><li><code>&#39;%s&#39;%()</code></li><li>python3.6+，<code>f&#39;my age is &#123;age&#125;&#39;</code> 推荐</li></ul><h3 id="5-Flat-is-better-than-nested"><a href="#5-Flat-is-better-than-nested" class="headerlink" title="5. Flat is better than nested"></a>5. Flat is better than nested</h3><ul><li><code>import this</code> 可以打印python之禅</li><li>nested 指的是if 嵌套、一层层包裹，不推荐</li><li>flat要代码扁平化，用if、 elif，避免多个if，不满足条件直接返回，推荐</li></ul><h3 id="6-列表解析，也就是列表推导式"><a href="#6-列表解析，也就是列表推导式" class="headerlink" title="6. 列表解析，也就是列表推导式"></a>6. 列表解析，也就是列表推导式</h3><p>除了减少代码量之外，还能提高运行效率，时间接近原来的一半</p><h4 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h4><p><code>[item for item in items if item%2 == 0]</code></p><h3 id="7-字典解析"><a href="#7-字典解析" class="headerlink" title="7. 字典解析"></a>7. 字典解析</h3><h4 id="示例：-1"><a href="#示例：-1" class="headerlink" title="示例："></a>示例：</h4><p><code>a = [1, 2, 3, 4, 5, 6]</code></p><p><code>&#123;item:str(item) for item in a&#125;</code></p><h3 id="8-字典合并"><a href="#8-字典合并" class="headerlink" title="8. 字典合并"></a>8. 字典合并</h3><ul><li>循环添加，也可以字典解析，但并不推荐</li><li>update更新，`d1.update(d2)<br>`</li><li>python3.5+， <code>&#123;**d1, **d2, **d3&#125;</code>推荐</li></ul><h3 id="9-字典安全访问"><a href="#9-字典安全访问" class="headerlink" title="9. 字典安全访问"></a>9. 字典安全访问</h3><ul><li>用<code>try-except</code>抛出异常</li><li>d.get(‘’)<br># 默认空返回None，也可以设置</li></ul><p>`    d.get(‘name’,’unkown’)</p><h1 id="设置空返回unknown"><a href="#设置空返回unknown" class="headerlink" title="设置空返回unknown`"></a>设置空返回unknown`</h1><ul><li>python内置defaultdict</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collection <span class="keyword">import</span> defaultdict</span><br><span class="line">d_new = defaultdict(lamda:<span class="string">&#x27;missing&#x27;</span>, d)</span><br><span class="line">d_new[<span class="string">&#x27;name&#x27;</span>] <span class="comment"># 返回name对应的</span></span><br><span class="line">d_new[<span class="string">&#x27;asdf&#x27;</span>] <span class="comment"># 不存在则返回missing</span></span><br></pre></td></tr></table></figure><h3 id="10-关于for循环，类中实现for循环"><a href="#10-关于for循环，类中实现for循环" class="headerlink" title="10. 关于for循环，类中实现for循环"></a>10. 关于for循环，类中实现for循环</h3><h4 id="示例：-2"><a href="#示例：-2" class="headerlink" title="示例："></a>示例：</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.data = []</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        self.data.append(x)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment"># return self.data.__iter__()</span></span><br><span class="line">        <span class="comment"># 这里也可以加一个for循环</span></span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> self.data:</span><br><span class="line">            <span class="keyword">yield</span> item</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>():</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, x, y</span>):</span></span><br><span class="line">        self.x = x</span><br><span class="line">        self.y = y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">b1 = B(x=<span class="number">1</span>, y=<span class="number">2</span>)</span><br><span class="line">b2 = B(x=<span class="number">3</span>, y=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">a.add(b1)</span><br><span class="line">a.add(b2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> a:</span><br><span class="line">    print(item.x, item.y)</span><br></pre></td></tr></table></figure><h3 id="11-为什么要使用yield"><a href="#11-为什么要使用yield" class="headerlink" title="11. 为什么要使用yield"></a>11. 为什么要使用yield</h3><p>一次性读取可能会占用太多内存，yield可以提高效率</p><h3 id="12-如何在递归调用中使用yield"><a href="#12-如何在递归调用中使用yield" class="headerlink" title="12. 如何在递归调用中使用yield"></a>12. 如何在递归调用中使用yield</h3><h4 id="示例：-3"><a href="#示例：-3" class="headerlink" title="示例："></a>示例：</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">path = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_file</span>(<span class="params">folder_name</span>):</span></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> os.listdir(folder_name):</span><br><span class="line">    full_path = os.path.join(folder_name, item)</span><br><span class="line">    <span class="keyword">if</span> os.path.isfile(full_path):</span><br><span class="line">        <span class="keyword">yield</span> full_path</span><br><span class="line">    <span class="keyword">elif</span> os.path.isdir(full_path):</span><br><span class="line">        <span class="comment"># 方法一</span></span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> get_file(full_path):</span><br><span class="line">        <span class="keyword">yield</span> item</span><br><span class="line">        <span class="comment"># 方法二,python3</span></span><br><span class="line">        <span class="keyword">yield</span> <span class="keyword">from</span> get_file(full_path)</span><br><span class="line"><span class="keyword">for</span> file_name <span class="keyword">in</span> get_file(path):</span><br><span class="line">    print(file_name)</span><br></pre></td></tr></table></figure><h3 id="13-巧用lambda"><a href="#13-巧用lambda" class="headerlink" title="13. 巧用lambda"></a>13. 巧用lambda</h3><p>函数参数为函数时，可以考虑能否用lambda实现</p><p>Jupyter shift+tab可以查看信息，比如sort排序传入key</p><h3 id="14-处理程序中的异常"><a href="#14-处理程序中的异常" class="headerlink" title="14. 处理程序中的异常"></a>14. 处理程序中的异常</h3><p>try-except，可以具体抛出某些异常。</p><p>总的如<code>except Exception as e：</code></p><p>具体的如<code>except DNSError:</code></p><h3 id="15-函数默认参数"><a href="#15-函数默认参数" class="headerlink" title="15. 函数默认参数"></a>15. 函数默认参数</h3><p>为函数参数设置默认值</p><h3 id="16-可变数量参数"><a href="#16-可变数量参数" class="headerlink" title="16. 可变数量参数"></a>16. 可变数量参数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">function</span>(<span class="params">x, *args</span>):</span></span><br><span class="line">    print(args)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line"><span class="comment"># 结果</span></span><br><span class="line">[<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 注意： 使用```*args```之后，x就不能赋值了，否则会报错SyntaxError</span></span><br><span class="line"><span class="comment"># 当如下形式时，x必须赋值,否则会报错TypeError：</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">function</span>(<span class="params">*args, x</span>):</span></span><br><span class="line">    print(args, x)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function(<span class="number">1</span>,<span class="number">2</span>,x=<span class="number">3</span>)</span><br></pre></td></tr></table></figure><h3 id="17-字典和-kwargs-的关系"><a href="#17-字典和-kwargs-的关系" class="headerlink" title="17. 字典和```**kwargs```的关系"></a>17. 字典和```**kwargs```的关系</h3><p>实现可变数量位置参数</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">function</span>(<span class="params">x, **kwargs</span>):</span></span><br><span class="line">    print(x, kwargs)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function(x=<span class="number">1</span>, a=<span class="number">2</span>, b=<span class="number">3</span>, c=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行结果</span></span><br><span class="line"><span class="number">1</span> &#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">2</span>, <span class="string">&#x27;b&#x27;</span>:<span class="number">3</span>, <span class="string">&#x27;c&#x27;</span>:<span class="number">4</span>&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum1</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    print(x+y)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">sum</span>(x=<span class="number">1</span>, y=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">sum</span>(**&#123;<span class="string">&#x27;x&#x27;</span>:<span class="number">1</span>, <span class="string">&#x27;y&#x27;</span>:<span class="string">&#x27;2&#x27;</span>&#125;)</span><br><span class="line"><span class="comment"># 传入参数\`\`\`\_\_&#123;&#x27;x&#x27;:1, &#x27;y&#x27;:2&#125;\`\`\`与传入参数\`\`\`x=1, y=2\`\`\\`返回结果一样</span></span><br></pre></td></tr></table></figure><h3 id="18-默认参数陷阱"><a href="#18-默认参数陷阱" class="headerlink" title="18. 默认参数陷阱"></a>18. 默认参数陷阱</h3><p>不建议用列表作为参数</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bad_default_arg</span>(<span class="params">s, time, target=[]</span>):</span></span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(time):</span><br><span class="line">        target.append(a)</span><br><span class="line">        <span class="keyword">return</span> target</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">bad_default_arg(s=<span class="string">&#x27;a&#x27;</span>, time=<span class="number">3</span>) <span class="comment"># 返回 [&#x27;a&#x27;, &#x27;a&#x27;, &#x27;a&#x27;]</span></span><br><span class="line">bad_default_arg(s=<span class="string">&#x27;b&#x27;</span>, time=<span class="number">3</span>, target=<span class="string">&#x27;a&#x27;</span>) <span class="comment"># 返回 [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;b&#x27;, &#x27;b&#x27;]</span></span><br><span class="line">bad_default_arg(s=<span class="string">&#x27;AB&#x27;</span>, time=<span class="number">2</span>) <span class="comment"># 返回 [&#x27;a&#x27;, &#x27;a&#x27;, &#x27;a&#x27;, &#x27;AB&#x27;, &#x27;AB&#x27;]</span></span><br><span class="line"><span class="comment"># 使用列表作为参数时，假如不指定，则会使用上一次的默认值</span></span><br><span class="line">bad_default_arg(s=<span class="string">&#x27;F&#x27;</span>, time=<span class="number">2</span>) <span class="comment"># 返回 [&#x27;a&#x27;, &#x27;a&#x27;, &#x27;a&#x27;, &#x27;AB&#x27;, &#x27;AB&#x27;, &#x27;F&#x27;, &#x27;F&#x27;]</span></span><br><span class="line">解决方法：</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">good_default_arg</span>(<span class="params">s, time, target=<span class="literal">None</span></span>):</span></span><br><span class="line">    <span class="keyword">if</span> target <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        target = []</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(time):</span><br><span class="line">        target.append(a)</span><br><span class="line">        <span class="keyword">return</span> target</span><br></pre></td></tr></table></figure><h3 id="19-尽量避免使用-from-xxx-import"><a href="#19-尽量避免使用-from-xxx-import" class="headerlink" title="19. 尽量避免使用```from xxx import *```"></a>19. 尽量避免使用```from xxx import *```</h3><p>库中方法可能与已命名方法重名，建议用什么引入什么</p><h3 id="20-合理使用virtualenv与pip"><a href="#20-合理使用virtualenv与pip" class="headerlink" title="20. 合理使用virtualenv与pip"></a>20. 合理使用virtualenv与pip</h3><ol><li>进入文件，virtualenv –python3.6 env 创建虚拟环境</li><li>激活环境， source env/bin/activate</li><li>安装使用的库</li><li>pip freeze，把已安装的库写入txt文件里</li><li>退出环境， deactivate</li><li>pip install -r xxx.txt 安装所有的依赖</li></ol><h3 id="21-类的属性和实例属性"><a href="#21-类的属性和实例属性" class="headerlink" title="21. 类的属性和实例属性"></a>21. 类的属性和实例属性</h3><ul><li>class类中定义属性，尽量在__init__下定义</li><li>或者在class下定义</li></ul><h3 id="22-类实例的受保护属性和私有属性"><a href="#22-类实例的受保护属性和私有属性" class="headerlink" title="22. 类实例的受保护属性和私有属性"></a>22. 类实例的受保护属性和私有属性</h3><ul><li>加一个下划线_，仍然可以被访问，即受保护</li><li>加两个下划线__，无法被访问，即私有，但是实际上还是可以访问的，只不过名字编程了_类名__属性名</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;docstring for A&quot;&quot;&quot;</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, age</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(A, self).__init__()</span><br><span class="line">        self.__name = name</span><br><span class="line">        self.__age = age</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = A(name=<span class="string">&#x27;python&#x27;</span>, age=<span class="number">27</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a.__age  <span class="comment"># 无法被访问</span></span><br></pre></td></tr></table></figure><h3 id="23-使用类的property"><a href="#23-使用类的property" class="headerlink" title="23. 使用类的property"></a>23. 使用类的property</h3><p>访问类的属性，需要property，但是是只读的</p><p>要修改的话，可以定义setter</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, age</span>):</span></span><br><span class="line">        self.__name = name</span><br><span class="line">        self.__age = age</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@property</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">name</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="keyword">return</span> self._name</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@property</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">age</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="keyword">return</span> self._age</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@age.setter</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">age</span>(<span class="params">self, value</span>):</span></span><br><span class="line">    self.__age = value</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">    print(<span class="string">&#x27;My name is &#123;&#125; and my age is &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(self.__name, self.__age))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">b = B(<span class="string">&#x27;Demo&#x27;</span>, <span class="number">30</span>)</span><br><span class="line">print(b)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">b.age = <span class="number">40</span> <span class="comment"># 可以修改</span></span><br></pre></td></tr></table></figure><h3 id="24-tuple元组技巧"><a href="#24-tuple元组技巧" class="headerlink" title="24. tuple元组技巧"></a>24. tuple元组技巧</h3><ul><li>同时赋值，保证个数一致</li><li>enumerate(),将列表变为元组</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">a &#x3D; [1, 2, 3, 4]</span><br><span class="line">for item in enumerate(a):</span><br><span class="line">    print(item)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 返回</span><br><span class="line">（0，1）</span><br><span class="line">（1，2）</span><br><span class="line">（2，3）</span><br><span class="line">（3，4）</span><br></pre></td></tr></table></figure><h3 id="25-特殊元组namedtuple"><a href="#25-特殊元组namedtuple" class="headerlink" title="25. 特殊元组namedtuple"></a>25. 特殊元组namedtuple</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> collections</span><br><span class="line">Student = collections.namedtuple(<span class="string">&#x27;Student&#x27;</span>, <span class="string">&#x27;id, name, score&#x27;</span>)</span><br><span class="line">students = [</span><br><span class="line">    Student(<span class="number">1</span>, <span class="string">&#x27;ABC&#x27;</span>, <span class="number">90</span>),</span><br><span class="line">    Student(<span class="number">2</span>, <span class="string">&#x27;XYZ&#x27;</span>, <span class="number">85</span>),</span><br><span class="line">    Student(<span class="number">3</span>, <span class="string">&#x27;asdf&#x27;</span>, <span class="number">80</span>)</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用</span></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> students:</span><br><span class="line">    print(<span class="string">&#x27;name=&#123;&#125;, id=&#123;&#125;, score=&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(s.name, s.<span class="built_in">id</span>, s.score))</span><br></pre></td></tr></table></figure><p>提高可读性及可维护性，效率并无太大区别</p><h3 id="26-dict和zip"><a href="#26-dict和zip" class="headerlink" title="26. dict和zip"></a>26. dict和zip</h3><p>创建字典</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1</span></span><br><span class="line"><span class="built_in">dict</span>(a=<span class="number">1</span>,b=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2</span></span><br><span class="line">data = ((<span class="string">&#x27;a&#x27;</span>:<span class="number">1</span>), (<span class="string">&#x27;b&#x27;</span>:<span class="number">2</span>)) <span class="comment"># 只要是可迭代对象都行</span></span><br><span class="line"><span class="built_in">dict</span>(data)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3</span></span><br><span class="line"><span class="comment"># 两个元素数量相同的列表</span></span><br><span class="line"><span class="built_in">dict</span>(<span class="built_in">zip</span>(x,y))  <span class="comment"># 生成对应字典</span></span><br></pre></td></tr></table></figure><h3 id="27-字典按照key-value大小排序"><a href="#27-字典按照key-value大小排序" class="headerlink" title="27. 字典按照key/value大小排序"></a>27. 字典按照key/value大小排序</h3><p><code>dict(sorted(d.items(), key=lambda x:x[1], reverse=True))</code></p><h3 id="28-通过debug学习Python生成器"><a href="#28-通过debug学习Python生成器" class="headerlink" title="28. 通过debug学习Python生成器"></a>28. 通过debug学习Python生成器</h3><p>yield生成器</p><h3 id="29-string操作技巧"><a href="#29-string操作技巧" class="headerlink" title="29. string操作技巧"></a>29. string操作技巧</h3><p><code>s = &#39; Last Checkpoint: a few seconds ago (unsaved changes) &#39;</code></p><p>最好是链条式做完，而不是一个一个做</p><h3 id="30-列表解析取代map和filter"><a href="#30-列表解析取代map和filter" class="headerlink" title="30. 列表解析取代map和filter"></a>30. 列表解析取代map和filter</h3><h3 id="31-上下文管理"><a href="#31-上下文管理" class="headerlink" title="31. 上下文管理"></a>31. 上下文管理</h3><p>with open</p><h3 id="32-一个单独的下划线可以怎么用"><a href="#32-一个单独的下划线可以怎么用" class="headerlink" title="32. 一个单独的下划线可以怎么用"></a>32. 一个单独的下划线可以怎么用</h3><ul><li>for循环中，不使用i，可用_代替</li><li>输入1+2返回3，实际上3就赋值给了_</li><li>取用列表或元组的元素时，无关紧要的可用_代替</li></ul><h3 id="33-str-和-repr-区别"><a href="#33-str-和-repr-区别" class="headerlink" title="33. ```__str__和__repr__```区别"></a>33. ```__str__和__repr__```区别</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, age</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.age = age</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">f&#x27;name=<span class="subst">&#123;self.name&#125;</span>, age=<span class="subst">&#123;self.age&#125;</span>&#x27;</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">f&#x27;name:<span class="subst">&#123;self.name&#125;</span>, age:<span class="subst">&#123;self.age&#125;</span>&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p = Person(<span class="string">&#x27;Python&#x27;</span>, <span class="number">27</span>)</span><br><span class="line">print(p)  <span class="comment"># 先找__str__没有再找__repr__,都没有打印地址</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p <span class="comment"># 命令行中输入p，有__repr__才能返回值，否则返回地址</span></span><br></pre></td></tr></table></figure><h3 id="34-定义自己的exception"><a href="#34-定义自己的exception" class="headerlink" title="34. 定义自己的exception"></a>34. 定义自己的exception</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> exception <span class="keyword">import</span> NameTooShort</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">validate</span>(<span class="params">name</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(name) &lt; <span class="number">10</span>:</span><br><span class="line">        <span class="keyword">raise</span> NameTooShort(<span class="string">&#x27;Name is too short.&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    validate(<span class="string">&#x27;test&#x27;</span>)</span><br><span class="line"><span class="keyword">except</span> NameTooShort <span class="keyword">as</span> e:</span><br><span class="line">    print(e)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># exceprion.py 文件下</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NameTooShort</span>(<span class="params">ValueError</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="comment"># 多个错误可以定义一个基类继承自Exception，其他错误都继承这个基类</span></span><br></pre></td></tr></table></figure><h3 id="35-mypy做静态类型检查"><a href="#35-mypy做静态类型检查" class="headerlink" title="35. mypy做静态类型检查"></a>35. mypy做静态类型检查</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum</span>(<span class="params">x: <span class="built_in">int</span>, y: <span class="built_in">int</span></span>) -&gt; int:</span> <span class="comment"># x、y都是int对象，函数返回int对象</span></span><br><span class="line">    <span class="keyword">return</span> x + y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    print(<span class="built_in">sum</span>(<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>)) <span class="comment"># 并不会报错，用mypy会提示希望是int，但却是str类型</span></span><br></pre></td></tr></table></figure><h3 id="36-改进的namedtuple"><a href="#36-改进的namedtuple" class="headerlink" title="36. 改进的namedtuple"></a>36. 改进的namedtuple</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># python3.6+</span></span><br><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> NamedTuple</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Car</span>(<span class="params">NmaedTuple</span>):</span></span><br><span class="line">    color: <span class="built_in">str</span></span><br><span class="line">    mileage: <span class="built_in">float</span></span><br><span class="line">    automatic: <span class="built_in">bool</span></span><br><span class="line">    <span class="comment"># 以上类型只是建议，不用对应的类型也不会报错，mypy会报错</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">car = Car(<span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;100.01&#x27;</span>, <span class="literal">False</span>)</span><br><span class="line">car.mileage = <span class="number">100</span> <span class="comment"># 会报错，因为不支持修改数据</span></span><br></pre></td></tr></table></figure><h3 id="37-用哪种数据结构存储数据"><a href="#37-用哪种数据结构存储数据" class="headerlink" title="37. 用哪种数据结构存储数据"></a>37. 用哪种数据结构存储数据</h3><ul><li>为了简单用dict或tuple，字典数据得不到保护，元组数据顺序不能乱</li><li>class，灵活，但是普通class属性还是可以改变的，也可以添加属性</li><li>NamedTuple，定义子类，得到有效保护</li></ul><h3 id="38-Python3-7-Data-Class"><a href="#38-Python3-7-Data-Class" class="headerlink" title="38. Python3.7+ Data Class"></a>38. Python3.7+ Data Class</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> dataclasses <span class="keyword">import</span> dataclass</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@dataclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NewPeple</span>:</span></span><br><span class="line">    name: <span class="built_in">str</span></span><br><span class="line">    age: <span class="built_in">int</span></span><br><span class="line">    <span class="comment"># 仅仅是提示</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p1 = NewPeple(<span class="string">&#x27;A&#x27;</span>, <span class="number">20</span>)</span><br><span class="line">p2 = NewPeple(<span class="string">&#x27;A&#x27;</span>, <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(p1, p2) <span class="comment"># 普通类还要重写__str__ ,__repr__</span></span><br><span class="line">print(<span class="string">&#x27;p1=p2?&#x27;</span>, p1==p2) <span class="comment"># 普通类需要重写__eq__</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
       <categories>
-        <category>scrapy</category>
+          
+          <category> python </category>
+          
       </categories>
-  </entry>
-  <entry>
-    <title>git learning</title>
-    <url>/blog/2020/12/18/git%20learning/</url>
-    <content><![CDATA[<p>website: <a href="https://learngitbranching.js.org/?locale=zh_CN">click me</a></p>
-]]></content>
-  </entry>
+      
+      
+    </entry>
+    
+    
+  
+  
 </search>
