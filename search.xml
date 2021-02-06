@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>图片CDN加速</title>
-    <url>/blog/2020/12/08/CDN%E5%8A%A0%E9%80%9F/</url>
-    <content><![CDATA[<p>一个免费的CDN加速，<a href="https://www.jsdelivr.com/?docs=gh" >JSDELIVR</a> </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;user&#x2F;repo@version&#x2F;file</span><br><span class="line">user--GitHub用户名</span><br><span class="line">repo--分支名称</span><br><span class="line">version--版本号，可以不填</span><br><span class="line">file--图片路径，比如存储在GitHub仓库images文件夹下的1.jpg，可以写&#x2F;images&#x2F;1.jpg</span><br></pre></td></tr></table></figure>
-
-<p>将修改过后的url放入md文件中远程推送即可实现图片CDN加速。</p>
-]]></content>
-      <categories>
-        <category>hexo博客</category>
-      </categories>
-      <tags>
-        <tag>-教程</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>爬虫 01 爬虫基础</title>
     <url>/blog/2020/12/01/01%E7%88%AC%E8%99%AB%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h1 id="1-Python爬虫"><a href="#1-Python爬虫" class="headerlink" title="1. Python爬虫"></a>1. Python爬虫</h1><h2 id="1-1-爬虫用途"><a href="#1-1-爬虫用途" class="headerlink" title="1.1 爬虫用途"></a>1.1 爬虫用途</h2><hr>
@@ -122,6 +107,27 @@
       <tags>
         <tag>教程</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>图片CDN加速</title>
+    <url>/blog/2020/12/08/CDN%E5%8A%A0%E9%80%9F/</url>
+    <content><![CDATA[<p>一个免费的CDN加速，<a href="https://www.jsdelivr.com/?docs=gh" >JSDELIVR</a> </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;gh&#x2F;user&#x2F;repo@version&#x2F;file</span><br><span class="line">user--GitHub用户名</span><br><span class="line">repo--分支名称</span><br><span class="line">version--版本号，可以不填</span><br><span class="line">file--图片路径，比如存储在GitHub仓库images文件夹下的1.jpg，可以写&#x2F;images&#x2F;1.jpg</span><br></pre></td></tr></table></figure>
+
+<p>将修改过后的url放入md文件中远程推送即可实现图片CDN加速。</p>
+]]></content>
+      <categories>
+        <category>hexo博客</category>
+      </categories>
+      <tags>
+        <tag>-教程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git-learning-website</title>
+    <url>/blog/2020/12/18/git-learning-website/</url>
+    <content><![CDATA[<p>website: <a href="https://learngitbranching.js.org/?locale=zh_CN">click me</a></p>
+]]></content>
   </entry>
   <entry>
     <title>hexo+github搭建教程</title>
@@ -301,6 +307,30 @@
 ]]></content>
       <categories>
         <category>markdown</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>pycharm基本设置</title>
+    <url>/blog/2020/12/08/pycharm%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/</url>
+    <content><![CDATA[<h1 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h1><p>File-Plugins</p>
+<ol>
+<li><p>Atom Material Icons  图标样式</p>
+</li>
+<li><p>Material Theme UI  主题UI</p>
+</li>
+<li><p>Translation  翻译工具</p>
+<a id="more"></a>
+<h1 id="仓库镜像"><a href="#仓库镜像" class="headerlink" title="仓库镜像"></a>仓库镜像</h1><p>添加以下镜像源：</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;main&#x2F;</span><br><span class="line">https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;free&#x2F;</span><br><span class="line">https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn&#x2F;simple&#x2F;</span><br></pre></td></tr></table></figure>
+
+<h1 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h1><p>推荐默认字体UI，大小为16，间距1.4</p>
+<h1 id="专业版激活"><a href="#专业版激活" class="headerlink" title="专业版激活"></a>专业版激活</h1><p><a href="http://idea.medeming.com/jets/">激活网站</a></p>
+<h1 id="禁止自动更新"><a href="#禁止自动更新" class="headerlink" title="禁止自动更新"></a>禁止自动更新</h1><p>apparence-system settings-updates，取消勾选automatically check</p>
+]]></content>
+      <categories>
+        <category>pycharm</category>
       </categories>
   </entry>
   <entry>
@@ -499,30 +529,6 @@
 ]]></content>
       <categories>
         <category>scrapy</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>pycharm基本设置</title>
-    <url>/blog/2020/12/08/pycharm%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE/</url>
-    <content><![CDATA[<h1 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h1><p>File-Plugins</p>
-<ol>
-<li><p>Atom Material Icons  图标样式</p>
-</li>
-<li><p>Material Theme UI  主题UI</p>
-</li>
-<li><p>Translation  翻译工具</p>
-<a id="more"></a>
-<h1 id="仓库镜像"><a href="#仓库镜像" class="headerlink" title="仓库镜像"></a>仓库镜像</h1><p>添加以下镜像源：</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;main&#x2F;</span><br><span class="line">https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;pkgs&#x2F;free&#x2F;</span><br><span class="line">https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn&#x2F;simple&#x2F;</span><br></pre></td></tr></table></figure>
-
-<h1 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h1><p>推荐默认字体UI，大小为16，间距1.4</p>
-<h1 id="专业版激活"><a href="#专业版激活" class="headerlink" title="专业版激活"></a>专业版激活</h1><p><a href="http://idea.medeming.com/jets/">激活网站</a></p>
-<h1 id="禁止自动更新"><a href="#禁止自动更新" class="headerlink" title="禁止自动更新"></a>禁止自动更新</h1><p>apparence-system settings-updates，取消勾选automatically check</p>
-]]></content>
-      <categories>
-        <category>pycharm</category>
       </categories>
   </entry>
   <entry>
@@ -779,15 +785,13 @@
       </tags>
   </entry>
   <entry>
-    <title>git-learning-website</title>
-    <url>/blog/2020/12/18/git-learning-website/</url>
-    <content><![CDATA[<p>website: <a href="https://learngitbranching.js.org/?locale=zh_CN">click me</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>爬取酷狗MP3音频</title>
     <url>/blog/2021/02/06/%E7%88%AC%E5%8F%96%E9%85%B7%E7%8B%97%E9%9F%B3%E4%B9%90/</url>
-    <content><![CDATA[<h2 id="一、分析问题"><a href="#一、分析问题" class="headerlink" title="一、分析问题"></a>一、分析问题</h2><h3 id="1-音频url"><a href="#1-音频url" class="headerlink" title="1. 音频url"></a>1. 音频url</h3><p>​        点入某个音乐的播放界面，通过F12-Network，分析数据，可以看到有一个index.php?..返回数据中有一个play_url，打开后正是我们需要的音频。</p>
+    <content><![CDATA[<p>代码实现从搜索到爬取酷狗音乐，付费音乐暂时只能爬取试听部分。</p>
+<a id="more"></a>
+
+
+<h2 id="一、分析问题"><a href="#一、分析问题" class="headerlink" title="一、分析问题"></a>一、分析问题</h2><h3 id="1-音频url"><a href="#1-音频url" class="headerlink" title="1. 音频url"></a>1. 音频url</h3><p>​        点入某个音乐的播放界面，通过F12-Network，分析数据，可以看到有一个index.php?..返回数据中有一个play_url，打开后正是我们需要的音频。</p>
 <p>​        查看该url的headers，其params参数如下，通过反复不同的几次尝试，得知r、callback、dfid、mid、platid这几项不变，而通过初步的requests尝试，发现最后一项’_’可有可无，改变的只有hash和album_id两项。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">r: play&#x2F;getdata</span><br><span class="line">callback: jQuery1910861615852090795_1612578519454</span><br><span class="line">hash: EF0DA656831F08B1FD2CB855BC38ED2C</span><br><span class="line">dfid: 0Q0Clh1IcZaG3ey1J70RaTiL</span><br><span class="line">mid: b6cf66837b18642cc269390b066649dc</span><br><span class="line">platid: 4</span><br><span class="line">album_id: 41669581</span><br><span class="line">_: 1612578519455</span><br></pre></td></tr></table></figure>
 
@@ -813,7 +817,7 @@
 
 ]]></content>
       <categories>
-        <category>hexo博客</category>
+        <category>python</category>
       </categories>
       <tags>
         <tag>-教程</tag>
