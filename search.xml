@@ -1,199 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Markdown</title>
-    <url>/blog/2020/09/25/markdown/</url>
-    <content><![CDATA[<h2 id="Markdown入门"><a href="#Markdown入门" class="headerlink" title="Markdown入门"></a>Markdown入门</h2><p><strong>概要</strong></p>
-<p>Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有HTML的格式。</p>
-<a id="more"></a>
-
-<h3 id="官方网站"><a href="#官方网站" class="headerlink" title="官方网站"></a>官方网站</h3><p><a href="https://daringfireball.net/projects/markdown/">https://daringfireball.net/projects/markdown/</a></p>
-<h3 id="GitHub-Markdown-Cheatsheet"><a href="#GitHub-Markdown-Cheatsheet" class="headerlink" title="GitHub Markdown Cheatsheet"></a>GitHub Markdown Cheatsheet</h3><p><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet</a></p>
-<h3 id="课程详细"><a href="#课程详细" class="headerlink" title="课程详细"></a>课程详细</h3><ol>
-<li>课程介绍</li>
-<li>预览插件</li>
-<li>设置标题</li>
-<li>自然段改行</li>
-<li>引用表现</li>
-<li>增加分割线</li>
-<li>强调表现</li>
-<li>列表表示</li>
-<li>超文本链接</li>
-<li>代码高亮显示</li>
-<li>图片显示</li>
-<li>表格显示</li>
-</ol>
-<h3 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h3><ul>
-<li>记事本等文本编辑器</li>
-</ul>
-<ol>
-<li>Visual Studio Code</li>
-<li>Pycharm</li>
-<li>ATOM</li>
-</ol>
-<h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><ul>
-<li>html标题标记的生成(h1～h6)</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># h1标题</span><br><span class="line">## h2标题</span><br><span class="line">### h3标题</span><br><span class="line">#### h4标题</span><br><span class="line">##### h5标题</span><br><span class="line">###### h6标题</span><br><span class="line"></span><br><span class="line">h1标题</span><br><span class="line">&#x3D;&#x3D;&#x3D;</span><br><span class="line"></span><br><span class="line">h2标题</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><ul>
-<li>引用文的表现方法：&gt;</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">我是引用</span><br><span class="line"></span><br><span class="line">&gt; 我是引用</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h3><ul>
-<li>为文章分割线：<code>---</code></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- ------</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h3><ul>
-<li>斜体：<code>*XXX*</code>, <code>_XXX_</code></li>
-<li>粗体：<code>**XXX**</code>,<code> __XXX__</code></li>
-</ul>
-<p>案例：<em>XXX</em>, <em>XXX</em></p>
-<p>案例：<strong>XXX</strong> , <strong>XXX</strong></p>
-<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><ul>
-<li>列表符号：-</li>
-<li>列表符号：*</li>
-<li>列表符号：+</li>
-<li>列表符号：数字</li>
-</ul>
-<p>练习：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- 项目</span><br><span class="line">  - 项目</span><br><span class="line">    - 项目</span><br><span class="line"></span><br><span class="line">1. 项目1</span><br><span class="line">2. 项目2</span><br><span class="line">3. 项目3</span><br><span class="line"></span><br><span class="line">- [ ] 计划任务</span><br><span class="line">- [x] 完成任务</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="超文本链接"><a href="#超文本链接" class="headerlink" title="超文本链接"></a>超文本链接</h3><ul>
-<li>超文本链接的书写</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;www.python.org&#x2F;</span><br><span class="line"></span><br><span class="line">[Python.org](https:&#x2F;&#x2F;www.python.org&#x2F;)</span><br><span class="line"></span><br><span class="line">[Python.org](https:&#x2F;&#x2F;www.python.org&#x2F; &quot;python官方文档&quot;)</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://www.python.org/">https://www.python.org/</a></p>
-<h3 id="代码高亮显示"><a href="#代码高亮显示" class="headerlink" title="代码高亮显示"></a>代码高亮显示</h3><ul>
-<li>代码高亮显示符号：`</li>
-<li>代码高亮显示符号：~</li>
-</ul>
-<p>例子：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">​&#96;&#96;&#96;python</span><br><span class="line">def add(x, y) </span><br><span class="line">    return x+y</span><br><span class="line">​&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line">说明：您可以使用 &#96;add(x,y)&#96; 函数计算两个数的和。</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="图片显示"><a href="#图片显示" class="headerlink" title="图片显示"></a>图片显示</h3><ul>
-<li>图片的引用与显示：<img src=""></li>
-</ul>
-<p>![alt文字](C:/Users/muzha/Documents/WeChat Files/wxid_jqw01i0de0iv22/FileStorage/File/2020-09/markdown/图片url 图片title)</p>
-<h3 id="制作图片链接"><a href="#制作图片链接" class="headerlink" title="制作图片链接"></a>制作图片链接</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">![img](https:&#x2F;&#x2F;gss0.bdstatic.com&#x2F;94o3dSag_xI4khGkpoWK1HF6hhy&#x2F;baike&#x2F;c0%3Dbaike150%2C5%2C5%2C150%2C50&#x2F;sign&#x3D;db37d3b8454a20a425133495f13bf347&#x2F;3b87e950352ac65c8819edd9f1f2b21193138a78.jpg)</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="表格显示"><a href="#表格显示" class="headerlink" title="表格显示"></a>表格显示</h3><ul>
-<li>表格制作与显示</li>
-</ul>
-<p>使用 <code>-</code> 和 <code>|</code> 来制作表格。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">| TH1 | TH2 | TH3 |</span><br><span class="line">----|----|----</span><br><span class="line">| TD1 | TD3 | TD5 |</span><br><span class="line">| TD2 | TD4 | TD6 |</span><br></pre></td></tr></table></figure>
-
-<h3 id="使用表格对齐"><a href="#使用表格对齐" class="headerlink" title="使用表格对齐"></a>使用表格对齐</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">| 居左 | 居中 | 居右 |</span><br><span class="line">|:---|:---:|---:|</span><br><span class="line">|1 |2 |3 |</span><br><span class="line">|4 |5 |6 | </span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>markdown</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>scrapy爬取漫画</title>
-    <url>/blog/2020/12/09/scrapy%E7%88%AC%E5%8F%96%E6%BC%AB%E7%94%BB/</url>
-    <content><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>是否苦于看漫画收费，那不如自己编个程序白嫖吧！</p>
-<a id="more"></a>
-
-<h1 id="基本环境"><a href="#基本环境" class="headerlink" title="基本环境"></a>基本环境</h1><p>python 3.6</p>
-<p>pycharm</p>
-<h1 id="安装scrapy"><a href="#安装scrapy" class="headerlink" title="安装scrapy"></a>安装scrapy</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">pip install scrapy</span><br></pre></td></tr></table></figure>
-
-<h1 id="创建scrapy项目"><a href="#创建scrapy项目" class="headerlink" title="创建scrapy项目"></a>创建scrapy项目</h1><p>在命令行输入：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">scrapy startproject 项目名称</span><br></pre></td></tr></table></figure>
-
-<h1 id="创建爬虫文件"><a href="#创建爬虫文件" class="headerlink" title="创建爬虫文件"></a>创建爬虫文件</h1><p>命令行输入：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">scrapy genspider 爬虫文件名称 域名</span><br><span class="line">注意：爬虫文件名称不能和项目名称一样</span><br><span class="line">域名：比如https://www.baidu.com,baidu.com就是其域名</span><br></pre></td></tr></table></figure>
-
-<h1 id="创建start文件"><a href="#创建start文件" class="headerlink" title="创建start文件"></a>创建start文件</h1><p>在spiders同级目录下创建start.py,写入：</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> scrapy <span class="keyword">import</span> cmdline</span><br><span class="line"></span><br><span class="line">cmdline.execute(<span class="string">&#x27;scrapy crawl 爬虫文件名称&#x27;</span>.split())</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="目标url"><a href="#目标url" class="headerlink" title="目标url"></a>目标url</h1><p>本文介绍爬取<a href="https://www.manhuatai.com/">漫画台</a>的漫画.</p>
-<p>QAQ,之前爬过一次，这次发现它url规则变了,不过没关系,逢山开路,遇水架桥</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Monster1314/blog/img/manhuatai1.png" alt="img"></p>
-<p>这里选取<a href="https://www.manhuatai.com/yjdz/">一剑独尊</a>为例：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Monster1314/blog/img/manhuatai2.png" alt="img"></p>
-<h1 id="分析url规律"><a href="#分析url规律" class="headerlink" title="分析url规律"></a>分析url规律</h1><p>这里看到Google开发者工具elements-XHR-preview中返回的json数据，我们可以通过分析json数据爬取该漫画。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Monster1314/blog/img/manhuatai3.png" alt="img"></p>
-<p>通过与其他url比对,发现只有chapter_newid部分是变化的,且上一话的url.request返回的json数据中包含了下一话的chapter_newid,如此一来url规律就分析好了.</p>
-<h1 id="提取数据"><a href="#提取数据" class="headerlink" title="提取数据"></a>提取数据</h1><p>提取方法如下:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 提取章节名称,url规则以及该章总共多少页</span></span><br><span class="line">chapter_name = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;current_chapter&#x27;</span>][<span class="string">&#x27;chapter_name&#x27;</span>]</span><br><span class="line">rule = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;current_chapter&#x27;</span>][<span class="string">&#x27;rule&#x27;</span>]</span><br><span class="line">end_num = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;current_chapter&#x27;</span>][<span class="string">&#x27;end_num&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
-<p>之后因为获取的url只是一部分规则,所以需要后续处理:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, end_num + <span class="number">1</span>):</span><br><span class="line">	whole_url = origin + rule.replace(<span class="string">&#x27;$$&#x27;</span>, <span class="built_in">str</span>(num)) + <span class="string">&#x27;-mht.middle.webp&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="整合爬虫文件"><a href="#整合爬虫文件" class="headerlink" title="整合爬虫文件"></a>整合爬虫文件</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"><span class="keyword">from</span> ..items <span class="keyword">import</span> ManhuataispiderItem</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ManhuataiSpider</span>(<span class="params">scrapy.Spider</span>):</span></span><br><span class="line">    name = <span class="string">&#x27;manhuatai&#x27;</span></span><br><span class="line">    allowed_domains = [<span class="string">&#x27;manhuatai.com&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    start_urls = [</span><br><span class="line">        <span class="string">&#x27;https://www.manhuatai.com/api/getchapterinfo?product_id=2&amp;productname=mht&amp;platformname=pc&amp;comic_id=108393&amp;chapter_newid=di1hua-1600506710013&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span>(<span class="params">self, response</span>):</span></span><br><span class="line">        <span class="comment"># print(response.json())</span></span><br><span class="line"></span><br><span class="line">        chapter_name = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;current_chapter&#x27;</span>][<span class="string">&#x27;chapter_name&#x27;</span>]</span><br><span class="line">        rule = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;current_chapter&#x27;</span>][<span class="string">&#x27;rule&#x27;</span>]</span><br><span class="line">        end_num = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;current_chapter&#x27;</span>][<span class="string">&#x27;end_num&#x27;</span>]</span><br><span class="line">        <span class="comment"># print(chapter_newid, chapter_name, rule, end_num)</span></span><br><span class="line"></span><br><span class="line">        origin = <span class="string">&#x27;https://mhpic.dm300.com&#x27;</span></span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, end_num + <span class="number">1</span>):</span><br><span class="line">            whole_url = origin + rule.replace(<span class="string">&#x27;$$&#x27;</span>, <span class="built_in">str</span>(num)) + <span class="string">&#x27;-mht.middle.webp&#x27;</span></span><br><span class="line">            <span class="comment"># print(whole_url)</span></span><br><span class="line">            <span class="keyword">yield</span> ManhuataispiderItem(img_url=whole_url, chapter_name=chapter_name, num=num)</span><br><span class="line"></span><br><span class="line">        chapter_newid = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;next_chapter&#x27;</span>][<span class="string">&#x27;chapter_newid&#x27;</span>]</span><br><span class="line">        print(chapter_newid)</span><br><span class="line"></span><br><span class="line">        next_url = <span class="string">f&#x27;https://www.manhuatai.com/api/getchapterinfo?product_id=2&amp;productname=mht&amp;platformname=pc&amp;comic_id=108393&amp;chapter_newid=<span class="subst">&#123;chapter_newid&#125;</span>&#x27;</span></span><br><span class="line">        <span class="keyword">if</span> chapter_newid:</span><br><span class="line">            <span class="keyword">yield</span> scrapy.Request(url=next_url, callback=self.parse)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h1 id="请求头设置"><a href="#请求头设置" class="headerlink" title="请求头设置"></a>请求头设置</h1><p>请求头在middlewares文件中设置:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> faker</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HeadersDownloaderMiddleware</span>:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;headers中间件&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_request</span>(<span class="params">self, request, spider</span>):</span></span><br><span class="line">        <span class="comment"># 可以拿到请求体</span></span><br><span class="line">        fake = faker.Faker()</span><br><span class="line">        <span class="comment"># request.headers  拿到请求头, 请求头是一个字典</span></span><br><span class="line">        request.headers.update(</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&#x27;user-agent&#x27;</span>: fake.user_agent(),</span><br><span class="line">                <span class="string">&#x27;authority&#x27;</span>: <span class="string">&#x27;www.manhuatai.com&#x27;</span>,</span><br><span class="line">            &#125;</span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="保持数据"><a href="#保持数据" class="headerlink" title="保持数据"></a>保持数据</h1><p>保存数据在pipelines中保持,因为是二进制数据,所以需要重写:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> scrapy.pipelines.images <span class="keyword">import</span> ImagesPipeline</span><br><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 二进制数据下载需要继承自 ImagesPipeline</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DownloadPicturePipeline</span>(<span class="params">ImagesPipeline</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;二进制数据的保存&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># get_media_requests  请求二进制数据的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_media_requests</span>(<span class="params">self, item, info</span>):</span></span><br><span class="line">        <span class="comment"># 需要把二进制url提取出来</span></span><br><span class="line">        img_url = item[<span class="string">&#x27;img_url&#x27;</span>]</span><br><span class="line">        <span class="comment"># 构建二进制数据请求</span></span><br><span class="line">        <span class="keyword">yield</span> scrapy.Request(url=img_url)</span><br><span class="line">	</span><br><span class="line">    <span class="comment"># file_path 定义文件保存路径</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">file_path</span>(<span class="params">self, request, response=<span class="literal">None</span>, info=<span class="literal">None</span>, *, item=<span class="literal">None</span></span>):</span></span><br><span class="line">        num = item[<span class="string">&#x27;num&#x27;</span>]</span><br><span class="line">        chapter_name = item[<span class="string">&#x27;chapter_name&#x27;</span>]</span><br><span class="line">        <span class="keyword">return</span> <span class="string">f&#x27;<span class="subst">&#123;chapter_name&#125;</span>/<span class="subst">&#123;num&#125;</span>.jpg&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="settings设置"><a href="#settings设置" class="headerlink" title="settings设置"></a>settings设置</h1><ol>
-<li><pre><code class="python">ROBOTSTXT_OBEY = False
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">2. &#96;&#96;&#96;python</span><br><span class="line">   SPIDER_MIDDLEWARES &#x3D; &#123;</span><br><span class="line">       &#39;ManhuataiSpider.middlewares.HeadersDownloaderMiddleware&#39;: 543,</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></code></pre>
-</li>
-<li><pre><code class="python">ITEM_PIPELINES = &#123;
-   &#39;ManhuataiSpider.pipelines.DownloadPicturePipeline&#39;: 300,
-&#125;
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">4. &#96;&#96;&#96;python</span><br><span class="line">   IMAGES_STORE &#x3D; &#39;.&#x2F;images&#39;  # 在最后一定要添加,否则无法保存</span><br></pre></td></tr></table></figure>
-
-
-</code></pre>
-</li>
-</ol>
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>打开start.py文件,运行等待即可看到漫画被爬取了.</p>
-]]></content>
-      <categories>
-        <category>scrapy</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Python实现有道翻译</title>
-    <url>/blog/2021/02/10/Python%E5%AE%9E%E7%8E%B0%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91/</url>
-    <content><![CDATA[<p>​        Python实现有道翻译。</p>
-<a id="more"></a>
-
-<h3 id="初期操作"><a href="#初期操作" class="headerlink" title="初期操作"></a>初期操作</h3><p>​        打开有道翻译界面—F12—Network—在翻译框中输入’hello’—在Network下面发现名为’translate_o?smartresult……’返回翻译之后的数据</p>
-<h3 id="分析参数"><a href="#分析参数" class="headerlink" title="分析参数"></a>分析参数</h3><p>​        把所有的Request Headers、params都写上尝试爬虫，可以得到结果。</p>
-<p>​        然后Request Headers中Headers、Host、Origin、Referer三项留下，Cookie一项经尝试只有            <code>OUTFOX_SEARCH_USER_ID=-1927650476@223.97.13.65;</code>会验证而且尝试多次之后我这里是没有变化的。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Accept: application&#x2F;json, text&#x2F;javascript, *&#x2F;*; q&#x3D;0.01</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept-Language: zh-CN,zh;q&#x3D;0.9</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Content-Length: 252</span><br><span class="line">Content-Type: application&#x2F;x-www-form-urlencoded; charset&#x3D;UTF-8</span><br><span class="line">Cookie: OUTFOX_SEARCH_USER_ID&#x3D;-1927650476@223.97.13.65; OUTFOX_SEARCH_USER_ID_NCOO&#x3D;1897197670.972445; JSESSIONID&#x3D;aaalvPunK-sv2fyR-UjEx; ___rl__test__cookies&#x3D;1612924426799</span><br><span class="line">Host: fanyi.youdao.com</span><br><span class="line">Origin: http:&#x2F;&#x2F;fanyi.youdao.com</span><br><span class="line">Referer: http:&#x2F;&#x2F;fanyi.youdao.com&#x2F;</span><br><span class="line">User-Agent: Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;88.0.4324.150 Safari&#x2F;537.36</span><br><span class="line">X-Requested-With: XMLHttpRequest</span><br></pre></td></tr></table></figure>
-
-<p>​        再就是params参数，变化的是salt、sign、lts，尝试后发现lts可有可无，所以变化的只有salt、sign两项。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">i: 你好</span><br><span class="line">from: AUTO</span><br><span class="line">to: AUTO</span><br><span class="line">smartresult: dict</span><br><span class="line">client: fanyideskweb</span><br><span class="line">salt: 16129244361391</span><br><span class="line">sign: 2820759b6e54f25e0aa94e185e2265e3</span><br><span class="line">lts: 1612924436139</span><br><span class="line">bv: 3da01a09873456cfb5dba05f2124b148</span><br><span class="line">doctype: json</span><br><span class="line">version: 2.1</span><br><span class="line">keyfrom: fanyi.web</span><br><span class="line">action: FY_BY_REALTlME</span><br></pre></td></tr></table></figure>
-
-<h3 id="分析salt、sign"><a href="#分析salt、sign" class="headerlink" title="分析salt、sign"></a>分析salt、sign</h3><p>​        全局搜索sign，结果中有fanyi.min.js文件，双击进入，然后右键选择’Open in Source panel’，搜索’sign’，找到如下代码：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">define(<span class="string">&quot;newweb/common/service&quot;</span>, [<span class="string">&quot;./utils&quot;</span>, <span class="string">&quot;./md5&quot;</span>, <span class="string">&quot;./jquery-1.7&quot;</span>], <span class="function"><span class="keyword">function</span>(<span class="params">e, t</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> n = e(<span class="string">&quot;./jquery-1.7&quot;</span>);</span><br><span class="line">    e(<span class="string">&quot;./utils&quot;</span>);</span><br><span class="line">    e(<span class="string">&quot;./md5&quot;</span>);</span><br><span class="line">    <span class="keyword">var</span> r = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> t = n.md5(navigator.appVersion)</span><br><span class="line">          , r = <span class="string">&quot;&quot;</span> + (<span class="keyword">new</span> <span class="built_in">Date</span>).getTime()</span><br><span class="line">          , i = r + <span class="built_in">parseInt</span>(<span class="number">10</span> * <span class="built_in">Math</span>.random(), <span class="number">10</span>);</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            ts: r,</span><br><span class="line">            bv: t,</span><br><span class="line">            salt: i,</span><br><span class="line">            sign: n.md5(<span class="string">&quot;fanyideskweb&quot;</span> + e + i + <span class="string">&quot;Tbh5E8=q6U3EXe+&amp;L[4c@&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
-
-<p>​        可以看出salt是13位时间戳加了一个10以内的随机数，而sign是’固定字符串+e+i+固定字符串’，其中i就是salt，而e经过断点调试（我选择在var t = n.md5(navigator.appVersion)这一行加断点，然后输入你好，会出现e=’你好’）可以得知e为我们要翻译的字符串。这样整个分析过程就结束了。</p>
-<p>​        之后通过爬虫可以得到我们想要的数据，因为返回的是json数据，我们使用.json()来获得返回值更加方便。</p>
-<h3 id="Python代码"><a href="#Python代码" class="headerlink" title="Python代码"></a>Python代码</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_data</span>():</span></span><br><span class="line">    r = <span class="built_in">str</span>(<span class="built_in">round</span>(time.time() * <span class="number">1000</span>))</span><br><span class="line">    salt = r + <span class="built_in">str</span>(random.randint(<span class="number">0</span>, <span class="number">9</span>))</span><br><span class="line"></span><br><span class="line">    content = <span class="string">&#x27;你好&#x27;</span></span><br><span class="line"></span><br><span class="line">    data = <span class="string">&quot;fanyideskweb&quot;</span> + content + salt + <span class="string">&quot;Tbh5E8=q6U3EXe+&amp;L[4c@&quot;</span></span><br><span class="line">    sign = hashlib.md5()</span><br><span class="line"></span><br><span class="line">    sign.update(data.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line"></span><br><span class="line">    sign = sign.hexdigest()</span><br><span class="line">    <span class="comment"># print(len(sign))</span></span><br><span class="line">    <span class="comment"># print(sign)</span></span><br><span class="line">    <span class="keyword">return</span> content, salt, sign</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">send_request</span>(<span class="params">content, salt, sign</span>):</span></span><br><span class="line">    url = <span class="string">&#x27;http://fanyi.youdao.com/translate_o?smartresult=dict&amp;smartresult=rule&#x27;</span></span><br><span class="line"></span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">&#x27;Cookie&#x27;</span>: <span class="string">&#x27;OUTFOX_SEARCH_USER_ID=-1927650476@223.97.13.65;&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;Host&#x27;</span>: <span class="string">&#x27;fanyi.youdao.com&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;Origin&#x27;</span>: <span class="string">&#x27;http://fanyi.youdao.com&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;Referer&#x27;</span>: <span class="string">&#x27;http://fanyi.youdao.com/&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    data = &#123;</span><br><span class="line">        <span class="string">&#x27;i&#x27;</span>: <span class="built_in">str</span>(content),</span><br><span class="line">        <span class="string">&#x27;from&#x27;</span>: <span class="string">&#x27;AUTO&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;to&#x27;</span>: <span class="string">&#x27;AUTO&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;smartresult&#x27;</span>: <span class="string">&#x27;dict&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;client&#x27;</span>: <span class="string">&#x27;fanyideskweb&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;salt&#x27;</span>: <span class="built_in">str</span>(salt),</span><br><span class="line">        <span class="string">&#x27;sign&#x27;</span>: <span class="built_in">str</span>(sign),</span><br><span class="line">        <span class="comment"># &#x27;lts&#x27;: &#x27;1612879546052&#x27;,</span></span><br><span class="line">        <span class="comment"># &#x27;bv&#x27;: &#x27;6a1ac4a5cc37a3de2c535a36eda9e149&#x27;,</span></span><br><span class="line">        <span class="comment"># &#x27;doctype&#x27;: &#x27;json&#x27;,</span></span><br><span class="line">        <span class="string">&#x27;version&#x27;</span>: <span class="string">&#x27;2.1&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;keyfrom&#x27;</span>: <span class="string">&#x27;fanyi.web&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;action&#x27;</span>: <span class="string">&#x27;FY_BY_REALTlME&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    res = requests.post(url=url, headers=headers, data=data).json()</span><br><span class="line"></span><br><span class="line">    print(<span class="string">&#x27;翻译后：&#x27;</span>, res[<span class="string">&#x27;translateResult&#x27;</span>][<span class="number">0</span>][<span class="number">0</span>][<span class="string">&#x27;tgt&#x27;</span>])</span><br><span class="line">    print(<span class="string">&#x27;翻译前：&#x27;</span>, res[<span class="string">&#x27;translateResult&#x27;</span>][<span class="number">0</span>][<span class="number">0</span>][<span class="string">&#x27;src&#x27;</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    content, salt, sign = get_data()</span><br><span class="line">    send_request(content, salt, sign)</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Java开发环境</title>
     <url>/blog/2021/02/25/01%20Java%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/</url>
     <content><![CDATA[<p>点击更多阅读全文。</p>
@@ -732,6 +539,32 @@
       </categories>
   </entry>
   <entry>
+    <title>Python实现有道翻译</title>
+    <url>/blog/2021/02/10/Python%E5%AE%9E%E7%8E%B0%E6%9C%89%E9%81%93%E7%BF%BB%E8%AF%91/</url>
+    <content><![CDATA[<p>​        Python实现有道翻译。</p>
+<a id="more"></a>
+
+<h3 id="初期操作"><a href="#初期操作" class="headerlink" title="初期操作"></a>初期操作</h3><p>​        打开有道翻译界面—F12—Network—在翻译框中输入’hello’—在Network下面发现名为’translate_o?smartresult……’返回翻译之后的数据</p>
+<h3 id="分析参数"><a href="#分析参数" class="headerlink" title="分析参数"></a>分析参数</h3><p>​        把所有的Request Headers、params都写上尝试爬虫，可以得到结果。</p>
+<p>​        然后Request Headers中Headers、Host、Origin、Referer三项留下，Cookie一项经尝试只有            <code>OUTFOX_SEARCH_USER_ID=-1927650476@223.97.13.65;</code>会验证而且尝试多次之后我这里是没有变化的。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Accept: application&#x2F;json, text&#x2F;javascript, *&#x2F;*; q&#x3D;0.01</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept-Language: zh-CN,zh;q&#x3D;0.9</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Content-Length: 252</span><br><span class="line">Content-Type: application&#x2F;x-www-form-urlencoded; charset&#x3D;UTF-8</span><br><span class="line">Cookie: OUTFOX_SEARCH_USER_ID&#x3D;-1927650476@223.97.13.65; OUTFOX_SEARCH_USER_ID_NCOO&#x3D;1897197670.972445; JSESSIONID&#x3D;aaalvPunK-sv2fyR-UjEx; ___rl__test__cookies&#x3D;1612924426799</span><br><span class="line">Host: fanyi.youdao.com</span><br><span class="line">Origin: http:&#x2F;&#x2F;fanyi.youdao.com</span><br><span class="line">Referer: http:&#x2F;&#x2F;fanyi.youdao.com&#x2F;</span><br><span class="line">User-Agent: Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;88.0.4324.150 Safari&#x2F;537.36</span><br><span class="line">X-Requested-With: XMLHttpRequest</span><br></pre></td></tr></table></figure>
+
+<p>​        再就是params参数，变化的是salt、sign、lts，尝试后发现lts可有可无，所以变化的只有salt、sign两项。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">i: 你好</span><br><span class="line">from: AUTO</span><br><span class="line">to: AUTO</span><br><span class="line">smartresult: dict</span><br><span class="line">client: fanyideskweb</span><br><span class="line">salt: 16129244361391</span><br><span class="line">sign: 2820759b6e54f25e0aa94e185e2265e3</span><br><span class="line">lts: 1612924436139</span><br><span class="line">bv: 3da01a09873456cfb5dba05f2124b148</span><br><span class="line">doctype: json</span><br><span class="line">version: 2.1</span><br><span class="line">keyfrom: fanyi.web</span><br><span class="line">action: FY_BY_REALTlME</span><br></pre></td></tr></table></figure>
+
+<h3 id="分析salt、sign"><a href="#分析salt、sign" class="headerlink" title="分析salt、sign"></a>分析salt、sign</h3><p>​        全局搜索sign，结果中有fanyi.min.js文件，双击进入，然后右键选择’Open in Source panel’，搜索’sign’，找到如下代码：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">define(<span class="string">&quot;newweb/common/service&quot;</span>, [<span class="string">&quot;./utils&quot;</span>, <span class="string">&quot;./md5&quot;</span>, <span class="string">&quot;./jquery-1.7&quot;</span>], <span class="function"><span class="keyword">function</span>(<span class="params">e, t</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> n = e(<span class="string">&quot;./jquery-1.7&quot;</span>);</span><br><span class="line">    e(<span class="string">&quot;./utils&quot;</span>);</span><br><span class="line">    e(<span class="string">&quot;./md5&quot;</span>);</span><br><span class="line">    <span class="keyword">var</span> r = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> t = n.md5(navigator.appVersion)</span><br><span class="line">          , r = <span class="string">&quot;&quot;</span> + (<span class="keyword">new</span> <span class="built_in">Date</span>).getTime()</span><br><span class="line">          , i = r + <span class="built_in">parseInt</span>(<span class="number">10</span> * <span class="built_in">Math</span>.random(), <span class="number">10</span>);</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            ts: r,</span><br><span class="line">            bv: t,</span><br><span class="line">            salt: i,</span><br><span class="line">            sign: n.md5(<span class="string">&quot;fanyideskweb&quot;</span> + e + i + <span class="string">&quot;Tbh5E8=q6U3EXe+&amp;L[4c@&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>​        可以看出salt是13位时间戳加了一个10以内的随机数，而sign是’固定字符串+e+i+固定字符串’，其中i就是salt，而e经过断点调试（我选择在var t = n.md5(navigator.appVersion)这一行加断点，然后输入你好，会出现e=’你好’）可以得知e为我们要翻译的字符串。这样整个分析过程就结束了。</p>
+<p>​        之后通过爬虫可以得到我们想要的数据，因为返回的是json数据，我们使用.json()来获得返回值更加方便。</p>
+<h3 id="Python代码"><a href="#Python代码" class="headerlink" title="Python代码"></a>Python代码</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_data</span>():</span></span><br><span class="line">    r = <span class="built_in">str</span>(<span class="built_in">round</span>(time.time() * <span class="number">1000</span>))</span><br><span class="line">    salt = r + <span class="built_in">str</span>(random.randint(<span class="number">0</span>, <span class="number">9</span>))</span><br><span class="line"></span><br><span class="line">    content = <span class="string">&#x27;你好&#x27;</span></span><br><span class="line"></span><br><span class="line">    data = <span class="string">&quot;fanyideskweb&quot;</span> + content + salt + <span class="string">&quot;Tbh5E8=q6U3EXe+&amp;L[4c@&quot;</span></span><br><span class="line">    sign = hashlib.md5()</span><br><span class="line"></span><br><span class="line">    sign.update(data.encode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line"></span><br><span class="line">    sign = sign.hexdigest()</span><br><span class="line">    <span class="comment"># print(len(sign))</span></span><br><span class="line">    <span class="comment"># print(sign)</span></span><br><span class="line">    <span class="keyword">return</span> content, salt, sign</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">send_request</span>(<span class="params">content, salt, sign</span>):</span></span><br><span class="line">    url = <span class="string">&#x27;http://fanyi.youdao.com/translate_o?smartresult=dict&amp;smartresult=rule&#x27;</span></span><br><span class="line"></span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">&#x27;Cookie&#x27;</span>: <span class="string">&#x27;OUTFOX_SEARCH_USER_ID=-1927650476@223.97.13.65;&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;Host&#x27;</span>: <span class="string">&#x27;fanyi.youdao.com&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;Origin&#x27;</span>: <span class="string">&#x27;http://fanyi.youdao.com&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;Referer&#x27;</span>: <span class="string">&#x27;http://fanyi.youdao.com/&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    data = &#123;</span><br><span class="line">        <span class="string">&#x27;i&#x27;</span>: <span class="built_in">str</span>(content),</span><br><span class="line">        <span class="string">&#x27;from&#x27;</span>: <span class="string">&#x27;AUTO&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;to&#x27;</span>: <span class="string">&#x27;AUTO&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;smartresult&#x27;</span>: <span class="string">&#x27;dict&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;client&#x27;</span>: <span class="string">&#x27;fanyideskweb&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;salt&#x27;</span>: <span class="built_in">str</span>(salt),</span><br><span class="line">        <span class="string">&#x27;sign&#x27;</span>: <span class="built_in">str</span>(sign),</span><br><span class="line">        <span class="comment"># &#x27;lts&#x27;: &#x27;1612879546052&#x27;,</span></span><br><span class="line">        <span class="comment"># &#x27;bv&#x27;: &#x27;6a1ac4a5cc37a3de2c535a36eda9e149&#x27;,</span></span><br><span class="line">        <span class="comment"># &#x27;doctype&#x27;: &#x27;json&#x27;,</span></span><br><span class="line">        <span class="string">&#x27;version&#x27;</span>: <span class="string">&#x27;2.1&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;keyfrom&#x27;</span>: <span class="string">&#x27;fanyi.web&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;action&#x27;</span>: <span class="string">&#x27;FY_BY_REALTlME&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    res = requests.post(url=url, headers=headers, data=data).json()</span><br><span class="line"></span><br><span class="line">    print(<span class="string">&#x27;翻译后：&#x27;</span>, res[<span class="string">&#x27;translateResult&#x27;</span>][<span class="number">0</span>][<span class="number">0</span>][<span class="string">&#x27;tgt&#x27;</span>])</span><br><span class="line">    print(<span class="string">&#x27;翻译前：&#x27;</span>, res[<span class="string">&#x27;translateResult&#x27;</span>][<span class="number">0</span>][<span class="number">0</span>][<span class="string">&#x27;src&#x27;</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    content, salt, sign = get_data()</span><br><span class="line">    send_request(content, salt, sign)</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+  </entry>
+  <entry>
     <title>python技巧</title>
     <url>/blog/2020/09/19/Python%E6%8A%80%E5%B7%A7/</url>
     <content><![CDATA[<ol>
@@ -865,6 +698,173 @@
 ]]></content>
       <categories>
         <category>python</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Markdown</title>
+    <url>/blog/2020/09/25/markdown/</url>
+    <content><![CDATA[<h2 id="Markdown入门"><a href="#Markdown入门" class="headerlink" title="Markdown入门"></a>Markdown入门</h2><p><strong>概要</strong></p>
+<p>Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有HTML的格式。</p>
+<a id="more"></a>
+
+<h3 id="官方网站"><a href="#官方网站" class="headerlink" title="官方网站"></a>官方网站</h3><p><a href="https://daringfireball.net/projects/markdown/">https://daringfireball.net/projects/markdown/</a></p>
+<h3 id="GitHub-Markdown-Cheatsheet"><a href="#GitHub-Markdown-Cheatsheet" class="headerlink" title="GitHub Markdown Cheatsheet"></a>GitHub Markdown Cheatsheet</h3><p><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet</a></p>
+<h3 id="课程详细"><a href="#课程详细" class="headerlink" title="课程详细"></a>课程详细</h3><ol>
+<li>课程介绍</li>
+<li>预览插件</li>
+<li>设置标题</li>
+<li>自然段改行</li>
+<li>引用表现</li>
+<li>增加分割线</li>
+<li>强调表现</li>
+<li>列表表示</li>
+<li>超文本链接</li>
+<li>代码高亮显示</li>
+<li>图片显示</li>
+<li>表格显示</li>
+</ol>
+<h3 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h3><ul>
+<li>记事本等文本编辑器</li>
+</ul>
+<ol>
+<li>Visual Studio Code</li>
+<li>Pycharm</li>
+<li>ATOM</li>
+</ol>
+<h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><ul>
+<li>html标题标记的生成(h1～h6)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># h1标题</span><br><span class="line">## h2标题</span><br><span class="line">### h3标题</span><br><span class="line">#### h4标题</span><br><span class="line">##### h5标题</span><br><span class="line">###### h6标题</span><br><span class="line"></span><br><span class="line">h1标题</span><br><span class="line">&#x3D;&#x3D;&#x3D;</span><br><span class="line"></span><br><span class="line">h2标题</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><ul>
+<li>引用文的表现方法：&gt;</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">我是引用</span><br><span class="line"></span><br><span class="line">&gt; 我是引用</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h3><ul>
+<li>为文章分割线：<code>---</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- ------</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h3><ul>
+<li>斜体：<code>*XXX*</code>, <code>_XXX_</code></li>
+<li>粗体：<code>**XXX**</code>,<code> __XXX__</code></li>
+</ul>
+<p>案例：<em>XXX</em>, <em>XXX</em></p>
+<p>案例：<strong>XXX</strong> , <strong>XXX</strong></p>
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><ul>
+<li>列表符号：-</li>
+<li>列表符号：*</li>
+<li>列表符号：+</li>
+<li>列表符号：数字</li>
+</ul>
+<p>练习：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- 项目</span><br><span class="line">  - 项目</span><br><span class="line">    - 项目</span><br><span class="line"></span><br><span class="line">1. 项目1</span><br><span class="line">2. 项目2</span><br><span class="line">3. 项目3</span><br><span class="line"></span><br><span class="line">- [ ] 计划任务</span><br><span class="line">- [x] 完成任务</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="超文本链接"><a href="#超文本链接" class="headerlink" title="超文本链接"></a>超文本链接</h3><ul>
+<li>超文本链接的书写</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;www.python.org&#x2F;</span><br><span class="line"></span><br><span class="line">[Python.org](https:&#x2F;&#x2F;www.python.org&#x2F;)</span><br><span class="line"></span><br><span class="line">[Python.org](https:&#x2F;&#x2F;www.python.org&#x2F; &quot;python官方文档&quot;)</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.python.org/">https://www.python.org/</a></p>
+<h3 id="代码高亮显示"><a href="#代码高亮显示" class="headerlink" title="代码高亮显示"></a>代码高亮显示</h3><ul>
+<li>代码高亮显示符号：`</li>
+<li>代码高亮显示符号：~</li>
+</ul>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">​&#96;&#96;&#96;python</span><br><span class="line">def add(x, y) </span><br><span class="line">    return x+y</span><br><span class="line">​&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line">说明：您可以使用 &#96;add(x,y)&#96; 函数计算两个数的和。</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="图片显示"><a href="#图片显示" class="headerlink" title="图片显示"></a>图片显示</h3><ul>
+<li>图片的引用与显示：<img src=""></li>
+</ul>
+<p>![alt文字](C:/Users/muzha/Documents/WeChat Files/wxid_jqw01i0de0iv22/FileStorage/File/2020-09/markdown/图片url 图片title)</p>
+<h3 id="制作图片链接"><a href="#制作图片链接" class="headerlink" title="制作图片链接"></a>制作图片链接</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">![img](https:&#x2F;&#x2F;gss0.bdstatic.com&#x2F;94o3dSag_xI4khGkpoWK1HF6hhy&#x2F;baike&#x2F;c0%3Dbaike150%2C5%2C5%2C150%2C50&#x2F;sign&#x3D;db37d3b8454a20a425133495f13bf347&#x2F;3b87e950352ac65c8819edd9f1f2b21193138a78.jpg)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="表格显示"><a href="#表格显示" class="headerlink" title="表格显示"></a>表格显示</h3><ul>
+<li>表格制作与显示</li>
+</ul>
+<p>使用 <code>-</code> 和 <code>|</code> 来制作表格。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">| TH1 | TH2 | TH3 |</span><br><span class="line">----|----|----</span><br><span class="line">| TD1 | TD3 | TD5 |</span><br><span class="line">| TD2 | TD4 | TD6 |</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用表格对齐"><a href="#使用表格对齐" class="headerlink" title="使用表格对齐"></a>使用表格对齐</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">| 居左 | 居中 | 居右 |</span><br><span class="line">|:---|:---:|---:|</span><br><span class="line">|1 |2 |3 |</span><br><span class="line">|4 |5 |6 | </span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>markdown</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>scrapy爬取漫画</title>
+    <url>/blog/2020/12/09/scrapy%E7%88%AC%E5%8F%96%E6%BC%AB%E7%94%BB/</url>
+    <content><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>是否苦于看漫画收费，那不如自己编个程序白嫖吧！</p>
+<a id="more"></a>
+
+<h1 id="基本环境"><a href="#基本环境" class="headerlink" title="基本环境"></a>基本环境</h1><p>python 3.6</p>
+<p>pycharm</p>
+<h1 id="安装scrapy"><a href="#安装scrapy" class="headerlink" title="安装scrapy"></a>安装scrapy</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">pip install scrapy</span><br></pre></td></tr></table></figure>
+
+<h1 id="创建scrapy项目"><a href="#创建scrapy项目" class="headerlink" title="创建scrapy项目"></a>创建scrapy项目</h1><p>在命令行输入：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">scrapy startproject 项目名称</span><br></pre></td></tr></table></figure>
+
+<h1 id="创建爬虫文件"><a href="#创建爬虫文件" class="headerlink" title="创建爬虫文件"></a>创建爬虫文件</h1><p>命令行输入：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">scrapy genspider 爬虫文件名称 域名</span><br><span class="line">注意：爬虫文件名称不能和项目名称一样</span><br><span class="line">域名：比如https://www.baidu.com,baidu.com就是其域名</span><br></pre></td></tr></table></figure>
+
+<h1 id="创建start文件"><a href="#创建start文件" class="headerlink" title="创建start文件"></a>创建start文件</h1><p>在spiders同级目录下创建start.py,写入：</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> scrapy <span class="keyword">import</span> cmdline</span><br><span class="line"></span><br><span class="line">cmdline.execute(<span class="string">&#x27;scrapy crawl 爬虫文件名称&#x27;</span>.split())</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="目标url"><a href="#目标url" class="headerlink" title="目标url"></a>目标url</h1><p>本文介绍爬取<a href="https://www.manhuatai.com/">漫画台</a>的漫画.</p>
+<p>QAQ,之前爬过一次，这次发现它url规则变了,不过没关系,逢山开路,遇水架桥</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Monster1314/blog/img/manhuatai1.png" alt="img"></p>
+<p>这里选取<a href="https://www.manhuatai.com/yjdz/">一剑独尊</a>为例：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Monster1314/blog/img/manhuatai2.png" alt="img"></p>
+<h1 id="分析url规律"><a href="#分析url规律" class="headerlink" title="分析url规律"></a>分析url规律</h1><p>这里看到Google开发者工具elements-XHR-preview中返回的json数据，我们可以通过分析json数据爬取该漫画。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Monster1314/blog/img/manhuatai3.png" alt="img"></p>
+<p>通过与其他url比对,发现只有chapter_newid部分是变化的,且上一话的url.request返回的json数据中包含了下一话的chapter_newid,如此一来url规律就分析好了.</p>
+<h1 id="提取数据"><a href="#提取数据" class="headerlink" title="提取数据"></a>提取数据</h1><p>提取方法如下:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 提取章节名称,url规则以及该章总共多少页</span></span><br><span class="line">chapter_name = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;current_chapter&#x27;</span>][<span class="string">&#x27;chapter_name&#x27;</span>]</span><br><span class="line">rule = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;current_chapter&#x27;</span>][<span class="string">&#x27;rule&#x27;</span>]</span><br><span class="line">end_num = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;current_chapter&#x27;</span>][<span class="string">&#x27;end_num&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>之后因为获取的url只是一部分规则,所以需要后续处理:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, end_num + <span class="number">1</span>):</span><br><span class="line">	whole_url = origin + rule.replace(<span class="string">&#x27;$$&#x27;</span>, <span class="built_in">str</span>(num)) + <span class="string">&#x27;-mht.middle.webp&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="整合爬虫文件"><a href="#整合爬虫文件" class="headerlink" title="整合爬虫文件"></a>整合爬虫文件</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"><span class="keyword">from</span> ..items <span class="keyword">import</span> ManhuataispiderItem</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ManhuataiSpider</span>(<span class="params">scrapy.Spider</span>):</span></span><br><span class="line">    name = <span class="string">&#x27;manhuatai&#x27;</span></span><br><span class="line">    allowed_domains = [<span class="string">&#x27;manhuatai.com&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    start_urls = [</span><br><span class="line">        <span class="string">&#x27;https://www.manhuatai.com/api/getchapterinfo?product_id=2&amp;productname=mht&amp;platformname=pc&amp;comic_id=108393&amp;chapter_newid=di1hua-1600506710013&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span>(<span class="params">self, response</span>):</span></span><br><span class="line">        <span class="comment"># print(response.json())</span></span><br><span class="line"></span><br><span class="line">        chapter_name = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;current_chapter&#x27;</span>][<span class="string">&#x27;chapter_name&#x27;</span>]</span><br><span class="line">        rule = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;current_chapter&#x27;</span>][<span class="string">&#x27;rule&#x27;</span>]</span><br><span class="line">        end_num = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;current_chapter&#x27;</span>][<span class="string">&#x27;end_num&#x27;</span>]</span><br><span class="line">        <span class="comment"># print(chapter_newid, chapter_name, rule, end_num)</span></span><br><span class="line"></span><br><span class="line">        origin = <span class="string">&#x27;https://mhpic.dm300.com&#x27;</span></span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, end_num + <span class="number">1</span>):</span><br><span class="line">            whole_url = origin + rule.replace(<span class="string">&#x27;$$&#x27;</span>, <span class="built_in">str</span>(num)) + <span class="string">&#x27;-mht.middle.webp&#x27;</span></span><br><span class="line">            <span class="comment"># print(whole_url)</span></span><br><span class="line">            <span class="keyword">yield</span> ManhuataispiderItem(img_url=whole_url, chapter_name=chapter_name, num=num)</span><br><span class="line"></span><br><span class="line">        chapter_newid = response.json()[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;next_chapter&#x27;</span>][<span class="string">&#x27;chapter_newid&#x27;</span>]</span><br><span class="line">        print(chapter_newid)</span><br><span class="line"></span><br><span class="line">        next_url = <span class="string">f&#x27;https://www.manhuatai.com/api/getchapterinfo?product_id=2&amp;productname=mht&amp;platformname=pc&amp;comic_id=108393&amp;chapter_newid=<span class="subst">&#123;chapter_newid&#125;</span>&#x27;</span></span><br><span class="line">        <span class="keyword">if</span> chapter_newid:</span><br><span class="line">            <span class="keyword">yield</span> scrapy.Request(url=next_url, callback=self.parse)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="请求头设置"><a href="#请求头设置" class="headerlink" title="请求头设置"></a>请求头设置</h1><p>请求头在middlewares文件中设置:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> faker</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HeadersDownloaderMiddleware</span>:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;headers中间件&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_request</span>(<span class="params">self, request, spider</span>):</span></span><br><span class="line">        <span class="comment"># 可以拿到请求体</span></span><br><span class="line">        fake = faker.Faker()</span><br><span class="line">        <span class="comment"># request.headers  拿到请求头, 请求头是一个字典</span></span><br><span class="line">        request.headers.update(</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&#x27;user-agent&#x27;</span>: fake.user_agent(),</span><br><span class="line">                <span class="string">&#x27;authority&#x27;</span>: <span class="string">&#x27;www.manhuatai.com&#x27;</span>,</span><br><span class="line">            &#125;</span><br><span class="line">        )</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="保持数据"><a href="#保持数据" class="headerlink" title="保持数据"></a>保持数据</h1><p>保存数据在pipelines中保持,因为是二进制数据,所以需要重写:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> scrapy.pipelines.images <span class="keyword">import</span> ImagesPipeline</span><br><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 二进制数据下载需要继承自 ImagesPipeline</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DownloadPicturePipeline</span>(<span class="params">ImagesPipeline</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;二进制数据的保存&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># get_media_requests  请求二进制数据的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_media_requests</span>(<span class="params">self, item, info</span>):</span></span><br><span class="line">        <span class="comment"># 需要把二进制url提取出来</span></span><br><span class="line">        img_url = item[<span class="string">&#x27;img_url&#x27;</span>]</span><br><span class="line">        <span class="comment"># 构建二进制数据请求</span></span><br><span class="line">        <span class="keyword">yield</span> scrapy.Request(url=img_url)</span><br><span class="line">	</span><br><span class="line">    <span class="comment"># file_path 定义文件保存路径</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">file_path</span>(<span class="params">self, request, response=<span class="literal">None</span>, info=<span class="literal">None</span>, *, item=<span class="literal">None</span></span>):</span></span><br><span class="line">        num = item[<span class="string">&#x27;num&#x27;</span>]</span><br><span class="line">        chapter_name = item[<span class="string">&#x27;chapter_name&#x27;</span>]</span><br><span class="line">        <span class="keyword">return</span> <span class="string">f&#x27;<span class="subst">&#123;chapter_name&#125;</span>/<span class="subst">&#123;num&#125;</span>.jpg&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="settings设置"><a href="#settings设置" class="headerlink" title="settings设置"></a>settings设置</h1><ol>
+<li><pre><code class="python">ROBOTSTXT_OBEY = False
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">2. &#96;&#96;&#96;python</span><br><span class="line">   SPIDER_MIDDLEWARES &#x3D; &#123;</span><br><span class="line">       &#39;ManhuataiSpider.middlewares.HeadersDownloaderMiddleware&#39;: 543,</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></code></pre>
+</li>
+<li><pre><code class="python">ITEM_PIPELINES = &#123;
+   &#39;ManhuataiSpider.pipelines.DownloadPicturePipeline&#39;: 300,
+&#125;
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">4. &#96;&#96;&#96;python</span><br><span class="line">   IMAGES_STORE &#x3D; &#39;.&#x2F;images&#39;  # 在最后一定要添加,否则无法保存</span><br></pre></td></tr></table></figure>
+
+
+</code></pre>
+</li>
+</ol>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>打开start.py文件,运行等待即可看到漫画被爬取了.</p>
+]]></content>
+      <categories>
+        <category>scrapy</category>
       </categories>
   </entry>
   <entry>
